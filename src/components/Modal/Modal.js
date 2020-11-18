@@ -39,7 +39,7 @@ export const SimpleModal = ({open, closePopUp, isEdit, cost}) => {
     setSpending(cost);
   }, [cost]);
 
-  console.log(99,cost)
+  console.log(cost)
 
   const sendData = (e) =>{
     e.preventDefault()

@@ -1,10 +1,9 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import EditIcon from "@material-ui/icons/Edit";
 import {
   Table,
   TableBody,
@@ -20,8 +19,8 @@ import {
   Checkbox,
   IconButton,
   Tooltip,
-  Fab,
 } from "@material-ui/core";
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -190,7 +189,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable({editSpending, dataSpending}) {
+export const EnhancedTable = ({editSpending, dataSpending}) => {
+
+  // let value = useSelector(state => state.tableReducer.tableList);
+  // console.log(7755,value)
+
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -245,6 +248,7 @@ export default function EnhancedTable({editSpending, dataSpending}) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataSpending.length - page * rowsPerPage);
+
 
   return (
     <div className={classes.root}>
@@ -320,3 +324,5 @@ export default function EnhancedTable({editSpending, dataSpending}) {
     </div>
   );
 }
+
+export default EnhancedTable
