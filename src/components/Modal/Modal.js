@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
@@ -27,13 +27,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SimpleModal = ({open, closePopUp, isEdit}) => {
+export const SimpleModal = ({open, closePopUp, isEdit, cost}) => {
   
   const classes = useStyles();
   const [date, setDate] = useState(new Date());
   const [nameProduct, setNameProduct] = useState('');
   const [spending, setSpending] = useState('');
   const [hasError, setHasError] =useState(false)
+
+  useEffect(() => {
+    setSpending(cost);
+  }, [cost]);
+
+  console.log(99,cost)
 
   const sendData = (e) =>{
     e.preventDefault()
@@ -58,7 +64,7 @@ export const SimpleModal = ({open, closePopUp, isEdit}) => {
           value={date} 
           onChange={closePopUp}
         />
-        <TextField label="Наименование траты"value={nameProduct} onChange={event => setNameProduct(event.target.value)} />
+        <TextField label="Наименование траты" value={nameProduct} onChange={event => setNameProduct(event.target.value)} />
         <TextField type='number' label="Трата (.руб)" value={spending} onChange={event => setSpending(event.target.value)}/>
         <Button type="submit" variant="contained">{ !isEdit ? 'Добавить' : 'Редактировать' }</Button>
       </form>

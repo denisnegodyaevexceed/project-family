@@ -23,10 +23,6 @@ import {
   Fab,
 } from "@material-ui/core";
 
-
-
-
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -160,13 +156,8 @@ const EnhancedTableToolbar = (props) => {
             <DeleteIcon />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      ) : (null)
+      }
     </Toolbar>
   );
 };
@@ -285,7 +276,6 @@ export default function EnhancedTable({editSpending, dataSpending}) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -296,6 +286,7 @@ export default function EnhancedTable({editSpending, dataSpending}) {
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
+                          onClick={(event) => handleClick(event, row.name)}
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
@@ -304,7 +295,7 @@ export default function EnhancedTable({editSpending, dataSpending}) {
                       <TableCell align="right">{row.height}</TableCell>
                       <TableCell align="right">{row.mass}</TableCell>
                       <TableCell align="right">{row.hair_color}</TableCell>
-                      <TableCell onClick={() => editSpending(1)} align="right">{row.skin_color}</TableCell>
+                      <TableCell onClick={() => editSpending(row.birth_year, row.height)} align="right">{row.skin_color}</TableCell>
                     </TableRow>
                   );
                 })}

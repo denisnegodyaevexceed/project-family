@@ -32,6 +32,7 @@ const MainPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [data, setdata] = useState(rows);
+    const [cost, setCost] = useState();
 
     useEffect(() => {
         getFamilySpending(1).then(data => {
@@ -44,15 +45,17 @@ const MainPage = () => {
         })
     }, []);
 
-    const editSpending = (id) => {
+    const editSpending = (id, cost) => {
         setIsEdit(true);
+        setCost(cost)
         handleOpenPopup();
-        console.log(id);
+        console.log(id, cost);
     }
 
     const handleClosePopup = () => {
         setIsOpen(false);
         setIsEdit(false);
+        setCost('');
     };
 
     const handleOpenPopup = () => {
@@ -63,7 +66,7 @@ const MainPage = () => {
         <>
             <Table editSpending={editSpending} dataSpending={data} />
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
-            <SimpleModal open={isOpen} closePopUp={handleClosePopup} isEdit={isEdit} />
+            <SimpleModal open={isOpen} closePopUp={handleClosePopup} isEdit={isEdit} cost={cost} />
         </>
     );
 }
