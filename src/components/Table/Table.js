@@ -74,7 +74,7 @@ const headCells = [
     label: "Наименование траты",
   },
   { id: "carbs", numeric: true, disablePadding: false, label: "Трата (.руб)" },
-  //   { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'protein', numeric: true, disablePadding: false, label: 'Редактировать' },
 ];
 
 function EnhancedTableHead(props) {
@@ -364,10 +364,11 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell align="right">{row.fat}</TableCell>
                       <TableCell align="right">{row.carbs}</TableCell>
-                      {/* <TableCell align="right">{row.protein}</TableCell> */}
-                      <Fab color="secondary" aria-label="edit">
-                        <EditIcon />
-                      </Fab>
+                      <TableCell align="right">
+                        <Fab color="secondary" aria-label="edit">
+                          <EditIcon />
+                        </Fab>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -389,9 +390,7 @@ export default function EnhancedTable() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-        <Button variant="contained" type="button" onClick={handleChangeModal}>
-          Добавить трату
-        </Button>
+        <Button variant="contained" type="button" onClick={handleChangeModal}>Добавить трату</Button>
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}

@@ -4,116 +4,83 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MaterialUIPickers from '../DatePicker/Date'
-import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Backdrop from '@material-ui/core/Backdrop';
 
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
+import './Modal.scss'
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+  modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      maxWidth: '400px',
+      margin: '0 auto',
   },
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
+  paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      width: '100%',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
   },
 }));
 
 export const SimpleModal = ({open, closePopUp}) => {
+  
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-
-  const [name, setName] = useState('');
-  const [date, setDate] = useState(new Date('2014-08-18T21:11:54'));
+  const [date, setDate] = useState(new Date());
   const [nameProduct, setNameProduct] = useState('');
   const [spending, setSpending] = useState('');
-  const [test, setTest] =useState(false)
-  function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
-  
-  const qwe = (e) =>{
+  const [hasError, setHasError] =useState(false)
 
-    if (name,nameProduct,spending === ''){
-        e.preventDefault()
-        setTest(true)
-
-       console.log('гавно')
-    
-
-    
-    }else{
+  const sendData = (e) =>{
     e.preventDefault()
-    console.log(name,date,nameProduct,spending)
-        setTest(false)
-    //    setDate('')
-       setName('')
-       setSpending('')
-       setNameProduct('')
-    
-}
+    if (nameProduct,spending === '') {
+      setHasError(true);
+      console.log('fail');
+    } else {
+      console.log(date,nameProduct,spending)
+      setHasError(false);
+      setSpending('');
+      setNameProduct('');
+      setDate(new Date());
+      closePopUp();
+    }
   }
-
-
-
-  const handleDateChange = (date) => {
-    setDate(date);
-  };
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Добавление траты</h2>
-      <form   className={classes.root} noValidate autoComplete="on" onSubmit={e => qwe(e)}>
-      <TextField id="standard-basic" label="Имя" value={name} onChange={event => setName(event.target.value)}></TextField>
-      {/* <TextField id="standard-basic" label="Дата"value={date} onChange={event => setDate(event.target.value)} /> */}
-      <MaterialUIPickers
-        value={date} 
-        onChange={handleDateChange}
-      />
-      <TextField id="standard-basic" label="Наименование траты"value={nameProduct} onChange={event => setNameProduct(event.target.value)} />
-      <TextField id="standard-basic" label="Трата (.руб)" value={spending} onChange={event => setSpending(event.target.value)}/>
-      
-    
-      <Button type="submit" variant="contained">Добавить</Button>
-    </form>
-  { test && <Alert severity="error" open>Заполните все поля!</Alert> }
-
+    <div className={classes.paper}>
+      <Typography variant='h4'>Добавление траты</Typography>
+      <form className='form-submit' autoComplete="on" onSubmit={e => sendData(e)}>
+        <MaterialUIPickers
+          value={date} 
+          onChange={closePopUp}
+        />
+        <TextField label="Наименование траты"value={nameProduct} onChange={event => setNameProduct(event.target.value)} />
+        <TextField label="Трата (.руб)" value={spending} onChange={event => setSpending(event.target.value)}/>
+        <Button type="submit" variant="contained">Добавить</Button>
+      </form>
+      { hasError && <MuiAlert elevation={6} variant="filled" severity="error">Заполните все поля!</MuiAlert> }
     </div>
   );
 
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={() => closePopUp()}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-    </div>
+    <Modal
+      className={classes.modal}
+      open={open}
+      closeAfterTransition
+      onClose={() => closePopUp()}
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+          timeout: 500,
+      }}
+    >
+      {body}
+    </Modal>
   );
 }
 
