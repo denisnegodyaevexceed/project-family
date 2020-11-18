@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SimpleModal = ({open, closePopUp}) => {
+export const SimpleModal = ({open, closePopUp, isEdit}) => {
   
   const classes = useStyles();
   const [date, setDate] = useState(new Date());
@@ -52,15 +52,15 @@ export const SimpleModal = ({open, closePopUp}) => {
 
   const body = (
     <div className={classes.paper}>
-      <Typography variant='h4'>Добавление траты</Typography>
+      <Typography variant='h4'>{!isEdit ? 'Добавление траты' : 'Редактирование' }</Typography>
       <form className='form-submit' autoComplete="on" onSubmit={e => sendData(e)}>
         <MaterialUIPickers
           value={date} 
           onChange={closePopUp}
         />
         <TextField label="Наименование траты"value={nameProduct} onChange={event => setNameProduct(event.target.value)} />
-        <TextField label="Трата (.руб)" value={spending} onChange={event => setSpending(event.target.value)}/>
-        <Button type="submit" variant="contained">Добавить</Button>
+        <TextField type='number' label="Трата (.руб)" value={spending} onChange={event => setSpending(event.target.value)}/>
+        <Button type="submit" variant="contained">{ !isEdit ? 'Добавить' : 'Редактировать' }</Button>
       </form>
       { hasError && <MuiAlert elevation={6} variant="filled" severity="error">Заполните все поля!</MuiAlert> }
     </div>
