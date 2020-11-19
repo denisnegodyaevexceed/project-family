@@ -18,7 +18,7 @@ import { useStyles } from './style'
 import './Modal.scss'
 
 
-export const SimpleModal = ({open, closePopUp, cost}) => {
+export const SimpleModal = ({isOpen, closePopUp}) => {
   
   const classes = useStyles();
   const [hasError, setHasError] = useState(false);
@@ -85,7 +85,7 @@ export const SimpleModal = ({open, closePopUp, cost}) => {
   return (
     <Modal
       className={classes.modal}
-      open={open}
+      open={isOpen}
       closeAfterTransition
       onClose={() => {closePopUp(); setHasError(false)}}
       aria-labelledby="transition-modal-title"
