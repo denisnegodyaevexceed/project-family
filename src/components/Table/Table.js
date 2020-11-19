@@ -228,7 +228,7 @@ export const EnhancedTable = ({editSpending, dataSpending}) => {
                       <TableCell align="right">{row.height}</TableCell>
                       <TableCell align="right">{row.mass}</TableCell>
                       <TableCell align="right">{row.hair_color}</TableCell>
-                      <TableCell onClick={() => editSpending(row.birth_year, row.height)} align="right">{row.skin_color}</TableCell>
+                      <TableCell onClick={() => editSpending(row.birth_year, row.height, row.name, row.height)} align="right">{row.skin_color}</TableCell>
                     </TableRow>
                   );
                 })}

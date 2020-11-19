@@ -1,69 +1,81 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux'
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import MaterialUIPickers from '../DatePicker/Date'
 import MuiAlert from '@material-ui/lab/Alert';
 import Backdrop from '@material-ui/core/Backdrop';
-
-import './Modal.scss'
 import { Typography } from '@material-ui/core';
+import allSpendingActions from "../../actions/spendingActions"
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      maxWidth: '400px',
-      margin: '0 auto',
-  },
-  paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      width: '100%',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-  },
-}));
+import { useStyles } from './style'
+import './Modal.scss'
 
-export const SimpleModal = ({open, closePopUp, isEdit, cost}) => {
+
+export const SimpleModal = ({open, closePopUp, cost}) => {
   
   const classes = useStyles();
-  const [date, setDate] = useState(new Date());
-  const [nameProduct, setNameProduct] = useState('');
-  const [spending, setSpending] = useState('');
-  const [hasError, setHasError] =useState(false)
+  const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
-    setSpending(cost);
-  }, [cost]);
+  const modalData = useSelector(state => state.spendingReducer);
+  const {isEdit, date, name, value} = modalData
+  const dispatch = useDispatch();
+  const {setDateSpending, setNameSpending, setValueSpending} = allSpendingActions;
+
+  console.log(modalData)
 
   const sendData = (e) =>{
-    e.preventDefault()
-    if (nameProduct,spending === '') {
-      setHasError(true);
-      console.log('fail');
+    e.preventDefault();
+    if(date, name, value == '') {setHasError(true); return null}
+    if(!isEdit){
+      console.log('new spending')
     } else {
-      console.log(date,nameProduct,spending)
-      setHasError(false);
-      setSpending('');
-      setNameProduct('');
-      setDate(new Date());
-      closePopUp();
+      console.log('edit spending')
     }
+    closePopUp();
+    setHasError(false)
   }
+
+  const handleDateChange = (date) => {
+    dispatch(setDateSpending(date));
+  };
 
   const body = (
     <div className={classes.paper}>
       <Typography variant='h4'>{!isEdit ? 'Добавление траты' : 'Редактирование' }</Typography>
       <form className='form-submit' autoComplete="on" onSubmit={e => sendData(e)}>
-        <MaterialUIPickers
-          value={date} 
-          onChange={closePopUp}
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Date picker inline"
+            value={date}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
+        </MuiPickersUtilsProvider>
+        <TextField 
+          label="Наименование траты" 
+          value={name}
+          onChange={event => dispatch(setNameSpending(event.target.value))} 
         />
-        <TextField label="Наименование траты" value={nameProduct} onChange={event => setNameProduct(event.target.value)} />
-        <TextField type='number' label="Трата (.руб)" value={spending} onChange={event => setSpending(event.target.value)}/>
+        <TextField 
+          type='number'
+          label="Трата (.руб)"
+          value={value} 
+          onChange={event => dispatch(setValueSpending(event.target.value))} 
+        />
         <Button type="submit" variant="contained">{ !isEdit ? 'Добавить' : 'Редактировать' }</Button>
       </form>
       { hasError && <MuiAlert elevation={6} variant="filled" severity="error">Заполните все поля!</MuiAlert> }
@@ -75,7 +87,7 @@ export const SimpleModal = ({open, closePopUp, isEdit, cost}) => {
       className={classes.modal}
       open={open}
       closeAfterTransition
-      onClose={() => closePopUp()}
+      onClose={() => {closePopUp(); setHasError(false)}}
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       BackdropComponent={Backdrop}
