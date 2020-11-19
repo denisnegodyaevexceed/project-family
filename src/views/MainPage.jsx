@@ -19,6 +19,7 @@ const MainPage = () => {
         dispatch(allActionsTable.getTableList(1))
     }, [dispatch]);
 
+
     const editSpending = (id, cost) => {
         setIsEdit(true);
         setCost(cost)

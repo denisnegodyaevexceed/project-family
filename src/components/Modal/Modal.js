@@ -39,8 +39,6 @@ export const SimpleModal = ({open, closePopUp, isEdit, cost}) => {
     setSpending(cost);
   }, [cost]);
 
-  console.log(cost)
-
   const sendData = (e) =>{
     e.preventDefault()
     if (nameProduct,spending === '') {
