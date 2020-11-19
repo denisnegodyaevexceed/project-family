@@ -5,32 +5,36 @@ import SimpleModal from "../components/Modal/Modal";
 import { Button } from "@material-ui/core"
 
 import allActionsTable from "../actions/tableAction"
+import allSpendingActions from "../actions/spendingActions"
 
 const MainPage = () => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
-    const [cost, setCost] = useState();
 
     const dispatch = useDispatch();
+    const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending } = allSpendingActions
     const listData = useSelector(state => state.tableReducer.tableList);
 
     useEffect(() => {
         dispatch(allActionsTable.getTableList(1))
     }, [dispatch]);
 
-
-    const editSpending = (id, cost) => {
-        setIsEdit(true);
-        setCost(cost)
+    const editSpending = (id, date, name, value) => {
         handleOpenPopup();
-        console.log(id, cost);
+        dispatch(setIsEditSpending(true));
+        dispatch(setIdSpending(id));
+        dispatch(setDateSpending(+date));
+        dispatch(setNameSpending(name));
+        dispatch(setValueSpending(+value));
+    }
+
+    const deleteSpendings = (arr) => {
+        console.log('delll', arr)
     }
 
     const handleClosePopup = () => {
-        setIsOpen(false);
-        setIsEdit(false);
-        setCost('');
+        setIsOpen(false);   
+        dispatch(allSpendingActions.clearSpendingForm());
     };
 
     const handleOpenPopup = () => {
@@ -39,9 +43,9 @@ const MainPage = () => {
 
     return (
         <>
-            <Table editSpending={editSpending} dataSpending={listData} />
+            <Table deleteSpendings={deleteSpendings} editSpending={editSpending} dataSpending={listData} />
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
-            <SimpleModal open={isOpen} closePopUp={handleClosePopup} isEdit={isEdit} cost={cost} />
+            <SimpleModal open={isOpen} closePopUp={handleClosePopup} />
         </>
     );
 }
