@@ -29,6 +29,11 @@ export const clearSpendingForm = () => ({
     type: actions.CLEAR_SPENDING_FORM,
 })
 
+export const deleteSpending = (arrDel) => ({
+    type: actions.SET_DELETE_SPENDINGS,
+    payload: arrDel
+})
+
 export default {
     setDateSpending,
     setNameSpending,
@@ -36,4 +41,5 @@ export default {
     setIsEditSpending,
     setIdSpending,
     clearSpendingForm,
+    deleteSpending
 }

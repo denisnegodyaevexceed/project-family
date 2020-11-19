@@ -28,6 +28,10 @@ const MainPage = () => {
         dispatch(setValueSpending(+value));
     }
 
+    const deleteSpendings = (arr) => {
+        console.log('delll', arr)
+    }
+
     const handleClosePopup = () => {
         setIsOpen(false);   
         dispatch(allSpendingActions.clearSpendingForm());
@@ -39,7 +43,7 @@ const MainPage = () => {
 
     return (
         <>
-            <Table editSpending={editSpending} dataSpending={listData} />
+            <Table deleteSpendings={deleteSpendings} editSpending={editSpending} dataSpending={listData} />
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
             <SimpleModal open={isOpen} closePopUp={handleClosePopup} />
         </>

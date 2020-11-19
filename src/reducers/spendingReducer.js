@@ -4,6 +4,7 @@ const initialState = {
     value: '',
     isEdit: false,
     id: '',
+    choosenDeleteSpendings: [],
 }
 
 export default function spendingReducer(state = initialState, actions){
@@ -30,13 +31,13 @@ export default function spendingReducer(state = initialState, actions){
             return{
                 ...state,
                 isEdit: actions.payload,
-        }
+            }
 
         case 'SET_ID_SPENDING':
             return{
                 ...state,
                 id: actions.payload,
-        }
+            }
 
         case 'CLEAR_SPENDING_FORM':
             return{
@@ -46,7 +47,13 @@ export default function spendingReducer(state = initialState, actions){
                 value: '',
                 isEdit: false,
                 id: '',
-        }
+            }
+
+        case 'SET_DELETE_SPENDINGS' :
+            return{
+                ...state,
+                choosenDeleteSpendings: actions.payload,
+            }
 
         default:
             return state

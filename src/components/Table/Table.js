@@ -84,44 +84,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-
-const EnhancedTableToolbar = (props) => {
-  const classes = useToolbarStyles();
-  const { numSelected } = props;
-
-  return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Nutrition
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (null)
-      }
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
-export const EnhancedTable = ({editSpending, dataSpending}) => {
+export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => {
 
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -138,7 +101,7 @@ export const EnhancedTable = ({editSpending, dataSpending}) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = dataSpending.map((n) => n.name);
+      const newSelecteds = dataSpending.map((n) => n.birth_year);
       setSelected(newSelecteds);
       return;
     }
@@ -179,6 +142,44 @@ export const EnhancedTable = ({editSpending, dataSpending}) => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataSpending.length - page * rowsPerPage);
 
 
+
+  const EnhancedTableToolbar = (props) => {
+    const classes = useToolbarStyles();
+    const { numSelected } = props;
+  
+    return (
+      <Toolbar
+        className={clsx(classes.root, {
+          [classes.highlight]: numSelected > 0,
+        })}
+      >
+        {numSelected > 0 ? (
+          <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+            {numSelected} selected
+          </Typography>
+        ) : (
+          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+            Nutrition
+          </Typography>
+        )}
+  
+        {numSelected > 0 ? (
+          <Tooltip title="Delete">
+            <IconButton aria-label="delete" onClick={() => {deleteSpendings(selected)}} >
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (null)
+        }
+      </Toolbar>
+    );
+  };
+  
+  EnhancedTableToolbar.propTypes = {
+    numSelected: PropTypes.number.isRequired,
+  };
+
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -203,7 +204,7 @@ export const EnhancedTable = ({editSpending, dataSpending}) => {
               {stableSort(dataSpending, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.birth_year);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
@@ -219,7 +220,7 @@ export const EnhancedTable = ({editSpending, dataSpending}) => {
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
-                          onClick={(event) => handleClick(event, row.name)}
+                          onClick={(event) => handleClick(event, row.birth_year)}
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
