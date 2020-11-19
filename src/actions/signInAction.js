@@ -16,13 +16,10 @@ const setSignInPassword = (data) => ({
     payload: data
 });
 
-const setSignInError = bool => ({
-    type: actions.SET_SIGNIN_ERROR,
-    payload: bool,
-});
+
 
 export default{
     setSignInEmail,
     setSignInPassword,
-    setSignInError
+
 }

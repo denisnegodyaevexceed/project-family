@@ -1,7 +1,6 @@
 const initialState = {
     email:'',
     password:'',
-    error:false,
 }
 
 export default function SignInReducer(state = initialState, actions){
@@ -15,11 +14,6 @@ export default function SignInReducer(state = initialState, actions){
             return {
                 ...state,
                 password:actions.payload,
-            }
-        case 'SET_SIGNIN_ERROR':
-            return{
-                ...state,
-                error:actions.payload
             }
 
         default:
