@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Moment from 'react-moment';
 import {
   Table,
   TableBody,
@@ -24,11 +25,10 @@ import { useToolbarStyles, useStyles } from './style'
 
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'height', numeric: true, disablePadding: false, label: 'height' },
-  { id: 'mass', numeric: true, disablePadding: false, label: '1' },
-  { id: 'hair_color', numeric: true, disablePadding: false, label: '2' },
-  { id: 'skin_color', numeric: true, disablePadding: false, label: '3' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'name' },
+  { id: 'nameWaste', numeric: false, disablePadding: true, label: 'nameWaste' },
+  { id: 'price', numeric: true, disablePadding: false, label: 'price' },
+  { id: 'date', numeric: true, disablePadding: false, label: 'date' },
 ];
 
 function EnhancedTableHead(props) {
@@ -36,6 +36,8 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
+
+
 
   return (
     <TableHead>
@@ -101,7 +103,7 @@ export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => 
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = dataSpending.map((n) => n.birth_year);
+      const newSelecteds = dataSpending.map((n) => n._id);
       setSelected(newSelecteds);
       return;
     }
@@ -204,7 +206,7 @@ export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => 
               {stableSort(dataSpending, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.birth_year);
+                  const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
@@ -213,23 +215,27 @@ export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => 
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={index}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
-                          onClick={(event) => handleClick(event, row.birth_year)}
+                          onClick={(event) => handleClick(event, row._id)}
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                        {row.fullName}
                       </TableCell>
-                      <TableCell align="right">{row.height}</TableCell>
-                      <TableCell align="right">{row.mass}</TableCell>
-                      <TableCell align="right">{row.hair_color}</TableCell>
-                      <TableCell onClick={() => editSpending(row.birth_year, row.height, row.name, row.height)} align="right">{row.skin_color}</TableCell>
+                      <TableCell align="left">{row.nameWaste}</TableCell>
+                      <TableCell align="right">{row.price}</TableCell>
+                      <TableCell align="right">
+                        <Moment format="MM/DD/YYYY">
+                          {row.date}
+                        </Moment>
+                        </TableCell>
+                      <TableCell onClick={() => editSpending(row._id, row.date, row.nameWaste, row.price)} align="right">EDIT</TableCell>
                     </TableRow>
                   );
                 })}
@@ -244,6 +250,7 @@ export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => 
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
+          labelRowsPerPage='строк на стр.'
           count={dataSpending.length}
           rowsPerPage={rowsPerPage}
           page={page}

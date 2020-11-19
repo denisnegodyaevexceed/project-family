@@ -17,26 +17,57 @@ import allSpendingActions from "../../actions/spendingActions"
 import { useStyles } from './style'
 import './Modal.scss'
 
-
+// TODO тут переделать все запросы на редакс и аксиос, пока просто тестим
 export const SimpleModal = ({open, closePopUp}) => {
   
   const classes = useStyles();
   const [hasError, setHasError] = useState(false);
 
   const modalData = useSelector(state => state.spendingReducer);
-  const {isEdit, date, name, value} = modalData
+  const {isEdit, date, name, value, id} = modalData
   const dispatch = useDispatch();
   const {setDateSpending, setNameSpending, setValueSpending} = allSpendingActions;
 
-  console.log(modalData)
-
   const sendData = (e) =>{
     e.preventDefault();
-    if(date, name, value == '') {setHasError(true); return null}
+    if(name === '' || value === '') {setHasError(true); return null}
+
     if(!isEdit){
-      console.log('new spending')
+
+
+      fetch('https://backend-family-budget.herokuapp.com/budget/add-waste?userId=5fb66cd058098e00045a04b4', {method: 'POST',body:JSON.stringify({
+        price: value,
+        date: date,
+        nameWaste: name,
+      }),headers:{'content-type': 'application/json'}})
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+      })
+      .catch(alert);
+
+
+      
     } else {
-      console.log('edit spending')
+
+
+
+      fetch('https://backend-family-budget.herokuapp.com/budget/edit-waste?budgetId=5fb66f7358098e00045a04b5', {method: 'PUT',body:JSON.stringify({
+        wasteId: id,
+        price: value,
+        date: date,
+        nameWaste: name,
+      }),headers:{'content-type': 'application/json'}})
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+      })
+      .catch(alert);
+
+
+
     }
     closePopUp();
     setHasError(false)

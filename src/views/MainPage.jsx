@@ -12,24 +12,42 @@ const MainPage = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch();
-    const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending } = allSpendingActions
+    const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending } = allSpendingActions;
     const listData = useSelector(state => state.tableReducer.tableList);
 
     useEffect(() => {
-        dispatch(allActionsTable.getTableList(1))
+        dispatch(allActionsTable.getTableList('5fb66cd058098e00045a04b4'))
     }, [dispatch]);
 
     const editSpending = (id, date, name, value) => {
+        date = new Date(date).toString()
         handleOpenPopup();
         dispatch(setIsEditSpending(true));
         dispatch(setIdSpending(id));
-        dispatch(setDateSpending(+date));
+        dispatch(setDateSpending(date));
         dispatch(setNameSpending(name));
         dispatch(setValueSpending(+value));
     }
 
     const deleteSpendings = (arr) => {
-        console.log('delll', arr)
+        
+        
+
+
+        fetch('https://backend-family-budget.herokuapp.com/budget/delete-waste?budgetId=5fb66f7358098e00045a04b5', {method: 'DELETE',body:JSON.stringify({
+        ids: arr
+        }),headers:{'content-type': 'application/json'}})
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+        .catch(alert);
+
+
+
+
     }
 
     const handleClosePopup = () => {

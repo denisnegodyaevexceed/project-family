@@ -5,9 +5,7 @@ export const getTableList = (i) => {
     return dispatch => {
         dispatch(getTablePageStarted());
         getFamilySpending(i).then(res =>{
-            setTimeout(() => {
-                dispatch(getTablePageSuccess(res.data.results));
-            }, 1);
+            dispatch(getTablePageSuccess(res.data.budget.waste));
         }).catch(err => {
             dispatch(getTablePageFailure(err.message));
         });
