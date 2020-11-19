@@ -1,3 +1,4 @@
+import axios from 'axios'
 import actions from '../constants/actionsType'
 
 export const setSignUpEmail = (data) => ({
@@ -20,9 +21,12 @@ export const setSignUpName = (data)=> ({
     payload: data
 })
 
+
+
 export default{
     setSignUpConfirmPassword,
     setSignUpEmail,
     setSignUpPassword,
-    setSignUpName
+    setSignUpName,
+    
 }
