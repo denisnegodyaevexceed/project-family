@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -18,7 +18,7 @@ import { useStyles } from './style'
 import './Modal.scss'
 
 
-export const SimpleModal = ({isOpen, closePopUp}) => {
+export const SimpleModal = ({open, closePopUp}) => {
   
   const classes = useStyles();
   const [hasError, setHasError] = useState(false);
@@ -85,7 +85,7 @@ export const SimpleModal = ({isOpen, closePopUp}) => {
   return (
     <Modal
       className={classes.modal}
-      open={isOpen}
+      open={open}
       closeAfterTransition
       onClose={() => {closePopUp(); setHasError(false)}}
       aria-labelledby="transition-modal-title"
