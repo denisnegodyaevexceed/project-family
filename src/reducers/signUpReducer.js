@@ -1,11 +1,11 @@
 const initialState = {
-   email: '',
-   password: '',
-   confirmPassword: '',
-   fullName: '',
-   isFetching: false,
-   isRegister: false,
-   error: false
+    email: '',
+    password: '',
+    confirmPassword: '',
+    fullName: '',
+    isFetching: false,
+    isRegister: false,
+    error: false
 }
 
 export default function signUpReducer(state=initialState, actions){

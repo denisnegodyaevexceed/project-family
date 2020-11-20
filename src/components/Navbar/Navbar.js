@@ -58,11 +58,14 @@ const useStyles = makeStyles((theme) => ({
               <Button to="/signup" component={Link} color="inherit" onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
             </>
           :
-            <Typography   variant="h6">
-              Имя пользователя: {setSignIn.userInfo.fullName}
-            </Typography>
+            <>
+              <Typography   variant="h6">
+                Имя пользователя: {setSignIn.userInfo.fullName}
+              </Typography>
+              <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
+            </>
           }
-          <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
+          
         </Toolbar>
       </AppBar>
     </div>

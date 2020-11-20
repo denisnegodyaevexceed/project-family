@@ -31,7 +31,7 @@ useEffect(() => {
               {setUser.isAuth ===true?
                 <MainPage /> 
                 :
-                <div>loh</div>
+                <div>Зарегестрируйтесь или войдите.</div>
               }
             </Route>
             <Route path="/signin" component={SignInPage}/>
