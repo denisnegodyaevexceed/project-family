@@ -4,22 +4,21 @@ import Table from '../components/Table/Table'
 import SimpleModal from "../components/Modal/Modal";
 import { Button } from "@material-ui/core"
 
-import allActionsTable from "../actions/tableAction"
 import allSpendingActions from "../actions/spendingActions"
 
 const MainPage = () => {
-
     const [isOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch();
-    const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending } = allSpendingActions;
-    const listData = useSelector(state => state.tableReducer.tableList);
+    const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, getTableList, deleteSpending } = allSpendingActions;
+    let listData = useSelector(state => state.spendingReducer.tableList);
+    listData && listData.map((item, i) => {listData[i].price = +item.price})
 
     useEffect(() => {
-        dispatch(allActionsTable.getTableList('5fb66cd058098e00045a04b4'))
+        dispatch(getTableList('5fb3acd719e16b64c852d824'))
     }, [dispatch]);
 
-    const editSpending = (id, date, name, value) => {
+    const editSpendingSetState = (id, date, name, value) => {
         date = new Date(date).toString()
         handleOpenPopup();
         dispatch(setIsEditSpending(true));
@@ -30,24 +29,7 @@ const MainPage = () => {
     }
 
     const deleteSpendings = (arr) => {
-        
-        
-
-
-        fetch('https://backend-family-budget.herokuapp.com/budget/delete-waste?budgetId=5fb66f7358098e00045a04b5', {method: 'DELETE',body:JSON.stringify({
-        ids: arr
-        }),headers:{'content-type': 'application/json'}})
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data)
-        })
-        .catch(alert);
-
-
-
-
+        dispatch(deleteSpending('5fb7a799572a7b00046c63c4', arr))
     }
 
     const handleClosePopup = () => {
@@ -61,7 +43,7 @@ const MainPage = () => {
 
     return (
         <>
-            <Table deleteSpendings={deleteSpendings} editSpending={editSpending} dataSpending={listData} />
+            <Table deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
             <SimpleModal open={isOpen} closePopUp={handleClosePopup} />
         </>
