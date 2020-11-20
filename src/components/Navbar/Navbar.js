@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import allUserActions from "../../actions/userActions"
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
-
+import allSignInActions from "../../actions/signInAction"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -24,10 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
  const Navbar=()=> {
   const dispatch = useDispatch();
+  const setSignIn = useSelector(state => state.SignInReducer);
+  
   const classes = useStyles();
   const Exit = ()=>{
     localStorage.clear()
-    dispatch(allUserActions.setUserError())
+    dispatch(allSignInActions.logoutUser())
   }
 
 
@@ -44,10 +46,20 @@ const useStyles = makeStyles((theme) => ({
             Семейный бюджет
           </Typography>
           {/* <Link to="/signin" color="inherit"> */}
+          
+          {!setSignIn.isAuth ?
+          <>
           <Button to="/signin" component={Link} color="inherit">Авторизация</Button>
-          {/* </Link> */}
           <Button to="/signup" component={Link} color="inherit">Регистрация</Button>
+          </>
+          :
+          <>
+          <Typography   variant="h8">
+            Имя пользователя: {setSignIn.userInfo.fullName}
+          </Typography>
           <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
+          </>
+          }
         </Toolbar>
       </AppBar>
     </div>

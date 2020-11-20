@@ -6,14 +6,15 @@ import SignInPage from './views/SignInPage';
 import SignUpPage from './views/SignUpPage';
 import MainPage from './views/MainPage';
 import { useSelector, useDispatch } from 'react-redux';
-import allUserActions from "./actions/userActions"
+import allSignInActions from "./actions/signInAction"
 function App() {
   const dispatch = useDispatch();
-const setUser = useSelector(state => state.userReducer);
-console.log(setUser)
+const setSignIn = useSelector(state => state.SignInReducer);
+const setUser = useSelector(state => state.SignInReducer);
+console.log(setUser.isAuth)
 useEffect(() => {
   if (localStorage.getItem('uid') === 'q' ){
-    dispatch(allUserActions.setUserSucces())
+    dispatch(allSignInActions.checkedToken())
   }
 }, [dispatch])
 
@@ -27,7 +28,7 @@ useEffect(() => {
         <div className='contnet'>
           <Switch>
             <Route exact path="/">
-              {setUser.isAuth ?
+              {setUser.isAuth ===true?
                 <MainPage /> 
                 :
                 <div>loh</div>
