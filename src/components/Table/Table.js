@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Moment from 'react-moment';
+import { useSelector } from 'react-redux'
 import {
   Table,
   TableBody,
@@ -22,6 +23,8 @@ import {
 
 import { getComparator, stableSort } from './functionality'
 import { useToolbarStyles, useStyles } from './style'
+
+import './Table.scss'
 
 
 const headCells = [
@@ -86,7 +89,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => {
+export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendings}) => {
 
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -182,8 +185,13 @@ export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => 
   };
 
 
+
+  const tableState = useSelector(state => state.spendingReducer);
+  const { loadingTable } = tableState;
+
   return (
     <div className={classes.root}>
+      {loadingTable && <div className="loader-table"></div>}
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -235,7 +243,7 @@ export const EnhancedTable = ({editSpending, dataSpending, deleteSpendings}) => 
                           {row.date}
                         </Moment>
                         </TableCell>
-                      <TableCell onClick={() => editSpending(row._id, row.date, row.nameWaste, row.price)} align="right">EDIT</TableCell>
+                      <TableCell onClick={() => editSpendingSetState(row._id, row.date, row.nameWaste, row.price)} align="right">EDIT</TableCell>
                     </TableRow>
                   );
                 })}

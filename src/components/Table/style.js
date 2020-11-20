@@ -4,6 +4,7 @@ export const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(1),
+        
     },
     highlight:
         theme.palette.type === 'light'
@@ -23,6 +24,7 @@ export const useToolbarStyles = makeStyles((theme) => ({
 export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
+        position: 'relative',
     },
     paper: {
         width: '100%',

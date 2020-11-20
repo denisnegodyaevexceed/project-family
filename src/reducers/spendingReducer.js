@@ -4,11 +4,36 @@ const initialState = {
     value: '',
     isEdit: false,
     id: '',
-    choosenDeleteSpendings: [],
+    errorTable:false,
+    loadingTable:false,
+    tableList:[],
+    loadingModal: false,
+    errorModal: false
 }
 
 export default function spendingReducer(state = initialState, actions){
     switch(actions.type) {
+        case 'GET_TABLE_LIST_SUCCESS':
+            return{
+                ...state,
+                loadingTable: false,
+                tableList: actions.payload,
+            }
+
+        case 'GET_TABLE_LIST_STARTED':
+            return{
+                ...state,
+                loadingTable: true,
+                errorTable: false,
+
+            }
+        case 'GET_TABLE_LIST_FAILURE':
+            return{
+                ...state,
+                loadingTable: false,
+                errorTable: actions.payload,
+            }
+
         case 'SET_DATE_SPENDING':
             return{
                 ...state,
@@ -49,10 +74,61 @@ export default function spendingReducer(state = initialState, actions){
                 id: '',
             }
 
-        case 'SET_DELETE_SPENDINGS' :
+        case 'POST_NEW_SPENDING_STARTED' :
             return{
                 ...state,
-                choosenDeleteSpendings: actions.payload,
+                loadingModal: true,
+                errorModal: false,
+            }
+
+        case 'POST_NEW_SPENDING_SUCCESS' :
+            return{
+                ...state,
+                tableList: actions.payload,
+                loadingModal: false,
+            }
+
+        case 'POST_NEW_SPENDING_FAILURE' :
+            return{
+                ...state,
+                loadingModal: false,
+                errorModal: true,
+            }
+
+        case 'DEL_SPENDING_STARTED' :
+            return{
+                ...state,
+            }
+
+        case 'DEL_SPENDING_SUCCESS' :
+            return{
+                ...state,
+            }
+
+        case 'DEL_SPENDING_FAILURE' :
+            return{
+                ...state,
+            }
+
+        case 'PUT_EDIT_SPENDING_STARTED' :
+            return{
+                ...state,
+                loadingModal:true,
+                errorModal: false
+            }
+
+        case 'PUT_EDIT_SPENDING_SUCCESS' :
+            return{
+                ...state,
+                tableList: actions.payload,
+                loadingModal:false,
+            }
+
+        case 'PUT_EDIT_SPENDING_FAILURE' :
+            return{
+                ...state,
+                errorModal: actions.payload,
+                loadingModal: false,
             }
 
         default:

@@ -24,53 +24,21 @@ export const SimpleModal = ({open, closePopUp}) => {
   const [hasError, setHasError] = useState(false);
 
   const modalData = useSelector(state => state.spendingReducer);
-  const {isEdit, date, name, value, id} = modalData
+  const {isEdit, date, name, value, id, loadingModal} = modalData
   const dispatch = useDispatch();
-  const {setDateSpending, setNameSpending, setValueSpending} = allSpendingActions;
+  const {setDateSpending, setNameSpending, setValueSpending, editSpending, addSpending } = allSpendingActions;
 
   const sendData = (e) =>{
     e.preventDefault();
     if(name === '' || value === '') {setHasError(true); return null}
 
     if(!isEdit){
-
-
-      fetch('https://backend-family-budget.herokuapp.com/budget/add-waste?userId=5fb66cd058098e00045a04b4', {method: 'POST',body:JSON.stringify({
-        price: value,
-        date: date,
-        nameWaste: name,
-      }),headers:{'content-type': 'application/json'}})
-      .then(function (response) {
-          return response.json();
-      })
-      .then(function (data) {
-      })
-      .catch(alert);
-
-
-      
+      dispatch(addSpending('5fb3acd719e16b64c852d824', value, date, name, closePopUp));
     } else {
-
-
-
-      fetch('https://backend-family-budget.herokuapp.com/budget/edit-waste?budgetId=5fb66f7358098e00045a04b5', {method: 'PUT',body:JSON.stringify({
-        wasteId: id,
-        price: value,
-        date: date,
-        nameWaste: name,
-      }),headers:{'content-type': 'application/json'}})
-      .then(function (response) {
-          return response.json();
-      })
-      .then(function (data) {
-      })
-      .catch(alert);
-
-
-
+      dispatch(editSpending('5fb7a799572a7b00046c63c4', id, value, date, name, closePopUp));
     }
-    closePopUp();
-    setHasError(false)
+  
+    setHasError(false);
   }
 
   const handleDateChange = (date) => {
@@ -80,9 +48,11 @@ export const SimpleModal = ({open, closePopUp}) => {
   const body = (
     <div className={classes.paper}>
       <Typography variant='h4'>{!isEdit ? 'Добавление траты' : 'Редактирование' }</Typography>
-      <form className='form-submit' autoComplete="on" onSubmit={e => sendData(e)}>
+      {loadingModal && <Typography variant='body2'>Loading...</Typography>}
+      <form disabled={loadingModal} className='form-submit' autoComplete="on" onSubmit={e => sendData(e)}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
+            disabled={loadingModal}
             disableToolbar
             variant="inline"
             format="MM/dd/yyyy"
@@ -95,19 +65,21 @@ export const SimpleModal = ({open, closePopUp}) => {
               'aria-label': 'change date',
             }}
           />
-        </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider >
         <TextField 
+          disabled={loadingModal}
           label="Наименование траты" 
           value={name}
           onChange={event => dispatch(setNameSpending(event.target.value))} 
         />
         <TextField 
+          disabled={loadingModal}
           type='number'
           label="Трата (.руб)"
           value={value} 
           onChange={event => dispatch(setValueSpending(event.target.value))} 
         />
-        <Button type="submit" variant="contained">{ !isEdit ? 'Добавить' : 'Редактировать' }</Button>
+        <Button disabled={loadingModal} type="submit" variant="contained">{ !isEdit ? 'Добавить' : 'Редактировать' }</Button>
       </form>
       { hasError && <MuiAlert elevation={6} variant="filled" severity="error">Заполните все поля!</MuiAlert> }
     </div>
