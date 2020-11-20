@@ -7,6 +7,7 @@ import SignUpPage from './views/SignUpPage';
 import MainPage from './views/MainPage';
 import { useSelector, useDispatch } from 'react-redux';
 import allSignInActions from "./actions/signInAction"
+import SignIn from './components/Auth/SignIn';
 function App() {
   const dispatch = useDispatch();
 const setSignIn = useSelector(state => state.SignInReducer);
@@ -31,7 +32,7 @@ useEffect(() => {
               {setUser.isAuth ===true?
                 <MainPage /> 
                 :
-                <div>Зарегестрируйтесь или войдите.</div>
+                <SignIn/>
               }
             </Route>
             <Route path="/signin" component={SignInPage}/>

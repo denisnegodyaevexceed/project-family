@@ -1,0 +1,17 @@
+.linkRegister{
+    display: block;
+    color: grey;
+    text-decoration: none;
+    
+}
+
+.form{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+
+    >*{
+        margin-bottom: 20px !important;
+    }
+}
