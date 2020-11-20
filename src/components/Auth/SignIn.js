@@ -46,17 +46,18 @@ export default function SignIn() {
       <Button type="submit" variant="contained">
         Войти
       </Button>
+      {error && (
+        <MuiAlert elevation={6} variant="filled" severity="error">
+          Неверный email или пароль
+        </MuiAlert>
+      )}
       </div>
       
       <Typography className='linkRegister' to="/signup" component={Link}  >Регистрация</Typography>
       <Typography className='linkRegister'  to="/" component={Link}  >Забыли пароль?</Typography>
       
             
-      {error && (
-        <MuiAlert elevation={6} variant="filled" severity="error">
-          Неверный email или пароль
-        </MuiAlert>
-      )}
+      
     </form>
   );
 }

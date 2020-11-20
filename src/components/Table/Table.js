@@ -244,7 +244,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
                         </Moment>
                         </TableCell>
                       <TableCell onClick={() => editSpendingSetState(row._id, row.date, row.nameWaste, row.price)} align="right">
-                        <EditIcon />
+                        <EditIcon className="edit" />
                       </TableCell>
                     </TableRow>
                   );
