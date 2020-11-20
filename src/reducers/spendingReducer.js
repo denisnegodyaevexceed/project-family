@@ -98,16 +98,22 @@ export default function spendingReducer(state = initialState, actions){
         case 'DEL_SPENDING_STARTED' :
             return{
                 ...state,
+                loadingTable:true,
+                errorTable:false,
             }
 
         case 'DEL_SPENDING_SUCCESS' :
             return{
                 ...state,
+                loadingTable:false,
+                tableList: actions.payload,
             }
 
         case 'DEL_SPENDING_FAILURE' :
             return{
                 ...state,
+                loadingTable:false,
+                errorTable: actions.payload,
             }
 
         case 'PUT_EDIT_SPENDING_STARTED' :

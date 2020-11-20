@@ -32,6 +32,7 @@ const headCells = [
   { id: 'nameWaste', numeric: false, disablePadding: true, label: 'nameWaste' },
   { id: 'price', numeric: true, disablePadding: false, label: 'price' },
   { id: 'date', numeric: true, disablePadding: false, label: 'date' },
+  { id: '', numeric: true, disablePadding: false, label: '' },
 ];
 
 function EnhancedTableHead(props) {
@@ -39,8 +40,6 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
-
 
   return (
     <TableHead>
@@ -237,7 +236,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
                         {row.fullName}
                       </TableCell>
                       <TableCell align="left">{row.nameWaste}</TableCell>
-                      <TableCell align="right">{row.price}</TableCell>
+                      <TableCell align="right">{row.price} ₽</TableCell>
                       <TableCell align="right">
                         <Moment format="MM/DD/YYYY">
                           {row.date}
@@ -265,6 +264,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        <div className='sum-table'>Sum: {dataSpending && dataSpending.length && dataSpending.map(item => item.price).reduce((prev, next) => prev + next)} ₽</div>
       </Paper>
     </div>
   );

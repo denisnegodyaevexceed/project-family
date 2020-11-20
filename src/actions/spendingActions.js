@@ -8,9 +8,9 @@ export const getTableList = (i) => {
         getFamilySpending(i).then(res => {
             setTimeout(() => {
                 dispatch(getTablePageSuccess(res.data.budget.waste));
-            },1500)
+            },1)
         }).catch(err => {
-            dispatch(getTablePageFailure(err.message));
+            alert(`ошибка сервера ${err.message}`);
         });
     }
 }
@@ -31,10 +31,11 @@ export const deleteSpending = (id, arrDel) => {
     return dispatch => {
         dispatch(deleteSpendingStarted());
         delSpendings(id, arrDel).then(res => {
-            // dispatch(deleteSpendingSuccess(res));
+            // dispatch(deleteSpendingSuccess(res.data.waste));
             console.log(12, res)
         }).catch(err => {
             dispatch(deleteSpendingFailure(err.message));
+            alert(`ошибка сервера ${err.message}`);
         });
     }
 }
@@ -58,9 +59,10 @@ export const editSpending = (budgetId, id, value, date, name, callback) => {
             setTimeout(() => {
                 dispatch(editSpendingSuccess(res.data.waste));
                 callback()
-            },1500)
+            },1)
         }).catch(err => {
             dispatch(editSpendingFailure(err.message));
+            alert(`ошибка сервера ${err.message}`);
         });
     }
 }
@@ -84,9 +86,10 @@ export const addSpending = (id, value, date, name, callback) => {
             setTimeout(() => {
                 dispatch(addSpendingSuccess(res.data.waste));
                 callback()
-            },1500)
+            },1)
         }).catch(err => {
             dispatch(addSpendingFailure(err.message));
+            alert(`ошибка сервера ${err.message}`);
         });
     }
 }

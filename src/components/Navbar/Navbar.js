@@ -8,6 +8,7 @@ import allUserActions from "../../actions/userActions";
 import allSignUpActions from '../../actions/signUpAction'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 // import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
 import allSignInActions from "../../actions/signInAction"
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
  const Navbar=()=> {
+  const history = useHistory()
   const dispatch = useDispatch();
   const setSignIn = useSelector(state => state.SignInReducer);
   
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   const Exit = ()=>{
     localStorage.clear()
     dispatch(allSignInActions.logoutUser())
+    history.go(0)
   }
 
 
@@ -55,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
               <Button to="/signup" component={Link} color="inherit" onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
             </>
           :
-            <Typography   variant="h8">
+            <Typography   variant="h6">
               Имя пользователя: {setSignIn.userInfo.fullName}
             </Typography>
           }
