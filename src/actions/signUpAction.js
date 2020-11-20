@@ -16,17 +16,58 @@ export const setSignUpConfirmPassword = (data) => ({
     payload: data
 })
 
-export const setSignUpName = (data)=> ({
+export const setSignUpName = (data) => ({
     type: actions.SET_SIGNUP_NAME,
     payload: data
 })
 
+export const postSignUp = ({ email, password, fullName }, e) => {
+    return function (dispatch) {
+        dispatch({
+            type: actions.POST_SIGNUP_REQUEST,
+        })
+        async function signUp({ email, password, fullName }, e) {
+            e.preventDefault()
+            try {
+                const { data: user } = await axios.post('https://backend-family-budget.herokuapp.com/auth/signup', {
+                    email,
+                    password,
+                    fullName
+                })
+                dispatch({
+                    type: actions.POST_SIGNUP_SUCCESS,
+                    payload: user,
+                })
+            } catch {
+                dispatch({
+                    type: actions.POST_SIGNUP_ERROR,
+                    error: true,
+                    isFetching: false,
+
+                })
+            }
 
 
-export default{
+
+
+        }
+        signUp({ email, password, fullName }, e)
+    }
+
+}
+
+export const isRegisterClear = () =>({
+    type: actions.SET_SIGNUP_ISREGISTER,
+    
+})
+
+
+
+export default {
     setSignUpConfirmPassword,
     setSignUpEmail,
     setSignUpPassword,
     setSignUpName,
-    
+    postSignUp,
+    isRegisterClear
 }

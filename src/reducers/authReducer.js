@@ -4,6 +4,7 @@ const initialState = {
    confirmPassword: '',
    fullName: '',
    isFetching: false,
+   isRegister: false,
    error: false
 }
 
@@ -37,12 +38,27 @@ export default function signUpReducer(state=initialState, actions){
         case 'POST_SIGNUP_SUCCESS':
             return{
                 ...state,
-                isFetching: false
+                isFetching: false,
+                isRegister: true,
+                fullName: actions.payload.fullName,
+                password: actions.payload.password,
+                email: actions.payload.email,
             }
         case 'POST_SIGNUP_ERROR':
             return{
                 ...state,
-                error: true
+                error: true,
+                isFetching: false,
+            }
+        case 'SET_SIGNUP_ISREGISTER' :
+            return{
+                ...state,
+                isRegister: false,
+                fullName: '',
+                password: '',
+                confirmPassword: '',
+                email: '',
+                error: false,
             }
 
         default: return state

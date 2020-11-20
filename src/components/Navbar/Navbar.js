@@ -4,7 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import allUserActions from "../../actions/userActions"
+import allUserActions from "../../actions/userActions";
+import allSignUpActions from '../../actions/signUpAction'
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 // import IconButton from '@material-ui/core/IconButton';
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
           {/* <Link to="/signin" color="inherit"> */}
           <Button to="/signin" component={Link} color="inherit">Авторизация</Button>
           {/* </Link> */}
-          <Button to="/signup" component={Link} color="inherit">Регистрация</Button>
+          <Button to="/signup" component={Link} color="inherit" onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
           <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
         </Toolbar>
       </AppBar>
