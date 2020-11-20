@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import signUpReducer from './authReducer'
+import signUpReducer from './signUpReducer'
 import spendingReducer from './spendingReducer'
 import SignInReducer from './signInReducer'
 import userReducer from './userReducer'
