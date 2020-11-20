@@ -4,6 +4,7 @@ import clsx from "clsx";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Moment from 'react-moment';
 import { useSelector } from 'react-redux'
+import EditIcon from '@material-ui/icons/Edit';
 import {
   Table,
   TableBody,
@@ -163,7 +164,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
           </Typography>
         ) : (
           <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-            Nutrition
+            Расход семьи
           </Typography>
         )}
   
@@ -242,7 +243,9 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
                           {row.date}
                         </Moment>
                         </TableCell>
-                      <TableCell onClick={() => editSpendingSetState(row._id, row.date, row.nameWaste, row.price)} align="right">EDIT</TableCell>
+                      <TableCell onClick={() => editSpendingSetState(row._id, row.date, row.nameWaste, row.price)} align="right">
+                        <EditIcon />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
