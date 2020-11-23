@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import allSignUpActions from '../../actions/signUpAction';
 import {Redirect} from 'react-router-dom';
 import MuiAlert from '@material-ui/lab/Alert';
-import './SignUp.scss'
+import './SignUp.scss';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 
@@ -16,19 +17,20 @@ export default function SignUp() {
   const setSignUp = useSelector(state => state.signUpReducer)
   console.log('bububuubu', setSignUp)
 
-  const { email, password, confirmPassword, fullName, isRegister, error } = setSignUp;
+  const { email, password, confirmPassword, fullName, isRegister, error, isFetching } = setSignUp;
 
   const validPassword = password.length>7||password.length===0;
 
   const validConfirmPassword = password===confirmPassword&&password.length===confirmPassword.length
 
- 
+  console.log('email', email)
 
   if(isRegister){
     return (<Redirect to='/signin'/>)
   } else {
   
   return (<div>
+    {isFetching&& <div className='loading'><CircularProgress className='loader' /></div>}
     <form onSubmit={(e)=>{dispatch(allSignUpActions.postSignUp({email, password, fullName}, e))}} >
       <div className='form'>
       <TextField required type="email" label="Почта" value={email} onChange={(e) => dispatch(allSignUpActions.setSignUpEmail(e.target.value))} />

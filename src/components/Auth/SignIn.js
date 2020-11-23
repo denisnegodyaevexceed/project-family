@@ -52,7 +52,7 @@ export default function SignIn() {
       </div>
       
       <Typography className='linkRegister' to="/signup" component={Link}  >Регистрация</Typography>
-      <Typography className='linkRegister'  to="/" component={Link}  >Забыли пароль?</Typography>
+      <Typography className='linkRegister'  to="/forgot-password" component={Link}  >Забыли пароль?</Typography>
       
             
       
