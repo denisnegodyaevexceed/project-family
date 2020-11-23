@@ -6,9 +6,11 @@ export const getTableList = (i, headers) => {
     return dispatch => {
         dispatch(getTablePageStarted());
         getFamilySpending(i, headers).then(res => {
-            setTimeout(() => {
-                dispatch(getTablePageSuccess(res && res.data && res.data.budget && res.data.budget.waste));
-            },1)
+            console.log(res)
+            res.data.budget ? 
+                dispatch(getTablePageSuccess(res.data.budget.waste))
+                : 
+                dispatch(getTablePageSuccess([]));
         }).catch(err => {
             alert(`ошибка сервера ${err.message}`);
             dispatch(getTablePageFailure(err))
@@ -84,10 +86,12 @@ export const addSpending = (id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(addSpendingStarted());
         postAddSpending(id, value, date, name, headers).then(res => {
-            setTimeout(() => {
-                dispatch(addSpendingSuccess(res.data.waste));
-                callback()
-            },1)
+            console.log(251,res)
+            res.data.waste ? 
+                dispatch(addSpendingSuccess(res.data.waste))
+                :
+                dispatch(addSpendingSuccess([]))
+            callback()
         }).catch(err => {
             dispatch(addSpendingFailure(err.message));
             alert(`ошибка сервера ${err.message}`);

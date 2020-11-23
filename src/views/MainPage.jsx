@@ -14,7 +14,8 @@ const MainPage = ({isSelf = false}) => {
     const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, getTableList, deleteSpending } = allSpendingActions;
     let listData = useSelector(state => state.spendingReducer.tableList);
     let userData = useSelector(state => state.SignInReducer);
-    listData && listData.map((item, i) => {listData[i].price = +item.price})
+    listData?.map((item, i) => {listData[i].price = +item.price})
+    if(isSelf){listData = listData?.filter(item => item.fullName == userData.userInfo.fullName);}
 
     useEffect(() => {
         const headers = {
@@ -49,7 +50,7 @@ const MainPage = ({isSelf = false}) => {
 
     return (
         <>
-            <Table deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
+            <Table isSelf={isSelf} deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
             <SimpleModal open={isOpen} closePopUp={handleClosePopup} />
         </>

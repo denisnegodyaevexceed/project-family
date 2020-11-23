@@ -89,7 +89,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendings}) => {
+export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendings, isSelf}) => {
 
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -144,7 +144,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataSpending.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataSpending && dataSpending.length - page * rowsPerPage);
 
 
 
@@ -164,7 +164,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
           </Typography>
         ) : (
           <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-            Расход семьи
+            {isSelf ? 'Мои расходы' : 'Расход семьи'}
           </Typography>
         )}
   
@@ -208,12 +208,12 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={dataSpending.length}
+              rowCount={dataSpending && dataSpending.length}
             />
             <TableBody>
               {stableSort(dataSpending, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
+                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                ?.map((row, index) => {
                   const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -261,7 +261,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           labelRowsPerPage='строк на стр.'
-          count={dataSpending.length}
+          count={dataSpending?.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
