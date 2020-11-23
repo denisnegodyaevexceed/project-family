@@ -12,14 +12,11 @@ function App() {
   const dispatch = useDispatch();
 const setSignIn = useSelector(state => state.SignInReducer);
 const setUser = useSelector(state => state.SignInReducer);
-console.log(setUser.isAuth)
 useEffect(() => {
   if (localStorage.getItem('uid') === 'q' ){
     dispatch(allSignInActions.checkedToken())
   }
 }, [dispatch])
-
-
 
   return (
     <BrowserRouter>
@@ -31,6 +28,13 @@ useEffect(() => {
             <Route exact path="/">
               {setUser.isAuth ===true?
                 <MainPage /> 
+                :
+                <SignIn/>
+              }
+            </Route>
+            <Route path="/self">
+              {setUser.isAuth ===true?
+                <MainPage isSelf={true} /> 
                 :
                 <SignIn/>
               }

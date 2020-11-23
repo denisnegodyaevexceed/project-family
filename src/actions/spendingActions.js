@@ -2,11 +2,12 @@ import actions from '../constants/actionsType'
 import { getFamilySpending, delSpendings, putEditSpending, postAddSpending } from '../api/spendingService'
 
 
-export const getTableList = (i) => {
+export const getTableList = (i, isSelf) => {
     return dispatch => {
         dispatch(getTablePageStarted());
         getFamilySpending(i).then(res => {
             setTimeout(() => {
+                console.log(123, isSelf)
                 dispatch(getTablePageSuccess(res.data.budget.waste));
             },1)
         }).catch(err => {

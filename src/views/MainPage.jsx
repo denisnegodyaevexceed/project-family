@@ -5,17 +5,20 @@ import SimpleModal from "../components/Modal/Modal";
 import { Button } from "@material-ui/core"
 
 import allSpendingActions from "../actions/spendingActions"
+import { Filter } from "@material-ui/icons";
 
-const MainPage = () => {
+const MainPage = ({isSelf = false}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch();
     const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, getTableList, deleteSpending } = allSpendingActions;
     let listData = useSelector(state => state.spendingReducer.tableList);
     listData && listData.map((item, i) => {listData[i].price = +item.price})
+    
+
 
     useEffect(() => {
-        dispatch(getTableList('5fb3acd719e16b64c852d824'))
+        dispatch(getTableList('5fb3acd719e16b64c852d824', isSelf))
     }, [dispatch]);
 
     const editSpendingSetState = (id, date, name, value) => {

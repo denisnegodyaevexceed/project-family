@@ -40,32 +40,25 @@ const useStyles = makeStyles((theme) => ({
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        
         <Toolbar>
-        <Button to="/" component={Link} color="inherit">На главную</Button>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"> */}
-            {/* <MenuIcon /> */}
-          {/* </IconButton> */}
-          <Typography   variant="h6" className={classes.title}>
-            Семейный бюджет
-          </Typography>
-          {/* <Link to="/signin" color="inherit"> */}
-          
-          {!setSignIn.isAuth ?
-          
-            <>
-              <Button to="/signin" component={Link} color="inherit">Авторизация</Button>
-              <Button to="/signup" component={Link} color="inherit" onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
-            </>
-          :
-            <>
-              <Typography   variant="h6">
-                Имя пользователя: {setSignIn.userInfo.fullName}
-              </Typography>
-              <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
-            </>
-          }
-          
+          <Button to="/" component={Link} color="inherit">На главную</Button>
+          {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Свои траты</Button> : null }
+            <Typography   variant="h6" className={classes.title}>
+              Семейный бюджет
+            </Typography>
+            {!setSignIn.isAuth ?
+              <>
+                <Button to="/signin" component={Link} color="inherit">Авторизация</Button>
+                <Button to="/signup" component={Link} color="inherit" onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
+              </>
+            :
+              <>
+                <Typography   variant="h6">
+                  Имя пользователя: {setSignIn.userInfo.fullName}
+                </Typography>
+                <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
+              </>
+            }
         </Toolbar>
       </AppBar>
     </div>
