@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SignIn from './components/Auth/SignIn';
 import PageError from './components/page404/Page404';
 import allActions from "./actions/signInAction"
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,12 @@ function App() {
     }
   }, [dispatch])
 
-
+  if (setUser.isFetching){
+    return(
+      // <div className="loader"></div>
+      <CircularProgress className='loader' />
+    )
+  }
   return (
     <BrowserRouter>
       <div className="App">

@@ -48,6 +48,7 @@ export default function SignInReducer(state = initialState, actions){
             return{
                 ...state,
                 isAuth: false,
+                isFetching:true,
             }
 
         case 'GET_USER_SUCCESS':
@@ -55,6 +56,7 @@ export default function SignInReducer(state = initialState, actions){
                 ...state,
                 userInfo:actions.payload,
                 isAuth: true,
+                isFetching:false,
             }
 
         case 'GET_USER_FAILURE':
