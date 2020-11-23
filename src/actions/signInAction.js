@@ -85,6 +85,10 @@ const getUserFailure = (error) => ({
   payload: error,
 });
 
+const fetchEnd = () => ({
+  type: actions.FETCHING_SET_FALSE,
+});
+
 export default {
   setSignInEmail,
   setSignInPassword,
@@ -92,4 +96,5 @@ export default {
   logoutUser,
   checkedToken,
   getUserAction,
+  fetchEnd
 };

@@ -9,7 +9,6 @@ import MainPage from './views/MainPage';
 import { useSelector, useDispatch } from 'react-redux';
 import SignIn from './components/Auth/SignIn';
 import PageError from './components/page404/Page404';
-import ForgotPassword from './components/forgotPassword/forgotPassword'
 import allActions from "./actions/signInAction"
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -24,6 +23,8 @@ function App() {
         headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
       };
       dispatch(allActions.getUserAction(decoded.userId, headers));
+    }else{
+      dispatch(allActions.fetchEnd());
     }
   }, [dispatch])
 
@@ -56,7 +57,8 @@ function App() {
             </Route>
             <Route path="/signin" component={SignInPage}/>
             <Route path="/signup" component={SignUpPage}/>
-            <Route path="/forgot-password" component={ForgotPassword}/>
+            <Route path="/signin" component={SignInPage} />
+            <Route path="/signup" component={SignUpPage} />
             <Route  component={PageError} />
           </Switch>
         </div>
