@@ -9,11 +9,8 @@ import MainPage from './views/MainPage';
 import { useSelector, useDispatch } from 'react-redux';
 import SignIn from './components/Auth/SignIn';
 import PageError from './components/page404/Page404';
-<<<<<<< HEAD
 import ForgotPassword from './components/forgotPassword/forgotPassword'
 import ResetPassword from './components/forgotPassword/resetPassword'
-=======
->>>>>>> 7718e8de86b898899bf89b96445d813e16bcdb71
 import allActions from "./actions/signInAction"
 import CircularProgress from '@material-ui/core/CircularProgress';
 
