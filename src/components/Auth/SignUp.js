@@ -22,7 +22,8 @@ export default function SignUp() {
 
   const validConfirmPassword = password===confirmPassword&&password.length===confirmPassword.length
 
-  
+ 
+
   if(isRegister){
     return (<Redirect to='/signin'/>)
   } else {
@@ -30,10 +31,10 @@ export default function SignUp() {
   return (<div>
     <form onSubmit={(e)=>{dispatch(allSignUpActions.postSignUp({email, password, fullName}, e))}} >
       <div className='form'>
-      <TextField required type="email" label="Email" value={email} onChange={(e) => dispatch(allSignUpActions.setSignUpEmail(e.target.value))} />
-      <TextField required error={!validPassword} helperText={!validPassword? 'Пароль сликшком короткий': ''}type="password" label="Password"  value={password} onChange={e => dispatch(allSignUpActions.setSignUpPassword(e.target.value))} />
-      <TextField required error={!validConfirmPassword} helperText={!validConfirmPassword? 'Пароли должны совпадать': ''}type="password" label="Password" value={confirmPassword} onChange={e => dispatch(allSignUpActions.setSignUpConfirmPassword(e.target.value))} />
-      <TextField required type="text" label="Name" value={fullName} onChange={e => dispatch(allSignUpActions.setSignUpName(e.target.value))} />
+      <TextField required type="email" label="Почта" value={email} onChange={(e) => dispatch(allSignUpActions.setSignUpEmail(e.target.value))} />
+      <TextField required error={!validPassword} helperText={!validPassword? 'Пароль сликшком короткий': ''}type="password" label="Пароль"  value={password} onChange={e => dispatch(allSignUpActions.setSignUpPassword(e.target.value))} />
+      <TextField required error={!validConfirmPassword} helperText={!validConfirmPassword? 'Пароли должны совпадать': ''}type="password" label="Подтверждение пароля" value={confirmPassword} onChange={e => dispatch(allSignUpActions.setSignUpConfirmPassword(e.target.value))} />
+      <TextField required type="text" label="Имя" value={fullName} onChange={e => dispatch(allSignUpActions.setSignUpName(e.target.value))} />
       <Button type="submit" variant="contained" disabled={!(validPassword&&validConfirmPassword)||!(email && password && confirmPassword && fullName)}>Регистрация</Button>
       {error && <MuiAlert elevation={6} variant="filled" severity="error">Пользователь уже зарегестрирован, авторизуйтесь или зарегестрируйте нового пользователя.</MuiAlert>}
       </div>

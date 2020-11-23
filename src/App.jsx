@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import './App.scss';
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -8,39 +8,44 @@ import MainPage from './views/MainPage';
 import { useSelector, useDispatch } from 'react-redux';
 import allSignInActions from "./actions/signInAction"
 import SignIn from './components/Auth/SignIn';
+import PageError from './components/page404/Page404';
+
+
+
+
 function App() {
   const dispatch = useDispatch();
-const setSignIn = useSelector(state => state.SignInReducer);
-const setUser = useSelector(state => state.SignInReducer);
-console.log(setUser.isAuth)
-useEffect(() => {
-  if (localStorage.getItem('uid') === 'q' ){
-    dispatch(allSignInActions.checkedToken())
-  }
-}, [dispatch])
+  const setSignIn = useSelector(state => state.SignInReducer);
+  const setUser = useSelector(state => state.SignInReducer);
+  console.log(setUser.isAuth)
+  useEffect(() => {
+    if (localStorage.getItem('uid') === 'q') {
+      dispatch(allSignInActions.checkedToken())
+    }
+  }, [dispatch])
 
-
-
+  
   return (
     <BrowserRouter>
       <div className="App">
 
-      <Navbar/>
+        <Navbar />
         <div className='contnet'>
           <Switch>
             <Route exact path="/">
-              {setUser.isAuth ===true?
-                <MainPage /> 
+              {setUser.isAuth === true ?
+                <MainPage />
                 :
-                <SignIn/>
+                <SignIn />
               }
             </Route>
-            <Route path="/signin" component={SignInPage}/>
-            <Route path="/signup" component={SignUpPage}/>
+            <Route path="/signin" component={SignInPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route  component={PageError} />
           </Switch>
         </div>
-
         
+
       </div>
     </BrowserRouter>
   );
