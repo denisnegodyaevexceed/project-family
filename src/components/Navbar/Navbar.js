@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
           :
             <>
               <Typography   variant="h6">
-                Имя пользователя: {setSignIn.userInfo.fullName}
+                Имя пользователя: {setSignIn.userInfo && setSignIn.userInfo.fullName}
               </Typography>
               <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
             </>
