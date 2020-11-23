@@ -2,7 +2,7 @@ const initialState = {
     email:'',
     password:'',
     error:false,
-    isFetching:false,
+    isFetching:true,
     isAuth:false,
     userInfo: {},
 }
@@ -63,6 +63,12 @@ export default function SignInReducer(state = initialState, actions){
             return{
                 ...state,
                 isAuth: false,
+            }
+        
+        case 'FETCHING_SET_FALSE':
+            return{
+                ...state,
+                isFetching: false,
             }
 
         default:

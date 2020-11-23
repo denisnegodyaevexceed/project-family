@@ -23,6 +23,8 @@ function App() {
         headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
       };
       dispatch(allActions.getUserAction(decoded.userId, headers));
+    }else{
+      dispatch(allActions.fetchEnd());
     }
   }, [dispatch])
 
