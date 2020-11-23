@@ -9,7 +9,6 @@ export async function getFamilySpending(userId, headers){
 }
 
 export async function delSpendings(budgetId, arr, headers){
-    console.log(9889,headers)
     try {
         return await API.delete(`https://backend-family-budget.herokuapp.com/budget/delete-waste?budgetId=${budgetId}`, {
             data: {

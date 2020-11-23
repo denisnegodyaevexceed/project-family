@@ -6,7 +6,6 @@ export const getTableList = (i, headers) => {
     return dispatch => {
         dispatch(getTablePageStarted());
         getFamilySpending(i, headers).then(res => {
-            console.log(res)
             res.data.budget ? 
                 dispatch(getTablePageSuccess(res.data.budget.waste))
                 : 
@@ -35,7 +34,6 @@ export const deleteSpending = (id, arrDel, headers) => {
         dispatch(deleteSpendingStarted());
         delSpendings(id, arrDel, headers).then(res => {
             dispatch(deleteSpendingSuccess(res.data.waste));
-            console.log(12, res)
         }).catch(err => {
             dispatch(deleteSpendingFailure(err.message));
             alert(`ошибка сервера ${err.message}`);
@@ -86,7 +84,7 @@ export const addSpending = (id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(addSpendingStarted());
         postAddSpending(id, value, date, name, headers).then(res => {
-            console.log(251,res)
+            console.log('first add test',res)
             res.data.waste ? 
                 dispatch(addSpendingSuccess(res.data.waste))
                 :
