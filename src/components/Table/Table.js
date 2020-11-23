@@ -29,7 +29,7 @@ import './Table.scss'
 
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'name' },
+  { id: 'fullName', numeric: false, disablePadding: true, label: 'name' },
   { id: 'nameWaste', numeric: false, disablePadding: true, label: 'nameWaste' },
   { id: 'price', numeric: true, disablePadding: false, label: 'price' },
   { id: 'date', numeric: true, disablePadding: false, label: 'date' },
