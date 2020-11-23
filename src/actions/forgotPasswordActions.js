@@ -15,7 +15,7 @@ export const postForgotPasswordEmail = ({ email }, e) => {
         async function postEmail({ email }, e) {
             e.preventDefault()
             try {
-                const { data: user } = await axios.post('https://backend-family-budget.herokuapp.com/auth/signup', {
+                const { data: user } = await axios.post('https://backend-family-budget.herokuapp.com/auth/check-mail', {
                     email,
                     })
                 dispatch({
