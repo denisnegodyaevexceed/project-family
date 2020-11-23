@@ -2,15 +2,17 @@ import actions from '../constants/actionsType'
 import { getFamilySpending, delSpendings, putEditSpending, postAddSpending } from '../api/spendingService'
 
 
-export const getTableList = (i, isSelf) => {
+export const getTableList = (i, headers) => {
     return dispatch => {
         dispatch(getTablePageStarted());
-        getFamilySpending(i).then(res => {
-            setTimeout(() => {
-                dispatch(getTablePageSuccess(res && res.data && res.data.budget && res.data.budget.waste));
-            },1)
+        getFamilySpending(i, headers).then(res => {
+            res.data.budget ? 
+                dispatch(getTablePageSuccess(res.data.budget.waste))
+                : 
+                dispatch(getTablePageSuccess([]));
         }).catch(err => {
             alert(`ошибка сервера ${err.message}`);
+            dispatch(getTablePageFailure(err))
         });
     }
 }
@@ -27,12 +29,11 @@ const getTablePageFailure = error => ({
 });
 
 
-export const deleteSpending = (id, arrDel) => {
+export const deleteSpending = (id, arrDel, headers) => {
     return dispatch => {
         dispatch(deleteSpendingStarted());
-        delSpendings(id, arrDel).then(res => {
-            // dispatch(deleteSpendingSuccess(res.data.waste));
-            console.log(12, res)
+        delSpendings(id, arrDel, headers).then(res => {
+            dispatch(deleteSpendingSuccess(res.data.waste));
         }).catch(err => {
             dispatch(deleteSpendingFailure(err.message));
             alert(`ошибка сервера ${err.message}`);
@@ -52,10 +53,10 @@ const deleteSpendingFailure = (err) => ({
 })
 
 
-export const editSpending = (budgetId, id, value, date, name, callback) => {
+export const editSpending = (budgetId, id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(editSpendingStarted());
-        putEditSpending(budgetId, id, value, date, name).then(res => {
+        putEditSpending(budgetId, id, value, date, name, headers).then(res => {
             setTimeout(() => {
                 dispatch(editSpendingSuccess(res.data.waste));
                 callback()
@@ -79,14 +80,16 @@ const editSpendingFailure = (err) => ({
 })
 
 
-export const addSpending = (id, value, date, name, callback) => {
+export const addSpending = (id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(addSpendingStarted());
-        postAddSpending(id, value, date, name).then(res => {
-            setTimeout(() => {
-                dispatch(addSpendingSuccess(res.data.waste));
-                callback()
-            },1)
+        postAddSpending(id, value, date, name, headers).then(res => {
+            console.log('first add test',res)
+            res.data.waste ? 
+                dispatch(addSpendingSuccess(res.data.waste))
+                :
+                dispatch(addSpendingSuccess([]))
+            callback()
         }).catch(err => {
             dispatch(addSpendingFailure(err.message));
             alert(`ошибка сервера ${err.message}`);
