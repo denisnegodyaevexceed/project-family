@@ -18,7 +18,7 @@ const MainPage = ({isSelf = false}) => {
 
 
     useEffect(() => {
-        dispatch(getTableList('5fb3acd719e16b64c852d824', isSelf))
+        // dispatch(getTableList('5fb3acd719e16b64c852d824'))
     }, [dispatch]);
 
     const editSpendingSetState = (id, date, name, value) => {

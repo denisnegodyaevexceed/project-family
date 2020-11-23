@@ -7,8 +7,7 @@ export const getTableList = (i, isSelf) => {
         dispatch(getTablePageStarted());
         getFamilySpending(i).then(res => {
             setTimeout(() => {
-                console.log(123, isSelf)
-                dispatch(getTablePageSuccess(res.data.budget.waste));
+                dispatch(getTablePageSuccess(res && res.data && res.data.budget && res.data.budget.waste));
             },1)
         }).catch(err => {
             alert(`ошибка сервера ${err.message}`);

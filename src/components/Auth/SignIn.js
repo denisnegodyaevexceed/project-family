@@ -16,9 +16,7 @@ export default function SignIn() {
   const validAuth = (e) => {
     e.preventDefault();
     dispatch(allSignInActions.signInUser(email, password));
-    localStorage.setItem("uid", "q");
   };
-
 
   if (isAuth) return <Redirect to="/" />;
   return (
@@ -27,7 +25,7 @@ export default function SignIn() {
       <TextField
         required
         type="email"
-        label="Email"
+        label="Почта"
         value={setSignIn.email}
         onChange={(e) =>
           dispatch(allSignInActions.setSignInEmail(e.target.value))
@@ -37,13 +35,13 @@ export default function SignIn() {
         required
         type="password"
         id="standard-basic"
-        label="Password"
+        label="Пароль"
         value={setSignIn.password}
         onChange={(e) =>
           dispatch(allSignInActions.setSignInPassword(e.target.value))
         }
       />
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" disabled={!(email && password)}>
         Войти
       </Button>
       {error && (
