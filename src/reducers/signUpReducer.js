@@ -40,9 +40,7 @@ export default function signUpReducer(state=initialState, actions){
                 ...state,
                 isFetching: false,
                 isRegister: true,
-                fullName: actions.payload.fullName,
-                password: actions.payload.password,
-                email: actions.payload.email,
+                
             }
         case 'POST_SIGNUP_ERROR':
             return{
