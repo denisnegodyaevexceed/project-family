@@ -27,15 +27,19 @@ export const SimpleModal = ({open, closePopUp}) => {
   const {isEdit, date, name, value, id, loadingModal} = modalData
   const dispatch = useDispatch();
   const {setDateSpending, setNameSpending, setValueSpending, editSpending, addSpending } = allSpendingActions;
+  const userData = useSelector(state => state.SignInReducer);
 
   const sendData = (e) =>{
+    const headers = {
+        headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
+    };
     e.preventDefault();
     if(name === '' || value === '') {setHasError(true); return null}
 
     if(!isEdit){
-      dispatch(addSpending('5fb3acd719e16b64c852d824', value, date, name, closePopUp));
+      dispatch(addSpending(userData.userInfo._id, value, date, name, closePopUp, headers));
     } else {
-      dispatch(editSpending('5fb7a799572a7b00046c63c4', id, value, date, name, closePopUp));
+      dispatch(editSpending(userData.userInfo.budget, id, value, date, name, closePopUp, headers));
     }
   
     setHasError(false);

@@ -17,15 +17,15 @@ export const signInUser = (email, password) => {
     dispatch(signInUserStarted());
     postSignInUser(email, password)
         .then((res) => {
-        dispatch(signInUserSuccess(res));
-        localStorage.setItem("accessToken", res.accessToken);
-        localStorage.setItem("refreshToken", res.refreshToken);
-        let token = res.accessToken;
-        let decoded = jwt_decode(token);
-        const headers = {
-            headers: { Authorization: `Bearer ${res.refreshToken}` },
-        };
-        dispatch(getUserAction(decoded.userId, headers));
+          dispatch(signInUserSuccess(res));
+          localStorage.setItem("accessToken", res.accessToken);
+          localStorage.setItem("refreshToken", res.refreshToken);
+          let token = res.accessToken;
+          let decoded = jwt_decode(token);
+          const headers = {
+              headers: { Authorization: `Bearer ${res.refreshToken}` },
+          };
+          dispatch(getUserAction(decoded.userId, headers));
         })
         .catch((err) => {
         console.log(err.message);

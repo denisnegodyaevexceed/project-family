@@ -2,15 +2,16 @@ import actions from '../constants/actionsType'
 import { getFamilySpending, delSpendings, putEditSpending, postAddSpending } from '../api/spendingService'
 
 
-export const getTableList = (i, isSelf) => {
+export const getTableList = (i, headers) => {
     return dispatch => {
         dispatch(getTablePageStarted());
-        getFamilySpending(i).then(res => {
+        getFamilySpending(i, headers).then(res => {
             setTimeout(() => {
                 dispatch(getTablePageSuccess(res && res.data && res.data.budget && res.data.budget.waste));
             },1)
         }).catch(err => {
             alert(`ошибка сервера ${err.message}`);
+            dispatch(getTablePageFailure(err))
         });
     }
 }
@@ -27,11 +28,11 @@ const getTablePageFailure = error => ({
 });
 
 
-export const deleteSpending = (id, arrDel) => {
+export const deleteSpending = (id, arrDel, headers) => {
     return dispatch => {
         dispatch(deleteSpendingStarted());
-        delSpendings(id, arrDel).then(res => {
-            // dispatch(deleteSpendingSuccess(res.data.waste));
+        delSpendings(id, arrDel, headers).then(res => {
+            dispatch(deleteSpendingSuccess(res.data.waste));
             console.log(12, res)
         }).catch(err => {
             dispatch(deleteSpendingFailure(err.message));
@@ -52,10 +53,10 @@ const deleteSpendingFailure = (err) => ({
 })
 
 
-export const editSpending = (budgetId, id, value, date, name, callback) => {
+export const editSpending = (budgetId, id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(editSpendingStarted());
-        putEditSpending(budgetId, id, value, date, name).then(res => {
+        putEditSpending(budgetId, id, value, date, name, headers).then(res => {
             setTimeout(() => {
                 dispatch(editSpendingSuccess(res.data.waste));
                 callback()
@@ -79,10 +80,10 @@ const editSpendingFailure = (err) => ({
 })
 
 
-export const addSpending = (id, value, date, name, callback) => {
+export const addSpending = (id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(addSpendingStarted());
-        postAddSpending(id, value, date, name).then(res => {
+        postAddSpending(id, value, date, name, headers).then(res => {
             setTimeout(() => {
                 dispatch(addSpendingSuccess(res.data.waste));
                 callback()

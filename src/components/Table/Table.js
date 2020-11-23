@@ -170,7 +170,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
   
         {numSelected > 0 ? (
           <Tooltip title="Delete">
-            <IconButton aria-label="delete" onClick={() => {deleteSpendings(selected)}} >
+            <IconButton aria-label="delete" onClick={() => {deleteSpendings(selected);setSelected([])}} >
               <DeleteIcon />
             </IconButton>
           </Tooltip>
