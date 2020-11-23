@@ -15,7 +15,7 @@ const MainPage = () => {
     listData && listData.map((item, i) => {listData[i].price = +item.price})
 
     useEffect(() => {
-        dispatch(getTableList('5fb3acd719e16b64c852d824'))
+        // dispatch(getTableList('5fb3acd719e16b64c852d824'))
     }, [dispatch]);
 
     const editSpendingSetState = (id, date, name, value) => {

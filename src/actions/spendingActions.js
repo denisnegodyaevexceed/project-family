@@ -7,7 +7,7 @@ export const getTableList = (i) => {
         dispatch(getTablePageStarted());
         getFamilySpending(i).then(res => {
             setTimeout(() => {
-                dispatch(getTablePageSuccess(res.data.budget.waste));
+                dispatch(getTablePageSuccess(res && res.data && res.data.budget && res.data.budget.waste));
             },1)
         }).catch(err => {
             alert(`ошибка сервера ${err.message}`);
