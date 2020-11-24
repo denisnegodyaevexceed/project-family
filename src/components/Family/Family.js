@@ -37,6 +37,19 @@ const BasicTable = () => {
     dispatch(getTableList(userData.userInfo._id, headers));
   }, [dispatch, userData.userInfo._id, getTableList]);
 
+  const res = listData.reduce((acc, curr) => {
+    if (acc.find(element => element.fullName === curr.fullName) === undefined) {
+      acc.push(curr)
+    } else {
+      acc = acc.map(element => {
+        if (element.fullName === curr.fullName) {
+          element.price += curr.price
+        }
+        return element
+      })
+    }
+    return acc
+  }, [])
 
   const handleClosePopup = () => {
       setIsOpen(false);
@@ -68,7 +81,7 @@ const BasicTable = () => {
             {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
         </div>
     </form>
-)
+  )
 
   return (
     <>
@@ -82,12 +95,12 @@ const BasicTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {listData.map((row, index) => (
+            {res.map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   {row.fullName}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
+                <TableCell align="right">{row.email}</TableCell>
                 <TableCell align="right">{row.price}</TableCell>
               </TableRow>
             ))}
