@@ -12,7 +12,7 @@ import './SignIn.scss'
 export default function SignIn() {
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
-  const { email, password, isAuth, error,isFetching } = setSignIn;
+  const { email, password, isAuth, error, isFetching } = setSignIn;
   const validAuth = (e) => {
     e.preventDefault();
     dispatch(allSignInActions.signInUser(email, password));

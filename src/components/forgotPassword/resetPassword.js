@@ -9,7 +9,7 @@ export default function ResetPassword(){
 
 
     return(
-        <form onSubmit={console.log('ok')}>
+        <form onSubmit={()=> {console.log('ok')}}>
             <TextField required label='Новый пароль' type='password'/>
             <TextField required  label='Повторите пароль' type='password'/>
             <Button type='submit'>Отправить</Button>
