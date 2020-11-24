@@ -23,9 +23,6 @@ const MainPage = ({isSelf = false}) => {
     const logData = useSelector(state => state.spendingReducer);
     listData?.map((item, i) => listData[i].price = +item.price)
     if(isSelf){listData = listData?.filter(item => item.fullName === userData.userInfo.fullName);}
-    
-
-    const arr = [ { 'fullName': 'P1', 'price': 151, 'email':'123' }, { 'fullName': 'P1', 'price': 150, 'email':'123' }, { 'fullName': 'P2', 'price': 200, 'email':'222' }, { 'fullName': 'P3', 'price': 450, 'email':'333' } ];
 
     useEffect(() => {
         const headers = {   
