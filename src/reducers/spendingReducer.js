@@ -8,7 +8,10 @@ const initialState = {
     loadingTable:false,
     tableList:[],
     loadingModal: false,
-    errorModal: false
+    errorModal: false,
+    inviteLoading: false,
+    inviteError: false,
+    inviteSuccess: false,
 }
 
 export default function spendingReducer(state = initialState, actions){
@@ -123,18 +126,26 @@ export default function spendingReducer(state = initialState, actions){
                 errorModal: false
             }
 
-        case 'PUT_EDIT_SPENDING_SUCCESS' :
+        case 'POST_INVITE_STARTED' :
             return{
                 ...state,
-                tableList: actions.payload,
-                loadingModal:false,
+                inviteError: false,
+                inviteLoading: true,
+                inviteSuccess: false,
             }
 
-        case 'PUT_EDIT_SPENDING_FAILURE' :
+        case 'POST_INVITE_SUCCESS' :
             return{
                 ...state,
-                errorModal: actions.payload,
-                loadingModal: false,
+                inviteLoading: false,
+                inviteSuccess: true,
+            }
+
+        case 'POST_INVITE_FAILURE' :
+                return{
+                ...state,
+                inviteError: actions.payload,
+                inviteLoading: false,
             }
 
         default:

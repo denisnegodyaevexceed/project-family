@@ -71,6 +71,15 @@ export default function SignInReducer(state = initialState, actions){
                 isFetching: false,
             }
 
+        case 'SET_USER_BUDGET_ID':
+            return{
+                ...state,
+                userInfo: {
+                    ...state.userInfo,
+                    budget: actions.payload
+                }
+            }
+
         default:
             return state
     }
