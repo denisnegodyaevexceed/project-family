@@ -61,6 +61,7 @@ function App() {
             <Route path="/signup" component={SignUpPage}/>
             <Route path="/forgot-password" component={ForgotPassword}/>
             <Route path="/reset-password" component={ResetPassword}/>
+            <Route path="/join" component={SignUpPage}/>
             <Route  component={PageError} />
           </Switch>
         </div>

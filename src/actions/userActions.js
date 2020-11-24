@@ -1,10 +1,6 @@
 import actions from '../constants/actionsType'
 
-// export const SignIn = () => {
-//     return dispatch => {
-        
-//     }
-// }
+
 
 const setUserSucces = (bool) => ({
     type: actions.SET_USER_SUCCES,
