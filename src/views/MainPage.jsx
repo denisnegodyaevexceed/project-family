@@ -9,7 +9,6 @@ import allSpendingActions from "../actions/spendingActions"
 
 const MainPage = ({isSelf = false}) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isInvite, setIsInvite] = useState(false);
 
     const dispatch = useDispatch();
     const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, clearSpendingForm, getTableList, deleteSpending } = allSpendingActions;
@@ -42,7 +41,6 @@ const MainPage = ({isSelf = false}) => {
 
     const handleClosePopup = () => {
         setIsOpen(false);
-        setIsInvite(false);
         dispatch(clearSpendingForm());
     };
 
@@ -50,13 +48,10 @@ const MainPage = ({isSelf = false}) => {
         setIsOpen(true);
     };
 
-
     return (
         <>  
             {userData.userInfo.budget ?
-                <>
-                    <Table isSelf={isSelf} deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
-                </>
+                <Table isSelf={isSelf} deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
                 :
                 <>
                     <Typography variant='h5'>Что бы создать бюджет - добавьте первую трату</Typography>
@@ -64,7 +59,7 @@ const MainPage = ({isSelf = false}) => {
                 </>
             }
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
-            <SimpleModal open={isOpen} closePopUp={handleClosePopup} forInvite={false} />
+            <SimpleModal open={isOpen} closePopUp={handleClosePopup} />
         </>
     );
 }

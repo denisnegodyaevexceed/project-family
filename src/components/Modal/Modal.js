@@ -6,21 +6,13 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Typography, Backdrop, Button, TextField, Modal } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import Backdrop from '@material-ui/core/Backdrop';
-import { Typography } from '@material-ui/core';
 import allSpendingActions from "../../actions/spendingActions";
-
-
-
 import { useStyles } from './style'
 import './Modal.scss'
 
-export const SimpleModal = ({open, closePopUp, forInvite}) => {
-  
+export const SimpleModal = ({open, closePopUp, forInvite = false}) => {
   const classes = useStyles();
   const [hasError, setHasError] = useState(false);
 
@@ -31,12 +23,11 @@ export const SimpleModal = ({open, closePopUp, forInvite}) => {
   const userData = useSelector(state => state.SignInReducer);
 
   const sendData = (e) =>{
+    e.preventDefault();
     const headers = {
         headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
     };
-    e.preventDefault();
     if(name === '' || value === '') {setHasError(true); return null}
-
     if(!isEdit){
       dispatch(addSpending(userData.userInfo._id, value, date, name, closePopUp, headers));
     } else {
@@ -51,7 +42,6 @@ export const SimpleModal = ({open, closePopUp, forInvite}) => {
 
   const body = (
     <div className={classes.paper}>
-
       {forInvite ||
         <>
           <Typography variant='h4'>{!isEdit ? 'Добавление траты' : 'Редактирование' }</Typography>
