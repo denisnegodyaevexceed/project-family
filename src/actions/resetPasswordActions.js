@@ -6,6 +6,10 @@ export const setResetPassword = (data) => ({
     type: actions.SET_RESETPASSWORD_PASSWORD,
     payload: data
 })
+export const setResetConfirmPassword = (data) => ({
+    type: actions.SET_RESETCONFIRMPASSWORD_PASSWORD,
+    payload: data
+})
 
 export const postResetPassword = ({ password }, e, id ) => {
     return function (dispatch) {
@@ -44,4 +48,5 @@ export const postResetPassword = ({ password }, e, id ) => {
 export default {
     postResetPassword,
     setResetPassword,
+    setResetConfirmPassword,
 }
