@@ -15,7 +15,7 @@ export default function ForgotPassword(){
     console.log('hfghfghfg', forgotPasswordReducer)
 
     const {error, isFetching, email, confirmEmail, id} = postForgotPassword;
-    console.log('id', id)
+    console.log('confirmEmail', confirmEmail)
 
     if(confirmEmail){
         return (

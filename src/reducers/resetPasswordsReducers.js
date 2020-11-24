@@ -3,6 +3,7 @@ const initialState = {
     error: false,
     password: '',
     confirmPassword: false,
+    confirmEmail: false,
 }
 
 export default function resetPasswordReducer (state=initialState, actions) {
@@ -21,7 +22,7 @@ export default function resetPasswordReducer (state=initialState, actions) {
             return {
                 ...state,
                 isFetching: false,
-                confirmEmail: true,
+                confirmEmail: false,
             } 
         case 'POST_RESETPASSWORD_ERROR':
             return {

@@ -11,12 +11,15 @@ import allResetPasswordActions from '../../actions/resetPasswordActions';
 export default function ResetPassword(){
     const dispatch = useDispatch();
     const postResetPassword = useSelector(state => state.resetPasswordReducer)
+    const postForgotPassword = useSelector(state => state.forgotPasswordReducer)
     console.log(postResetPassword)
+    const {id, confirmEmail} = postForgotPassword;
     const {error, isFetching, password, confirmPassword} = postResetPassword;
-    console.log(password)
+    console.log('confirmEmail', confirmEmail)
+
     return(
 
-        <form onSubmit={(e) => {dispatch(allResetPasswordActions.postResetPassword({password}, e))}}>
+        <form onSubmit={(e) => {dispatch(allResetPasswordActions.postResetPassword({password}, e, id))}}>
             <TextField required label='Новый пароль' type='password' onChange={(e)=>{dispatch(allResetPasswordActions.setResetPassword(e.target.value))}}/>
             <TextField required  label='Повторите пароль' type='password'/>
             <Button type='submit'>Отправить</Button>

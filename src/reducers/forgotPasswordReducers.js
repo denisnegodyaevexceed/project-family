@@ -32,6 +32,13 @@ export default function forgotPasswordReducer (state=initialState, actions) {
                 ...state,
                 isFetching: false,
                 error: true
+            }
+        case 'POST_RESETPASSWORD_SUCCESS':
+            return{
+                ...state,
+                confirmEmail: false,
+                email: '',
+                id: ''
             }  
         default :
         return state     

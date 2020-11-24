@@ -7,16 +7,16 @@ export const setResetPassword = (data) => ({
     payload: data
 })
 
-export const postResetPassword = ({ password }, e) => {
+export const postResetPassword = ({ password }, e, id ) => {
     return function (dispatch) {
         console.log(password)
         dispatch({
             type: actions.POST_RESETPASSWORD_REQUEST,
         })
-        async function postPassword({ password }, e) {
+        async function postPassword({ password }, e,id) {
             e.preventDefault()
             try {
-                const { data: user } = await axios.post('https://backend-family-budget.herokuapp.com/auth/reset-password?userId=5fb7a5f2572a7b00046c63c1', {
+                const { data: user } = await axios.post(`https://backend-family-budget.herokuapp.com/auth/reset-password?userId=${id}`, {
                     password,
                     })
                 dispatch({
@@ -36,7 +36,7 @@ export const postResetPassword = ({ password }, e) => {
 
 
         }
-        postPassword({ password }, e)
+        postPassword({ password }, e, id)
     }
 
 }
