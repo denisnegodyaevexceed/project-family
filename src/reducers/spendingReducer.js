@@ -126,6 +126,20 @@ export default function spendingReducer(state = initialState, actions){
                 errorModal: false
             }
 
+        case 'PUT_EDIT_SPENDING_SUCCESS' :
+            return{
+                ...state,
+                tableList: actions.payload,
+                loadingModal:false,
+            }
+
+        case 'PUT_EDIT_SPENDING_FAILURE' :
+            return{
+                ...state,
+                errorModal: actions.payload,
+                loadingModal: false,
+            }
+
         case 'POST_INVITE_STARTED' :
             return{
                 ...state,

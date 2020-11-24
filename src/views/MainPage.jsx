@@ -64,7 +64,7 @@ const MainPage = ({isSelf = false}) => {
                 </>
             }
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
-            <SimpleModal open={isOpen} closePopUp={handleClosePopup} forInvite={isInvite ? InviteForm : false} />
+            <SimpleModal open={isOpen} closePopUp={handleClosePopup} forInvite={false} />
         </>
     );
 }
