@@ -24,13 +24,7 @@ export default function BasicTable() {
   let listData = useSelector((state) => state.spendingReducer.tableList);
   const dispatch = useDispatch();
   const {
-    setIsEditSpending,
-    setIdSpending,
-    setDateSpending,
-    setNameSpending,
-    setValueSpending,
     getTableList,
-    deleteSpending,
   } = allSpendingActions;
   let userData = useSelector((state) => state.SignInReducer);
 
@@ -38,12 +32,6 @@ export default function BasicTable() {
 
   const rows = listData
 
-
-
-
-
-
-  
   const classes = useStyles();
   useEffect(() => {
     const headers = {
