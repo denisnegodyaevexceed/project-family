@@ -28,7 +28,6 @@ const BasicTable = () => {
     getTableList,
     inviteUserAction,
   } = allSpendingActions;
-
   useEffect(() => {
     const headers = {
       headers: {
