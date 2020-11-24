@@ -39,7 +39,12 @@ export const postForgotPasswordEmail = ({ email }, e) => {
 
 }
 
+export const setForgotPasswordClean = () => ({
+    type: actions.SET_FORGOTPASSWORD_CLEAN
+})
+
 export default {
     postForgotPasswordEmail,
     setForgotPasswordEmail,
+    setForgotPasswordClean
 }

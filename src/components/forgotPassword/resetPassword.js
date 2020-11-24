@@ -20,9 +20,11 @@ export default function ResetPassword(){
     return(
 
         <form onSubmit={(e) => {dispatch(allResetPasswordActions.postResetPassword({password}, e, id))}}>
+           <div className='form'>
             <TextField required label='Новый пароль' type='password' onChange={(e)=>{dispatch(allResetPasswordActions.setResetPassword(e.target.value))}}/>
             <TextField required  label='Повторите пароль' type='password'/>
             <Button type='submit'>Отправить</Button>
+            </div>
         </form>
     )
 }

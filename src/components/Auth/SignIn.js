@@ -55,8 +55,6 @@ export default function SignIn() {
       <Typography className='linkRegister' to="/signup" component={Link}  >Регистрация</Typography>
       <Typography className='linkRegister'  to="/forgot-password" component={Link}  >Забыли пароль?</Typography>
       
-            
-      
-    </form>
+            </form>
   );
 }

@@ -39,6 +39,11 @@ export default function forgotPasswordReducer (state=initialState, actions) {
                 confirmEmail: false,
                 email: '',
                 id: ''
+            }
+        case 'SET_FORGOTPASSWORD_CLEAN':
+            return{
+                ...state,
+                confirmEmail: false,
             }  
         default :
         return state     
