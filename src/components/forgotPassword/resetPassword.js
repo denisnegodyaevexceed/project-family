@@ -15,6 +15,7 @@ export default function ResetPassword(){
     const {error, isFetching, password, confirmPassword} = postResetPassword;
     console.log(password)
     return(
+
         <form onSubmit={(e) => {dispatch(allResetPasswordActions.postResetPassword({password}, e))}}>
             <TextField required label='Новый пароль' type='password' onChange={(e)=>{dispatch(allResetPasswordActions.setResetPassword(e.target.value))}}/>
             <TextField required  label='Повторите пароль' type='password'/>

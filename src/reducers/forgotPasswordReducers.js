@@ -4,6 +4,7 @@ const initialState = {
     error: false,
     email: '',
     confirmEmail: false,
+    id: '',
 }
 
 export default function forgotPasswordReducer (state=initialState, actions) {
@@ -16,13 +17,15 @@ export default function forgotPasswordReducer (state=initialState, actions) {
         case 'POST_FORGOTPASSWORD_REQUEST':
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                
             }
         case 'POST_FORGOTPASSWORD_SUCCESS':
             return {
                 ...state,
                 isFetching: false,
                 confirmEmail: true,
+                id: actions.payload
             } 
         case 'POST_FORGOTPASSWORD_ERROR':
             return {

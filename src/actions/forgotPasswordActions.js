@@ -15,19 +15,18 @@ export const postForgotPasswordEmail = ({ email }, e) => {
         async function postEmail({ email }, e) {
             e.preventDefault()
             try {
-                const { data: user } = await axios.post('https://backend-family-budget.herokuapp.com/auth/check-mail', {
+                const {data : id}  = await axios.post('https://backend-family-budget.herokuapp.com/auth/check-mail', {
                     email,
                     })
                 dispatch({
                     type: actions.POST_FORGOTPASSWORD_SUCCESS,
-                    payload: user,
+                    payload: id,
                 })
             } catch {
                 dispatch({
                     type: actions.POST_FORGOTPASSWORD_ERROR,
                     error: true,
                     isFetching: false,
-
                 })
             }
 
