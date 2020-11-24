@@ -1,3 +1,4 @@
+
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -24,12 +25,15 @@ export default function ResetPassword() {
     return (
         <>{isFetching && <div className='loading'><CircularProgress className='loader' /></div>}
       <form
+        
         onSubmit={(e) => {
           dispatch(
             allResetPasswordActions.postResetPassword({ password }, e, id)
           );
         }}
       >
+        <div className='form'>
+
         <TextField
           required
           value={password}
@@ -68,8 +72,11 @@ export default function ResetPassword() {
           Cервер не отвечает
         </MuiAlert>
       )}
+      </div>
       </form>
       </>
     );
   }
 }
+
+
