@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
         <Toolbar>
           <Button to="/" component={Link} color="inherit">На главную</Button>
           {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Свои траты</Button> : null }
+          {setSignIn.isAuth ? <Button to="/family" component={Link} color="inherit">Семья</Button> : null }
+
             <Typography   variant="h6" className={classes.title}>
               Семейный бюджет
             </Typography>

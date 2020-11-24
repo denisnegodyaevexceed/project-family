@@ -16,6 +16,7 @@ const MainPage = ({isSelf = false}) => {
     let userData = useSelector(state => state.SignInReducer);
     listData?.map((item, i) => {listData[i].price = +item.price})
     if(isSelf){listData = listData?.filter(item => item.fullName == userData.userInfo.fullName);}
+    console.log(1,listData)
 
     useEffect(() => {
         const headers = {
