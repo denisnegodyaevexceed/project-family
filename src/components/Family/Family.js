@@ -39,10 +39,6 @@ export default function BasicTable() {
   const rows = listData
 
 
-
-
-
-
   
   const classes = useStyles();
   useEffect(() => {
