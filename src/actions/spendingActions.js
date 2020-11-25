@@ -1,6 +1,11 @@
 import actions from '../constants/actionsType'
-import { getFamilySpending, delSpendings, putEditSpending, postAddSpending, postInviteUser } from '../api/spendingService'
-
+import {
+    getFamilySpending,
+    delSpendings,
+    putEditSpending,
+    postAddSpending,
+    postInviteUser
+} from '../api/spendingService'
 
 export const getTableList = (i, headers) => {
     return dispatch => {
@@ -57,7 +62,6 @@ export const editSpending = (budgetId, id, value, date, name, callback, headers)
     return dispatch => {
         dispatch(editSpendingStarted());
         putEditSpending(budgetId, id, value, date, name, headers).then(res => {
-                console.log('first edit test',res);
                 dispatch(setUserBudgetId(res.data._id));
                 res.data.waste ? 
                     dispatch(editSpendingSuccess(res.data.waste))
@@ -87,7 +91,6 @@ export const addSpending = (id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(addSpendingStarted());
         postAddSpending(id, value, date, name, headers).then(res => {
-            console.log('first add test',res);
             dispatch(setUserBudgetId(res.data._id));
             res.data.waste ? 
                 dispatch(addSpendingSuccess(res.data.waste))
@@ -155,6 +158,7 @@ export const inviteUserAction = (email, budgetId, headers) => {
             dispatch(inviteUserActionSuccess(res));
         }).catch(err => {
             dispatch(inviteUserActionFailure(err.message));
+            alert(`ошибка сервера ${err.message}`);
         });
     }
 }

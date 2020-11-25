@@ -1,8 +1,7 @@
 import axios from "axios";
 
-
 export default axios.create({
-    baseURL: "https://swapi.dev/api/",
+    baseURL: "https://backend-family-budget.herokuapp.com/",
     responseType: "json",
     body:"json",
 });

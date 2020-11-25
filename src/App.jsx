@@ -63,7 +63,7 @@ function App() {
             <Route path="/forgot-password" component={ForgotPassword}/>
             <Route path="/reset-password" component={ResetPassword}/>
             <Route path="/join" component={SignUpPage}/>
-            <Route path="/family" component={Family}/>
+            <Route path="/family" component={setUser.isAuth ? Family : SignInPage}/>
             <Route  component={PageError} />
           </Switch>
         </div>
