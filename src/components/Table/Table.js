@@ -20,7 +20,6 @@ import {
   Checkbox,
   IconButton,
   Tooltip,
-  TextField,
 } from "@material-ui/core";
 
 import tableFunctionality from './functionality'
@@ -46,10 +45,7 @@ function EnhancedTableHead(props) {
   };
 
 
-  function searchTableRows(e){
 
-  console.log(e.target.value)
-  }
 
   return (
     <TableHead>
@@ -62,7 +58,7 @@ function EnhancedTableHead(props) {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
-        <TextField type='text' onChange={(e)=>searchTableRows(e)}></TextField>
+
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -195,13 +191,18 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
   };
 
 
-
+  const [search, setSearch] = useState('')
   const tableState = useSelector(state => state.spendingReducer);
   const { loadingTable } = tableState;
+  let data = dataSpending
+  if(search.length > 0 ) {
+       data = dataSpending.filter(i => i.fullName.toLowerCase().match(search.trim().toLocaleLowerCase()))
+  }
   return (
     <div className={classes.root}>
       {loadingTable && <div className="loader-table"></div>}
       <Paper className={classes.paper}>
+        <input type="text" onChange={(e) => setSearch(e.target.value)} />
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -220,7 +221,7 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
               rowCount={dataSpending && dataSpending.length}
             />
             <TableBody>
-              {stableSort(dataSpending, getComparator(order, orderBy))
+              {stableSort(data, getComparator(order, orderBy))
                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 ?.map((row, index) => {
                   const isItemSelected = isSelected(row._id);
@@ -256,17 +257,17 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
                         <EditIcon className="edit" />
                       </TableCell>
                     </TableRow>
-                    
+
                   );
                 })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (53) * emptyRows }}>
                   <TableCell colSpan={6} />
-                  
+
                 </TableRow>
-                
+
               )}
-              
+
             </TableBody>
           </Table>
         </TableContainer>

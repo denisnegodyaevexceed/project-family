@@ -9,13 +9,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import allSignInActions from "../../actions/signInAction";
-import clsx from "clsx";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-
-
+import Menu from '@material-ui/core/Menu';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 
 import "./Navbar.scss";
@@ -36,7 +31,6 @@ const Navbar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
-  
 
   const classes = useStyles();
   const Exit = () => {
@@ -44,74 +38,34 @@ const Navbar = () => {
     dispatch(allSignInActions.logoutUser());
     history.go(0);
   };
-  const [state, setState] = React.useState({
-    
-    left: false,
-    
-  });
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {[
-          <Button to="/" component={Link} color="inherit">
-            Расход семьи
-          </Button>,
-          <Button to="/self" component={Link} color="inherit">
-            Мои траты
-          </Button>,
-          <Button to="/family" component={Link} color="inherit">
-            Моя Семья
-          </Button>,
-        ].map((text, index) => (
-          <div className='burger-content'>
-            <ListItemText primary={text} />
-          </div>
-        ))}
-      </List>
-      <Divider />
-    </div>
-  );
+ 
+  
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           {setSignIn.isAuth ? (
-          <div className='burger'>
-            {["Меню"].map((anchor) => (
-              <React.Fragment key={anchor}>
-                <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-                <SwipeableDrawer
-                  anchor={anchor}
-                  open={state[anchor]}
-                  onClose={toggleDrawer(anchor, false)}
-                  onOpen={toggleDrawer(anchor, true)}
-                >
-                  {list(anchor)}
-                </SwipeableDrawer>
-              </React.Fragment>
-            ))}
-          </div>
+          <PopupState variant="popover" popupId="demo-popup-menu">
+      {(popupState) => (
+        <React.Fragment>
+          <Button variant="contained" color="primary" {...bindTrigger(popupState)}>
+            Меню
+          </Button>
+          <Menu {...bindMenu(popupState)}>
+          <Button to="/" component={Link} color="inherit">
+            Расход семьи
+          </Button>
+          <Button to="/self" component={Link} color="inherit">
+            Мои траты
+          </Button>
+          <Button to="/family" component={Link} color="inherit">
+            Моя Семья
+          </Button>
+          </Menu>
+        </React.Fragment>
+      )}
+    </PopupState>
           ):(null)
         }
           {/* <Button to="/" component={Link} color="inherit">
@@ -137,7 +91,7 @@ const Navbar = () => {
           </Typography>
           {!setSignIn.isAuth ? (
             <>
-              <Button to="/signin" component={Link} color="inherit">
+              <Button to="/signin" className='auth-nav' component={Link} color="inherit">
                 Авторизация
               </Button>
               <Button
@@ -145,6 +99,7 @@ const Navbar = () => {
                 component={Link}
                 color="inherit"
                 onClick={() => dispatch(allSignUpActions.isRegisterClear())}
+                className='auth-nav'
               >
                 Регистрация
               </Button>

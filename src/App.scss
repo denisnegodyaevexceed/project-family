@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .App-header {
@@ -14,10 +15,10 @@
   }
 
 .contnet{
- 
-  width: 100%;
+  
+  max-width: 100%;
   margin: 0 auto;
-  padding-top: 20px;
+  padding: 5px;
   max-width: 1200px;
 }
 .loader{
@@ -37,5 +38,11 @@
   }
   to {
       transform:rotate(360deg);
+  }
+}
+
+@media all and (max-width: 400px){
+  .auth-nav {
+    font-size: 7px;
   }
 }
