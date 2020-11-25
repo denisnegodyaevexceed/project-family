@@ -29,10 +29,10 @@ import './Table.scss'
 
 
 const headCells = [
-  { id: 'fullName', numeric: false, disablePadding: true, label: 'name' },
-  { id: 'nameWaste', numeric: false, disablePadding: true, label: 'nameWaste' },
-  { id: 'price', numeric: true, disablePadding: false, label: 'price' },
-  { id: 'date', numeric: true, disablePadding: false, label: 'date' },
+  { id: 'fullName', numeric: false, disablePadding: true, label: 'Имя' },
+  { id: 'nameWaste', numeric: false, disablePadding: true, label: 'Покупка' },
+  { id: 'price', numeric: true, disablePadding: false, label: 'Цена' },
+  { id: 'date', numeric: true, disablePadding: false, label: 'Дата' },
   { id: '', numeric: true, disablePadding: false, label: '' },
 ];
 
@@ -160,7 +160,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
       >
         {numSelected > 0 ? (
           <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-            {numSelected} selected
+            {numSelected} Выбрано
           </Typography>
         ) : (
           <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
@@ -267,7 +267,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-        <div className='sum-table'>Sum: {dataSpending && dataSpending.length && dataSpending.map(item => item.price).reduce((prev, next) => prev + next)} ₽</div>
+        <div className='sum-table'>Сумма: {dataSpending && dataSpending.length && dataSpending.map(item => item.price).reduce((prev, next) => prev + next)} ₽</div>
       </Paper>
     </div>
   );

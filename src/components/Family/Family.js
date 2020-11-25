@@ -94,7 +94,7 @@ const BasicTable = () => {
           <TableHead>
             <TableRow>
               <TableCell>Имя</TableCell>
-              <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Почта</TableCell>
               <TableCell align="right">Трата&nbsp;(₽)</TableCell>
             </TableRow>
           </TableHead>

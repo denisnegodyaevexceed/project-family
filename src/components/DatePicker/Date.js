@@ -16,7 +16,7 @@ export const MaterialUIPickers = ({onChange, value}) => {
           format="MM/dd/yyyy"
           margin="normal"
           id="date-picker-inline"
-          label="Date picker inline"
+          label="Дата"
           value={value}
           onChange={onChange}
           KeyboardButtonProps={{
