@@ -14,15 +14,19 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 export default function SignUp() {
   
   const dispatch = useDispatch();
-  const setSignUp = useSelector(state => state.signUpReducer)
   
+  const setSignUp = useSelector(state => state.signUpReducer)
+  const setSignIn = useSelector((state) => state.SignInReducer);
+  
+  const {isAuth} = setSignIn;
   const { email, password, confirmPassword, fullName, isRegister, error, isFetching } = setSignUp;
 
   const validPassword = password.length>7||password.length===0;
 
   const validConfirmPassword = password===confirmPassword&&password.length===confirmPassword.length;
 
-  
+  if (isAuth) return <Redirect to="/" />;
+
   if(isRegister){
     return (<Redirect to='/signin'/>)
   } else {

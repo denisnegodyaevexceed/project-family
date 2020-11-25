@@ -80,7 +80,7 @@ const BasicTable = () => {
                 value={inviteEmail}
                 onChange={(e) => setInviteEmail(e.target.value)}
             />
-            <Button disabled={logData.inviteLoading} type="submit" variant="contained" >Send</Button>
+            <Button disabled={logData.inviteLoading} type="submit" variant="contained" >Отправить</Button>
             {logData.inviteError && <Alert severity="error">Ошибка сервера - повторите позже</Alert>}
             {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
         </div>
@@ -93,7 +93,7 @@ const BasicTable = () => {
           <TableHead>
             <TableRow>
               <TableCell>Имя</TableCell>
-              <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Почта</TableCell>
               <TableCell align="right">Трата&nbsp;(₽)</TableCell>
             </TableRow>
           </TableHead>

@@ -45,7 +45,7 @@ export const SimpleModal = ({open, closePopUp, forInvite = false}) => {
       {forInvite ||
         <>
           <Typography variant='h4'>{!isEdit ? 'Добавление траты' : 'Редактирование' }</Typography>
-          {loadingModal && <Typography variant='body2'>Loading...</Typography>}
+          {loadingModal && <Typography variant='body2'>Загрузка...</Typography>}
           <form disabled={loadingModal} className='form-submit' autoComplete="on" onSubmit={e => sendData(e)}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -55,7 +55,7 @@ export const SimpleModal = ({open, closePopUp, forInvite = false}) => {
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                label="Date picker inline"
+                label="Дата"
                 value={date}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
