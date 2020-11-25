@@ -1,27 +1,27 @@
 import axios from 'axios'
 import actions from '../constants/actionsType'
 
-export const setSignUpEmail = (data) => ({
+const setSignUpEmail = (data) => ({
     type: actions.SET_SIGNUP_EMAIL,
     payload: data
 })
 
-export const setSignUpPassword = (data) => ({
+const setSignUpPassword = (data) => ({
     type: actions.SET_SIGNUP_PASSWORD,
     payload: data
 })
 
-export const setSignUpConfirmPassword = (data) => ({
+const setSignUpConfirmPassword = (data) => ({
     type: actions.SET_SIGNUP_CONFIRM_PASSWORD,
     payload: data
 })
 
-export const setSignUpName = (data) => ({
+const setSignUpName = (data) => ({
     type: actions.SET_SIGNUP_NAME,
     payload: data
 })
 
-export const postSignUp = ({ email, password, fullName , budgetId}, e) => {
+const postSignUp = ({ email, password, fullName , budgetId}, e) => {
     return function (dispatch) {
         dispatch({
             type: actions.POST_SIGNUP_REQUEST,
@@ -57,14 +57,14 @@ export const postSignUp = ({ email, password, fullName , budgetId}, e) => {
 
 }
 
-export const isRegisterClear = () =>({
+const isRegisterClear = () =>({
     type: actions.SET_SIGNUP_ISREGISTER,
     
 })
 
 
 
-export default {
+const allSignUpActions = {
     setSignUpConfirmPassword,
     setSignUpEmail,
     setSignUpPassword,
@@ -72,3 +72,5 @@ export default {
     postSignUp,
     isRegisterClear
 }
+
+export default allSignUpActions;

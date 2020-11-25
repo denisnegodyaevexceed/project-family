@@ -1,6 +1,6 @@
 import { lighten, makeStyles } from "@material-ui/core/styles";
 
-export const useToolbarStyles = makeStyles((theme) => ({
+const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(1),
@@ -21,7 +21,7 @@ export const useToolbarStyles = makeStyles((theme) => ({
     },
 }));
 
-export const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         position: 'relative',
@@ -46,7 +46,11 @@ export const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default {
+
+
+const allTableStyles = {
     useToolbarStyles,
     useStyles,
 }
+
+export default allTableStyles

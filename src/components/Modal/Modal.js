@@ -9,8 +9,10 @@ import {
 import { Typography, Backdrop, Button, TextField, Modal } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import allSpendingActions from "../../actions/spendingActions";
-import { useStyles } from './style'
+import allUseStyles from './style'
 import './Modal.scss'
+
+const {useStyles} = allUseStyles
 
 export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
   const classes = useStyles();

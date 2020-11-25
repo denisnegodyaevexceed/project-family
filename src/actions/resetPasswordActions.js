@@ -2,16 +2,16 @@ import axios from 'axios'
 import actions from '../constants/actionsType'
 
 
-export const setResetPassword = (data) => ({
+const setResetPassword = (data) => ({
     type: actions.SET_RESETPASSWORD_PASSWORD,
     payload: data
 })
-export const setResetConfirmPassword = (data) => ({
+const setResetConfirmPassword = (data) => ({
     type: actions.SET_RESETCONFIRMPASSWORD_PASSWORD,
     payload: data
 })
 
-export const postResetPassword = ({ password }, e, id ) => {
+const postResetPassword = ({ password }, e, id ) => {
     return function (dispatch) {
         
         dispatch({
@@ -45,8 +45,10 @@ export const postResetPassword = ({ password }, e, id ) => {
 
 }
 
-export default {
+const allResetPasswordActions = {
     postResetPassword,
     setResetPassword,
     setResetConfirmPassword,
 }
+
+export default allResetPasswordActions;

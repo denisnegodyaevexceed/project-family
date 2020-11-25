@@ -2,12 +2,12 @@ import axios from 'axios'
 import actions from '../constants/actionsType'
 
 
-export const setForgotPasswordEmail = (data) => ({
+const setForgotPasswordEmail = (data) => ({
     type: actions.SET_FORGOTPASSWORD_EMAIL,
     payload: data
 })
 
-export const postForgotPasswordEmail = ({ email }, e) => {
+const postForgotPasswordEmail = ({ email }, e) => {
     return function (dispatch) {
         dispatch({
             type: actions.POST_FORGOTPASSWORD_REQUEST,
@@ -39,12 +39,14 @@ export const postForgotPasswordEmail = ({ email }, e) => {
 
 }
 
-export const setForgotPasswordClean = () => ({
+const setForgotPasswordClean = () => ({
     type: actions.SET_FORGOTPASSWORD_CLEAN
 })
 
-export default {
+const allForgotPasswordActions = {
     postForgotPasswordEmail,
     setForgotPasswordEmail,
     setForgotPasswordClean
 }
+
+export default allForgotPasswordActions

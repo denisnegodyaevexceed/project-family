@@ -1,13 +1,15 @@
 import actions from '../constants/actionsType'
-import {
+import allSpendingServises from '../api/spendingService'
+
+const {
     getFamilySpending,
     delSpendings,
     putEditSpending,
-    postAddSpending,
-    postInviteUser
-} from '../api/spendingService'
+    postInviteUser,
+    postAddSpending
+} = allSpendingServises
 
-export const getTableList = (i, headers) => {
+const getTableList = (i, headers) => {
     return dispatch => {
         dispatch(getTablePageStarted());
         getFamilySpending(i, headers).then(res => {
@@ -33,7 +35,7 @@ const getTablePageFailure = error => ({
 });
 
 
-export const deleteSpending = (id, arrDel, headers) => {
+const deleteSpending = (id, arrDel, headers) => {
     return dispatch => {
         dispatch(deleteSpendingStarted());
         delSpendings(id, arrDel, headers).then(res => {
@@ -56,7 +58,7 @@ const deleteSpendingFailure = (err) => ({
 })
 
 
-export const editSpending = (budgetId, id, value, date, name, callback, headers) => {
+const editSpending = (budgetId, id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(editSpendingStarted());
         putEditSpending(budgetId, id, value, date, name, headers).then(res => {
@@ -84,7 +86,7 @@ const editSpendingFailure = (err) => ({
 })
 
 
-export const addSpending = (id, value, date, name, callback, headers) => {
+const addSpending = (id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(addSpendingStarted());
         postAddSpending(id, value, date, name, headers).then(res => {
@@ -112,42 +114,42 @@ const addSpendingFailure = (err) => ({
 })
 
 
-export const setUserBudgetId = data => ({
+const setUserBudgetId = data => ({
     type: actions.SET_USER_BUDGET_ID,
     payload: data,
 })
 
-export const setDateSpending = (date) => ({
+const setDateSpending = (date) => ({
     type: actions.SET_DATE_SPENDING,
     payload: date
 })
 
-export const setNameSpending = (name) => ({
+const setNameSpending = (name) => ({
     type: actions.SET_NAME_SPENDING,
     payload: name
 })
 
-export const setValueSpending = (value) => ({
+const setValueSpending = (value) => ({
     type: actions.SET_VALUE_SPENDING,
     payload: value
 })
 
-export const setIsEditSpending = (bool) => ({
+const setIsEditSpending = (bool) => ({
     type: actions.SET_IS_EDIT_SPENDING,
     payload: bool
 })
 
-export const setIdSpending = (id) => ({
+const setIdSpending = (id) => ({
     type: actions.SET_ID_SPENDING,
     payload: id
 })
 
-export const clearSpendingForm = () => ({
+const clearSpendingForm = () => ({
     type: actions.CLEAR_SPENDING_FORM,
 })
 
 
-export const inviteUserAction = (email, budgetId, headers) => {
+const inviteUserAction = (email, budgetId, headers) => {
     return dispatch => {
         dispatch(inviteUserActionStarted());
         postInviteUser(email, budgetId, headers).then(res => {
@@ -173,11 +175,11 @@ const inviteUserActionFailure  = (err) => ({
     payload: err
 })
 
-export const clearInviteFormAction = () => ({
+const clearInviteFormAction = () => ({
     type: actions.CLEAR_INVITE_FORM,
 })
 
-export default {
+const allSpendingActions = {
     setDateSpending,
     setNameSpending,
     setValueSpending,
@@ -192,3 +194,5 @@ export default {
     inviteUserAction,
     clearInviteFormAction
 }
+
+export default allSpendingActions

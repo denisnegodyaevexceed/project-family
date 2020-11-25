@@ -22,11 +22,13 @@ import {
   Tooltip,
 } from "@material-ui/core";
 
-import { getComparator, stableSort } from './functionality'
-import { useToolbarStyles, useStyles } from './style'
+import tableFunctionality from './functionality'
+import allTableStyles from './style'
 
 import './Table.scss'
 
+const { getComparator, stableSort } = tableFunctionality
+const { useToolbarStyles, useStyles } = allTableStyles
 
 const headCells = [
   { id: 'fullName', numeric: false, disablePadding: true, label: 'Имя' },

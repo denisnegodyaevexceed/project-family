@@ -41,7 +41,8 @@ const BasicTable = () => {
   }, [dispatch, userData.userInfo._id, getTableList,]);
 
   useEffect(() => {
-    listData = listData.reduce((acc, curr) => {
+    let copyData
+    copyData = listData.reduce((acc, curr) => {
       if (acc.find(element => element.fullName === curr.fullName) === undefined) {
         acc.push(curr)
       } else {
@@ -54,7 +55,7 @@ const BasicTable = () => {
       }
       return acc
     }, [])
-    setData(listData)
+    setData(copyData)
   }, [listData]);
 
   const handleClosePopup = () => {
@@ -73,6 +74,11 @@ const BasicTable = () => {
     };
     dispatch(inviteUserAction(inviteEmail, userData.userInfo.budget, headers));
   }
+
+  if(logData.inviteSuccess){
+    handleClosePopup()
+  }
+  
 
   const InviteForm = (
     <form className='form-submit' autoComplete="on" onSubmit={(e) => sendInvite(e)}>

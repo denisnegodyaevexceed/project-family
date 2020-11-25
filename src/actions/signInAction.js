@@ -1,6 +1,8 @@
 import actions from "../constants/actionsType";
 import jwt_decode from 'jwt-decode';
-import { postSignInUser, getUser } from "../api/loginServer";
+import allSignInApi from "../api/loginServer";
+
+const {postSignInUser, getUser} = allSignInApi
 
 const setSignInEmail = (data) => ({
     type: actions.SET_SIGNIN_EMAIL,
@@ -12,7 +14,7 @@ const setSignInPassword = (data) => ({
     payload: data,
 });
 
-export const signInUser = (email, password) => {
+ const signInUser = (email, password) => {
     return (dispatch) => {
     dispatch(signInUserStarted());
     postSignInUser(email, password)
@@ -58,7 +60,7 @@ const checkedToken = (bool) => ({
   payload: bool,
 });
 
-export const getUserAction = (i, headers) => {
+ const getUserAction = (i, headers) => {
   return (dispatch) => {
     dispatch(getUserStarted());
     getUser(i, headers)
@@ -89,7 +91,9 @@ const fetchEnd = () => ({
   type: actions.FETCHING_SET_FALSE,
 });
 
-export default {
+
+
+const allSignInActions = {
   setSignInEmail,
   setSignInPassword,
   signInUser,
@@ -98,3 +102,5 @@ export default {
   getUserAction,
   fetchEnd
 };
+
+export default  allSignInActions;

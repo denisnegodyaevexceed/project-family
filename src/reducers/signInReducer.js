@@ -79,6 +79,13 @@ export default function SignInReducer(state = initialState, actions) {
                     budget: actions.payload
                 }
             }
+        case 'POST_SIGNUP_REQUEST':
+            return{
+                ...state,
+                email: '',
+                password: '',
+                error: false
+            }
 
         default:
             return state
