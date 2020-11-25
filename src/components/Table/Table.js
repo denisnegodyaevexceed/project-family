@@ -20,6 +20,7 @@ import {
   Checkbox,
   IconButton,
   Tooltip,
+  TextField,
 } from "@material-ui/core";
 
 import tableFunctionality from './functionality'
@@ -44,6 +45,12 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
+
+  function searchTableRows(e){
+
+  console.log(e.target.value)
+  }
+
   return (
     <TableHead>
       <TableRow>
@@ -55,6 +62,7 @@ function EnhancedTableHead(props) {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
+        <TextField type='text' onChange={(e)=>searchTableRows(e)}></TextField>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -190,7 +198,6 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
 
   const tableState = useSelector(state => state.spendingReducer);
   const { loadingTable } = tableState;
-
   return (
     <div className={classes.root}>
       {loadingTable && <div className="loader-table"></div>}

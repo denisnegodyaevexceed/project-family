@@ -13,12 +13,10 @@ import clsx from "clsx";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MenuIcon from '@material-ui/icons/Menu';
 
-import FaceIcon from '@material-ui/icons/Face';
+
+
 
 import "./Navbar.scss";
 
@@ -38,7 +36,7 @@ const Navbar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
-  let userData = useSelector((state) => state.SignInReducer);
+  
 
   const classes = useStyles();
   const Exit = () => {
