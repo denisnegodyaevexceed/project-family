@@ -9,7 +9,7 @@ import {
   TableHead,
   TableRow,
   TextField,
-  Paper
+  Paper,
 } from "@material-ui/core"
 import allSpendingActions from "../../actions/spendingActions";
 import SimpleModal from "../Modal/Modal";
@@ -28,6 +28,7 @@ const BasicTable = () => {
     getTableList,
     inviteUserAction,
   } = allSpendingActions;
+
   useEffect(() => {
     const headers = {
       headers: {
@@ -81,7 +82,7 @@ const BasicTable = () => {
                 onChange={(e) => setInviteEmail(e.target.value)}
             />
             <Button disabled={logData.inviteLoading} type="submit" variant="contained" >Send</Button>
-            {logData.inviteError && <Alert severity="error">Ошибка сервера - повторите позже</Alert>}
+            {logData.inviteError && <Alert severity="error">{logData.inviteError}</Alert>}
             {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
         </div>
     </form>)

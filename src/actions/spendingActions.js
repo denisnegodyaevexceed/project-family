@@ -157,8 +157,9 @@ export const inviteUserAction = (email, budgetId, headers) => {
         postInviteUser(email, budgetId, headers).then(res => {
             dispatch(inviteUserActionSuccess(res));
         }).catch(err => {
+            console.log('inv-err', err)
             dispatch(inviteUserActionFailure(err.message));
-            alert(`ошибка сервера ${err.message}`);
+            // alert(`ошибка сервера ${err.message}`);  
         });
     }
 }

@@ -32,7 +32,7 @@ export async function postAddSpending(userId, price, date, nameWaste, headers){
 
 // TODO
 export async function postInviteUser(email, budgetId, headers){
-    return await API.post(`https://backend-family-budget.herokuapp.com`,{
+    return await API.post(`https://backend-family-budget.herokuapp.com/auth/invite-new-user`,{
         email,
         budgetId,
     }, headers);
