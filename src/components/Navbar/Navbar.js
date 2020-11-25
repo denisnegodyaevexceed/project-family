@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import allUserActions from "../../actions/userActions";
+// import allUserActions from "../../actions/userActions";
 import allSignUpActions from '../../actions/signUpAction'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ import { useHistory } from 'react-router'
 // import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
 import allSignInActions from "../../actions/signInAction"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   const history = useHistory()
   const dispatch = useDispatch();
   const setSignIn = useSelector(state => state.SignInReducer);
+  let userData = useSelector(state => state.SignInReducer);
   
   const classes = useStyles();
   const Exit = ()=>{
@@ -41,24 +43,43 @@ const useStyles = makeStyles((theme) => ({
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+
           <Button to="/" component={Link} color="inherit">На главную</Button>
-          {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Свои траты</Button> : null }
-          {setSignIn.isAuth ? <Button to="/family" component={Link} color="inherit">Семья</Button> : null }
+          {userData.userInfo.budget ?
+            <>
+              {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Свои траты</Button> : null }
+              {setSignIn.isAuth ? <Button to="/family" component={Link} color="inherit">Семья</Button> : null }
+            </>
+          :
+            null
+          }
 
             <Typography   variant="h6" className={classes.title}>
+
               Семейный бюджет
             </Typography>
             {!setSignIn.isAuth ?
               <>
-                <Button to="/signin" component={Link} color="inherit">Авторизация</Button>
-                <Button to="/signup" component={Link} color="inherit" onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
+                <Button 
+                to="/signin" 
+                component={Link} 
+                color="inherit">Авторизация</Button>
+                <Button 
+                to="/signup" 
+                component={Link} 
+                color="inherit" 
+                onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
               </>
             :
               <>
                 <Typography   variant="h6">
                   Имя пользователя: {setSignIn.userInfo.fullName}
                 </Typography>
-                <Button to="/" component={Link} color="inherit" onClick={Exit} >Выход</Button>
+                <Button 
+                to="/" 
+                component={Link} 
+                color="inherit" 
+                onClick={Exit} >Выход</Button>
               </>
             }
         </Toolbar>

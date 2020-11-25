@@ -19,6 +19,7 @@ import Alert from '@material-ui/lab/Alert';
 const BasicTable = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
+  const [data, setData] = useState([]);
   const logData = useSelector(state => state.spendingReducer);
   let listData = useSelector((state) => state.spendingReducer.tableList);
   const userData = useSelector((state) => state.SignInReducer);
@@ -36,19 +37,22 @@ const BasicTable = () => {
     dispatch(getTableList(userData.userInfo._id, headers));
   }, [dispatch, userData.userInfo._id, getTableList,]);
 
-  const res = listData.reduce((acc, curr) => {
-    if (acc.find(element => element.fullName === curr.fullName) === undefined) {
-      acc.push(curr)
-    } else {
-      acc = acc.map(element => {
-        if (element.fullName === curr.fullName) {
-          element.price += curr.price
-        }
-        return element
-      })
-    }
-    return acc
-  }, [])
+  useEffect(() => {
+    listData = listData.reduce((acc, curr) => {
+      if (acc.find(element => element.fullName === curr.fullName) === undefined) {
+        acc.push(curr)
+      } else {
+        acc = acc.map(element => {
+          if (element.fullName === curr.fullName) {
+            element.price += curr.price
+          }
+          return element
+        })
+      }
+      return acc
+    }, [])
+    setData(listData)
+  }, [listData]);
 
   const handleClosePopup = () => {
       setIsOpen(false);
@@ -56,6 +60,7 @@ const BasicTable = () => {
   const handleOpenPopup = () => {
       setIsOpen(true);
   };
+
   const sendInvite = (e) => {
       e.preventDefault();
       const headers = {
@@ -79,8 +84,7 @@ const BasicTable = () => {
             {logData.inviteError && <Alert severity="error">Ошибка сервера - повторите позже</Alert>}
             {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
         </div>
-    </form>
-  )
+    </form>)
 
   return (
     <>
@@ -94,7 +98,7 @@ const BasicTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {res.map((row, index) => (
+            {data.map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   {row.fullName}
@@ -106,7 +110,7 @@ const BasicTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" type="button" onClick={() => {handleOpenPopup(true)}}>Пригласить пользователя</Button>
+      <Button variant="contained" type="button" onClick={(e) => {handleOpenPopup(true)}}>Пригласить пользователя</Button>
       <SimpleModal open={isOpen} closePopUp={handleClosePopup} forInvite={InviteForm} />
     </>
   );
