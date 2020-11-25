@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
-import './App.scss';
-import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import SignInPage from './views/SignInPage';
 import SignUpPage from './views/SignUpPage';
 import MainPage from './views/MainPage';
-import { useSelector, useDispatch } from 'react-redux';
 import SignIn from './components/Auth/SignIn';
 import PageError from './components/page404/Page404';
 import ForgotPassword from './components/forgotPassword/forgotPassword'
 import ResetPassword from './components/forgotPassword/resetPassword'
 import Family from './components/Family/Family'
+import Navbar from './components/Navbar/Navbar';
 import allActions from "./actions/signInAction"
-import CircularProgress from '@material-ui/core/CircularProgress';
+import './App.scss';
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +33,6 @@ function App() {
 
   if (setUser.isFetching){
     return(
-      // <div className="loader"></div>
       <CircularProgress className='loader' />
     )
   }

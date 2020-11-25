@@ -8,7 +8,6 @@ import allSpendingActions from "../actions/spendingActions"
 
 const MainPage = ({isSelf = false}) => {
     const [isOpen, setIsOpen] = useState(false);
-
     const dispatch = useDispatch();
     const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, clearSpendingForm, getTableList, deleteSpending } = allSpendingActions;
     let listData = useSelector(state => state.spendingReducer.tableList);
