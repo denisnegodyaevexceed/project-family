@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { 
+import {
   Button,
   Table,
   TableBody,
@@ -63,15 +63,15 @@ const BasicTable = () => {
       setInviteEmail('');
   };
   const handleOpenPopup = () => {
-      setIsOpen(true);
+    setIsOpen(true);
   };
 
   const sendInvite = (e) => {
-      e.preventDefault();
-      const headers = {
-          headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
-      };
-      dispatch(inviteUserAction(inviteEmail, userData.userInfo.budget, headers));
+    e.preventDefault();
+    const headers = {
+      headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
+    };
+    dispatch(inviteUserAction(inviteEmail, userData.userInfo.budget, headers));
   }
 
   const InviteForm = (
@@ -115,7 +115,7 @@ const BasicTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" type="button" onClick={(e) => {handleOpenPopup(true)}}>Пригласить пользователя</Button>
+      <Button variant="contained" type="button" onClick={(e) => { handleOpenPopup(true) }}>Пригласить пользователя</Button>
       <SimpleModal open={isOpen} closePopUp={handleClosePopup} forInvite={InviteForm} />
     </>
   );

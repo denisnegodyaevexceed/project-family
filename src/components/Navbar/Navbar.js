@@ -24,14 +24,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- const Navbar=()=> {
+const Navbar = () => {
   const history = useHistory()
   const dispatch = useDispatch();
   const setSignIn = useSelector(state => state.SignInReducer);
   let userData = useSelector(state => state.SignInReducer);
-  
+
   const classes = useStyles();
-  const Exit = ()=>{
+  const Exit = () => {
     localStorage.clear()
     dispatch(allSignInActions.logoutUser())
     history.go(0)
@@ -49,26 +49,26 @@ const useStyles = makeStyles((theme) => ({
               {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Мои траты</Button> : null }
               {setSignIn.isAuth ? <Button to="/family" component={Link} color="inherit">Моя Семья</Button> : null }
             </>
-          :
+            :
             null
           }
 
-            <Typography   variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
 
-              Семейный бюджет
+            Семейный бюджет
             </Typography>
-            {!setSignIn.isAuth ?
-              <>
-                <Button 
-                to="/signin" 
-                component={Link} 
+          {!setSignIn.isAuth ?
+            <>
+              <Button
+                to="/signin"
+                component={Link}
                 color="inherit">Авторизация</Button>
-                <Button 
-                to="/signup" 
-                component={Link} 
-                color="inherit" 
-                onClick={()=>dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
-              </>
+              <Button
+                to="/signup"
+                component={Link}
+                color="inherit"
+                onClick={() => dispatch(allSignUpActions.isRegisterClear())}>Регистрация</Button>
+            </>
             :
               <>
                 <span  >
@@ -79,8 +79,8 @@ const useStyles = makeStyles((theme) => ({
                 component={Link} 
                 color="inherit" 
                 onClick={Exit} >Выход</Button>
-              </>
-            }
+            </>
+          }
         </Toolbar>
       </AppBar>
     </div>

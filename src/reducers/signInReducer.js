@@ -1,78 +1,78 @@
 const initialState = {
-    email:'',
-    password:'',
-    error:false,
-    isFetching:true,
-    isAuth:false,
+    email: '',
+    password: '',
+    error: false,
+    isFetching: true,
+    isAuth: false,
     userInfo: {},
 }
 
-export default function SignInReducer(state = initialState, actions){
-    switch(actions.type) {
+export default function SignInReducer(state = initialState, actions) {
+    switch (actions.type) {
         case 'SET_SIGNIN_EMAIL':
             return {
                 ...state,
-                email:actions.payload,
+                email: actions.payload,
             }
         case 'SET_SIGNIN_PASSWORD':
             return {
                 ...state,
-                password:actions.payload,
+                password: actions.payload,
             }
         case 'POST_SIGNIN_REQUEST':
-            return{
+            return {
                 ...state,
-                isFetching:true,
+                isFetching: true,
                 error: false,
             }
         case 'POST_SIGNIN_SUCCESS':
-            return{
+            return {
                 ...state,
-                isFetching:false,
+                isFetching: false,
                 error: false,
-                userInfo:actions.payload,
+                userInfo: actions.payload,
             }
         case 'POST_SIGNIN_ERROR':
-            return{
+            return {
                 ...state,
-                error:true,
-                isFetching:false,
+                error: true,
+                isFetching: false,
             }
         case 'LOGOUT_USER':
-            return{
+            return {
                 ...state,
-                isAuth:false,
+                isAuth: false,
             }
 
         case 'GET_USER_STARTED':
-            return{
+            return {
                 ...state,
                 isAuth: false,
-                isFetching:true,
+                isFetching: true,
             }
 
         case 'GET_USER_SUCCESS':
-            return{
+            return {
                 ...state,
-                userInfo:actions.payload,
+                userInfo: actions.payload,
                 isAuth: true,
-                isFetching:false,
+                isFetching: false,
             }
 
         case 'GET_USER_FAILURE':
-            return{
+            return {
                 ...state,
                 isAuth: false,
             }
-        
+
         case 'FETCHING_SET_FALSE':
-            return{
+            return {
                 ...state,
                 isFetching: false,
             }
 
         case 'SET_USER_BUDGET_ID':
-            return{
+            return {
                 ...state,
                 userInfo: {
                     ...state.userInfo,
@@ -85,23 +85,3 @@ export default function SignInReducer(state = initialState, actions){
     }
 }
 
-
-        // case 'GET_SIGN_SUCCESS':
-        //     return{
-        //         ...state,
-        //         tableList: actions.payload,
-        //     }
-
-        // case 'GET_SIGN_STARTED':
-        //     return{
-        //         ...state,
-        //         loading: true,
-        //         error: false,
-
-        //     }
-        // case 'GET_SIGN_FAILURE':
-        //     return{
-        //         ...state,
-        //         loading: false,
-        //         error: actions.payload,
-        //     }

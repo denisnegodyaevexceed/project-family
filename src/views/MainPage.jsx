@@ -6,17 +6,17 @@ import SimpleModal from "../components/Modal/Modal";
 
 import allSpendingActions from "../actions/spendingActions"
 
-const MainPage = ({isSelf = false}) => {
+const MainPage = ({ isSelf = false }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
     const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, clearSpendingForm, getTableList, deleteSpending } = allSpendingActions;
     let listData = useSelector(state => state.spendingReducer.tableList);
     let userData = useSelector(state => state.SignInReducer);
     listData?.map((item, i) => listData[i].price = +item.price)
-    if(isSelf){listData = listData?.filter(item => item.fullName === userData.userInfo.fullName);}
+    if (isSelf) { listData = listData?.filter(item => item.fullName === userData.userInfo.fullName); }
 
     useEffect(() => {
-        const headers = {   
+        const headers = {
             headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
         };
         dispatch(getTableList(userData.userInfo._id, headers));
@@ -47,7 +47,7 @@ const MainPage = ({isSelf = false}) => {
     };
 
     return (
-        <>  
+        <>
             {userData.userInfo.budget ?
                 <Table isSelf={isSelf} deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
                 :

@@ -2,7 +2,7 @@ import React from 'react'
 
 import './Page404Style.scss'
 
-export function PageError(){
+export function PageError() {
     return (
         <div className='pageError'>404</div>
     )

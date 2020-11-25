@@ -89,7 +89,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendings, isSelf}) => {
+export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendings, isSelf }) => {
 
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
@@ -151,7 +151,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
   const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
-  
+
     return (
       <Toolbar
         className={clsx(classes.root, {
@@ -163,14 +163,14 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
             {numSelected} Выбрано
           </Typography>
         ) : (
-          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-            {isSelf ? 'Мои расходы' : 'Расход семьи'}
-          </Typography>
-        )}
-  
+            <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+              {isSelf ? 'Мои расходы' : 'Расход семьи'}
+            </Typography>
+          )}
+
         {numSelected > 0 ? (
           <Tooltip title="Delete">
-            <IconButton aria-label="delete" onClick={() => {deleteSpendings(selected);setSelected([])}} >
+            <IconButton aria-label="delete" onClick={() => { deleteSpendings(selected); setSelected([]) }} >
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -179,7 +179,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
       </Toolbar>
     );
   };
-  
+
   EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
   };
@@ -242,7 +242,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
                         <Moment format="MM/DD/YYYY">
                           {row.date}
                         </Moment>
-                        </TableCell>
+                      </TableCell>
                       <TableCell onClick={() => editSpendingSetState(row._id, row.date, row.nameWaste, row.price)} align="right">
                         <EditIcon className="edit" />
                       </TableCell>

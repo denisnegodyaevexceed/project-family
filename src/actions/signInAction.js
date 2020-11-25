@@ -28,7 +28,7 @@ export const signInUser = (email, password) => {
           dispatch(getUserAction(decoded.userId, headers));
         })
         .catch((err) => {
-        console.log(err.message);
+        
         dispatch(signInUserFailure(err.message));
         });
     };

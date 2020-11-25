@@ -13,7 +13,7 @@ export const setResetConfirmPassword = (data) => ({
 
 export const postResetPassword = ({ password }, e, id ) => {
     return function (dispatch) {
-        console.log(password)
+        
         dispatch({
             type: actions.POST_RESETPASSWORD_REQUEST,
         })

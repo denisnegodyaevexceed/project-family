@@ -7,10 +7,10 @@ const initialState = {
     id: '',
 }
 
-export default function forgotPasswordReducer (state=initialState, actions) {
-    switch(actions.type){
+export default function forgotPasswordReducer(state = initialState, actions) {
+    switch (actions.type) {
         case 'SET_FORGOTPASSWORD_EMAIL':
-            return{
+            return {
                 ...state,
                 email: actions.payload
             }
@@ -18,7 +18,7 @@ export default function forgotPasswordReducer (state=initialState, actions) {
             return {
                 ...state,
                 isFetching: true,
-                
+
             }
         case 'POST_FORGOTPASSWORD_SUCCESS':
             return {
@@ -26,7 +26,7 @@ export default function forgotPasswordReducer (state=initialState, actions) {
                 isFetching: false,
                 confirmEmail: true,
                 id: actions.payload
-            } 
+            }
         case 'POST_FORGOTPASSWORD_ERROR':
             return {
                 ...state,
@@ -34,18 +34,18 @@ export default function forgotPasswordReducer (state=initialState, actions) {
                 error: true
             }
         case 'POST_RESETPASSWORD_SUCCESS':
-            return{
+            return {
                 ...state,
                 confirmEmail: false,
                 email: '',
                 id: ''
             }
         case 'SET_FORGOTPASSWORD_CLEAN':
-            return{
+            return {
                 ...state,
                 confirmEmail: false,
-            }  
-        default :
-        return state     
+            }
+        default:
+            return state
     }
 }
