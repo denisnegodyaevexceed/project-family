@@ -21,12 +21,12 @@ export const setSignUpName = (data) => ({
     payload: data
 })
 
-export const postSignUp = ({ email, password, fullName }, e) => {
+export const postSignUp = ({ email, password, fullName , budgetId}, e) => {
     return function (dispatch) {
         dispatch({
             type: actions.POST_SIGNUP_REQUEST,
         })
-        async function signUp({ email, password, fullName }, e) {
+        async function signUp({ email, password, fullName, budgetId}, e) {
             e.preventDefault()
             try {
                 const { data: user } = await axios.post('https://backend-family-budget.herokuapp.com/auth/signup', {
@@ -51,7 +51,7 @@ export const postSignUp = ({ email, password, fullName }, e) => {
 
 
         }
-        signUp({ email, password, fullName }, e)
+        signUp({ email, password, fullName, budgetId },  e)
     }
 
 }

@@ -25,6 +25,11 @@ export default function SignUp() {
 
   const validConfirmPassword = password===confirmPassword&&password.length===confirmPassword.length;
 
+  const budgetId = window.location.search.split('=')[1]
+
+  console.log(budgetId)
+
+
   if (isAuth) return <Redirect to="/" />;
 
   if(isRegister){
@@ -33,7 +38,7 @@ export default function SignUp() {
   
   return (<div>
     {isFetching&& <div className='loading'><CircularProgress className='loader' /></div>}
-    <form onSubmit={(e)=>{dispatch(allSignUpActions.postSignUp({email, password, fullName}, e))}} >
+    <form onSubmit={(e)=>{dispatch(allSignUpActions.postSignUp({email, password, fullName, budgetId}, e))}} >
       <div className='form'>
       <TextField required 
       type="email" 
