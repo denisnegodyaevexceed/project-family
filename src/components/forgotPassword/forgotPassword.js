@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import allForgotPasswordActions from '../../actions/forgotPasswordActions';
-import forgotPasswordReducer from '../../reducers/forgotPasswordReducers';
 import {Redirect} from 'react-router-dom';
 import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';

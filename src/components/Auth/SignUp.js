@@ -20,7 +20,7 @@ export default function SignUp() {
 
   const validPassword = password.length>7||password.length===0;
 
-  const validConfirmPassword = password===confirmPassword&&password.length===confirmPassword.length
+  const validConfirmPassword = password===confirmPassword&&password.length===confirmPassword.length;
 
   
   if(isRegister){
