@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        position: 'relative',
     },
 }));
 

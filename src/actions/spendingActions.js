@@ -173,6 +173,9 @@ const inviteUserActionFailure  = (err) => ({
     payload: err
 })
 
+export const clearInviteFormAction = () => ({
+    type: actions.CLEAR_INVITE_FORM,
+})
 
 export default {
     setDateSpending,
@@ -187,4 +190,5 @@ export default {
     addSpending,
     setUserBudgetId,
     inviteUserAction,
+    clearInviteFormAction
 }

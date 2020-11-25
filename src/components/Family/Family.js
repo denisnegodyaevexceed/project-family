@@ -10,11 +10,12 @@ import {
   TableRow,
   TextField,
   Paper,
+  Typography,
 } from "@material-ui/core"
 import allSpendingActions from "../../actions/spendingActions";
 import SimpleModal from "../Modal/Modal";
 import Alert from '@material-ui/lab/Alert';
-
+import "./Family.scss"
 
 const BasicTable = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,7 @@ const BasicTable = () => {
   const {
     getTableList,
     inviteUserAction,
+    clearInviteFormAction,
   } = allSpendingActions;
 
   useEffect(() => {
@@ -56,7 +58,9 @@ const BasicTable = () => {
   }, [listData]);
 
   const handleClosePopup = () => {
-    setIsOpen(false);
+      setIsOpen(false);
+      dispatch(clearInviteFormAction());
+      setInviteEmail('');
   };
   const handleOpenPopup = () => {
     setIsOpen(true);
@@ -71,25 +75,25 @@ const BasicTable = () => {
   }
 
   const InviteForm = (
-    <form onSubmit={(e) => sendInvite(e)}>
-      <div className='form'>
-        <TextField
+    <form className='form-submit' autoComplete="on" onSubmit={(e) => sendInvite(e)}>
+      <Typography variant='h4'>Приглашение</Typography>
+      <TextField
           disabled={logData.inviteLoading}
           required
           type="email"
           label="Почта"
           value={inviteEmail}
           onChange={(e) => setInviteEmail(e.target.value)}
-        />
-        <Button disabled={logData.inviteLoading} type="submit" variant="contained" >Send</Button>
-        {logData.inviteError && <Alert severity="error">{logData.inviteError}</Alert>}
-        {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
-      </div>
-    </form>)
+      />
+      <Button disabled={logData.inviteLoading} type="submit" variant="contained" >Пригласить</Button>
+      {logData.inviteError && <Alert severity="error">{logData.inviteError}</Alert>}
+      {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
+    </form>
+  )
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className='family-table'>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>

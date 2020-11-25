@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import allSignInActions from "../../actions/signInAction"
 
+import './Navbar.scss'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

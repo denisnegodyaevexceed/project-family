@@ -42,6 +42,10 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
 
   const body = (
     <div className={classes.paper}>
+      <button
+        className='close-button'
+        onClick={() => {closePopUp(); setHasError(false)}}
+      >✖</button>
       {forInvite ||
         <>
           <Typography variant='h4'>{!isEdit ? 'Добавление траты' : 'Редактирование'}</Typography>
