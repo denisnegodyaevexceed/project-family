@@ -13,6 +13,8 @@ import { useHistory } from 'react-router'
 // import MenuIcon from '@material-ui/icons/Menu';
 import allSignInActions from "../../actions/signInAction"
 
+import './Navbar.scss'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

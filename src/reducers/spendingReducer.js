@@ -162,6 +162,14 @@ export default function spendingReducer(state = initialState, actions){
                 inviteLoading: false,
             }
 
+        case 'CLEAR_INVITE_FORM' :
+                return{
+                ...state,
+                inviteLoading: false,
+                inviteError: false,
+                inviteSuccess: false,
+            }
+
         default:
             return state
     }
