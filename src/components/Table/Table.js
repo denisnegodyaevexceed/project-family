@@ -247,16 +247,21 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
                         <EditIcon className="edit" />
                       </TableCell>
                     </TableRow>
+                    
                   );
                 })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (53) * emptyRows }}>
                   <TableCell colSpan={6} />
+                  
                 </TableRow>
+                
               )}
+              
             </TableBody>
           </Table>
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
@@ -268,6 +273,7 @@ export const EnhancedTable = ({editSpendingSetState, dataSpending, deleteSpendin
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
         <div className='sum-table'>Сумма: {dataSpending && dataSpending.length && dataSpending.map(item => item.price).reduce((prev, next) => prev + next)} ₽</div>
+
       </Paper>
     </div>
   );

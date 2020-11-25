@@ -4,13 +4,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-// import allUserActions from "../../actions/userActions";
 import allSignUpActions from '../../actions/signUpAction'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-// import IconButton from '@material-ui/core/IconButton';
-// import MenuIcon from '@material-ui/icons/Menu';
 import allSignInActions from "../../actions/signInAction"
 
 const useStyles = makeStyles((theme) => ({
@@ -47,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
           <Button to="/" component={Link} color="inherit">На главную</Button>
           {userData.userInfo.budget ?
             <>
-              {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Свои траты</Button> : null }
-              {setSignIn.isAuth ? <Button to="/family" component={Link} color="inherit">Семья</Button> : null }
+              {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Мои траты</Button> : null }
+              {setSignIn.isAuth ? <Button to="/family" component={Link} color="inherit">Моя Семья</Button> : null }
             </>
           :
             null
@@ -72,9 +69,9 @@ const useStyles = makeStyles((theme) => ({
               </>
             :
               <>
-                <Typography   variant="h6">
-                  Имя пользователя: {setSignIn.userInfo.fullName}
-                </Typography>
+                <span  >
+                  Привет, {setSignIn.userInfo.fullName}
+                </span>
                 <Button 
                 to="/" 
                 component={Link} 
