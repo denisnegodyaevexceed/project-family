@@ -34,7 +34,7 @@ const BasicTable = () => {
       },
     };
     dispatch(getTableList(userData.userInfo._id, headers));
-  }, [dispatch, userData.userInfo._id, getTableList]);
+  }, [dispatch, userData.userInfo._id, getTableList,]);
 
   const res = listData.reduce((acc, curr) => {
     if (acc.find(element => element.fullName === curr.fullName) === undefined) {
