@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
+import { Typography, Button } from '@material-ui/core';
 import Table from '../components/Table/Table'
 import SimpleModal from "../components/Modal/Modal";
-import { Button } from "@material-ui/core"
-import { Typography } from '@material-ui/core';
 
 import allSpendingActions from "../actions/spendingActions"
 
