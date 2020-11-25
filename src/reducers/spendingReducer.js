@@ -4,9 +4,9 @@ const initialState = {
     value: '',
     isEdit: false,
     id: '',
-    errorTable:false,
-    loadingTable:false,
-    tableList:[],
+    errorTable: false,
+    loadingTable: false,
+    tableList: [],
     loadingModal: false,
     errorModal: false,
     inviteLoading: false,
@@ -14,61 +14,61 @@ const initialState = {
     inviteSuccess: false,
 }
 
-export default function spendingReducer(state = initialState, actions){
-    switch(actions.type) {
+export default function spendingReducer(state = initialState, actions) {
+    switch (actions.type) {
         case 'GET_TABLE_LIST_SUCCESS':
-            return{
+            return {
                 ...state,
                 loadingTable: false,
                 tableList: actions.payload,
             }
 
         case 'GET_TABLE_LIST_STARTED':
-            return{
+            return {
                 ...state,
                 loadingTable: true,
                 errorTable: false,
 
             }
         case 'GET_TABLE_LIST_FAILURE':
-            return{
+            return {
                 ...state,
                 loadingTable: false,
                 errorTable: actions.payload,
             }
 
         case 'SET_DATE_SPENDING':
-            return{
+            return {
                 ...state,
                 date: actions.payload,
             }
 
         case 'SET_NAME_SPENDING':
-            return{
+            return {
                 ...state,
                 name: actions.payload,
 
             }
         case 'SET_VALUE_SPENDING':
-            return{
+            return {
                 ...state,
                 value: actions.payload,
             }
 
         case 'SET_IS_EDIT_SPENDING':
-            return{
+            return {
                 ...state,
                 isEdit: actions.payload,
             }
 
         case 'SET_ID_SPENDING':
-            return{
+            return {
                 ...state,
                 id: actions.payload,
             }
 
         case 'CLEAR_SPENDING_FORM':
-            return{
+            return {
                 ...state,
                 date: new Date(),
                 name: '',
@@ -77,86 +77,86 @@ export default function spendingReducer(state = initialState, actions){
                 id: '',
             }
 
-        case 'POST_NEW_SPENDING_STARTED' :
-            return{
+        case 'POST_NEW_SPENDING_STARTED':
+            return {
                 ...state,
                 loadingModal: true,
                 errorModal: false,
             }
 
-        case 'POST_NEW_SPENDING_SUCCESS' :
-            return{
+        case 'POST_NEW_SPENDING_SUCCESS':
+            return {
                 ...state,
                 tableList: actions.payload,
                 loadingModal: false,
             }
 
-        case 'POST_NEW_SPENDING_FAILURE' :
-            return{
+        case 'POST_NEW_SPENDING_FAILURE':
+            return {
                 ...state,
                 loadingModal: false,
                 errorModal: true,
             }
 
-        case 'DEL_SPENDING_STARTED' :
-            return{
+        case 'DEL_SPENDING_STARTED':
+            return {
                 ...state,
-                loadingTable:true,
-                errorTable:false,
+                loadingTable: true,
+                errorTable: false,
             }
 
-        case 'DEL_SPENDING_SUCCESS' :
-            return{
+        case 'DEL_SPENDING_SUCCESS':
+            return {
                 ...state,
-                loadingTable:false,
+                loadingTable: false,
                 tableList: actions.payload,
             }
 
-        case 'DEL_SPENDING_FAILURE' :
-            return{
+        case 'DEL_SPENDING_FAILURE':
+            return {
                 ...state,
-                loadingTable:false,
+                loadingTable: false,
                 errorTable: actions.payload,
             }
 
-        case 'PUT_EDIT_SPENDING_STARTED' :
-            return{
+        case 'PUT_EDIT_SPENDING_STARTED':
+            return {
                 ...state,
-                loadingModal:true,
+                loadingModal: true,
                 errorModal: false
             }
 
-        case 'PUT_EDIT_SPENDING_SUCCESS' :
-            return{
+        case 'PUT_EDIT_SPENDING_SUCCESS':
+            return {
                 ...state,
                 tableList: actions.payload,
-                loadingModal:false,
+                loadingModal: false,
             }
 
-        case 'PUT_EDIT_SPENDING_FAILURE' :
-            return{
+        case 'PUT_EDIT_SPENDING_FAILURE':
+            return {
                 ...state,
                 errorModal: actions.payload,
                 loadingModal: false,
             }
 
-        case 'POST_INVITE_STARTED' :
-            return{
+        case 'POST_INVITE_STARTED':
+            return {
                 ...state,
                 inviteError: false,
                 inviteLoading: true,
                 inviteSuccess: false,
             }
 
-        case 'POST_INVITE_SUCCESS' :
-            return{
+        case 'POST_INVITE_SUCCESS':
+            return {
                 ...state,
                 inviteLoading: false,
                 inviteSuccess: true,
             }
 
-        case 'POST_INVITE_FAILURE' :
-                return{
+        case 'POST_INVITE_FAILURE':
+            return {
                 ...state,
                 inviteError: actions.payload,
                 inviteLoading: false,

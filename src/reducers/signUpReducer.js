@@ -8,18 +8,18 @@ const initialState = {
     error: false
 }
 
-export default function signUpReducer(state=initialState, actions){
-    switch(actions.type){
+export default function signUpReducer(state = initialState, actions) {
+    switch (actions.type) {
         case 'SET_SIGNUP_EMAIL':
             return {
                 ...state,
                 email: actions.payload,
             }
         case 'SET_SIGNUP_PASSWORD':
-                return {
-                    ...state,
-                    password: actions.payload,
-                }
+            return {
+                ...state,
+                password: actions.payload,
+            }
         case 'SET_SIGNUP_CONFIRM_PASSWORD':
             return {
                 ...state,
@@ -31,25 +31,25 @@ export default function signUpReducer(state=initialState, actions){
                 fullName: actions.payload,
             }
         case 'POST_SIGNUP_REQUEST':
-            return{
+            return {
                 ...state,
                 isFetching: true
             }
         case 'POST_SIGNUP_SUCCESS':
-            return{
+            return {
                 ...state,
                 isFetching: false,
                 isRegister: true,
-                
+
             }
         case 'POST_SIGNUP_ERROR':
-            return{
+            return {
                 ...state,
                 error: true,
                 isFetching: false,
             }
-        case 'SET_SIGNUP_ISREGISTER' :
-            return{
+        case 'SET_SIGNUP_ISREGISTER':
+            return {
                 ...state,
                 isRegister: false,
                 fullName: '',

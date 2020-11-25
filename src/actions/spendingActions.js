@@ -151,7 +151,7 @@ export const inviteUserAction = (email, budgetId, headers) => {
     return dispatch => {
         dispatch(inviteUserActionStarted());
         postInviteUser(email, budgetId, headers).then(res => {
-            console.log('inv-suc',res)
+            
             dispatch(inviteUserActionSuccess(res));
         }).catch(err => {
             if(err.response){

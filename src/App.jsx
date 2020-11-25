@@ -19,20 +19,20 @@ function App() {
   const dispatch = useDispatch();
   const setUser = useSelector(state => state.SignInReducer);
   useEffect(() => {
-    if (localStorage.getItem('accessToken')){
+    if (localStorage.getItem('accessToken')) {
       let token = localStorage.getItem('accessToken');
       let decoded = jwt_decode(token);
       const headers = {
         headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
       };
       dispatch(allActions.getUserAction(decoded.userId, headers));
-    }else{
+    } else {
       dispatch(allActions.fetchEnd());
     }
   }, [dispatch])
 
-  if (setUser.isFetching){
-    return(
+  if (setUser.isFetching) {
+    return (
       <CircularProgress className='loader' />
     )
   }
@@ -51,22 +51,22 @@ function App() {
               }
             </Route>
             <Route path="/self">
-              {setUser.isAuth ===true?
-                <MainPage isSelf={true} /> 
+              {setUser.isAuth === true ?
+                <MainPage isSelf={true} />
                 :
-                <SignIn/>
+                <SignIn />
               }
             </Route>
-            <Route path="/signin" component={SignInPage}/>
-            <Route path="/signup" component={SignUpPage}/>
-            <Route path="/forgot-password" component={ForgotPassword}/>
-            <Route path="/reset-password" component={ResetPassword}/>
-            <Route path="/join" component={SignUpPage}/>
-            <Route path="/family" component={setUser.isAuth ? Family : SignInPage}/>
-            <Route  component={PageError} />
+            <Route path="/signin" component={SignInPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/reset-password" component={ResetPassword} />
+            <Route path="/join" component={SignUpPage} />
+            <Route path="/family" component={setUser.isAuth ? Family : SignInPage} />
+            <Route component={PageError} />
           </Switch>
         </div>
-        
+
 
       </div>
     </BrowserRouter>

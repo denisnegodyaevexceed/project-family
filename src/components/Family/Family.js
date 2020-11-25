@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { 
+import {
   Button,
   Table,
   TableBody,
@@ -56,35 +56,35 @@ const BasicTable = () => {
   }, [listData]);
 
   const handleClosePopup = () => {
-      setIsOpen(false);
+    setIsOpen(false);
   };
   const handleOpenPopup = () => {
-      setIsOpen(true);
+    setIsOpen(true);
   };
 
   const sendInvite = (e) => {
-      e.preventDefault();
-      const headers = {
-          headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
-      };
-      dispatch(inviteUserAction(inviteEmail, userData.userInfo.budget, headers));
+    e.preventDefault();
+    const headers = {
+      headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
+    };
+    dispatch(inviteUserAction(inviteEmail, userData.userInfo.budget, headers));
   }
 
   const InviteForm = (
     <form onSubmit={(e) => sendInvite(e)}>
-        <div className='form'>
-            <TextField
-                disabled={logData.inviteLoading}
-                required
-                type="email"
-                label="Почта"
-                value={inviteEmail}
-                onChange={(e) => setInviteEmail(e.target.value)}
-            />
-            <Button disabled={logData.inviteLoading} type="submit" variant="contained" >Send</Button>
-            {logData.inviteError && <Alert severity="error">{logData.inviteError}</Alert>}
-            {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
-        </div>
+      <div className='form'>
+        <TextField
+          disabled={logData.inviteLoading}
+          required
+          type="email"
+          label="Почта"
+          value={inviteEmail}
+          onChange={(e) => setInviteEmail(e.target.value)}
+        />
+        <Button disabled={logData.inviteLoading} type="submit" variant="contained" >Send</Button>
+        {logData.inviteError && <Alert severity="error">{logData.inviteError}</Alert>}
+        {logData.inviteSuccess && <Alert severity="success">Приглашение выслано</Alert>}
+      </div>
     </form>)
 
   return (
@@ -111,7 +111,7 @@ const BasicTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" type="button" onClick={(e) => {handleOpenPopup(true)}}>Пригласить пользователя</Button>
+      <Button variant="contained" type="button" onClick={(e) => { handleOpenPopup(true) }}>Пригласить пользователя</Button>
       <SimpleModal open={isOpen} closePopUp={handleClosePopup} forInvite={InviteForm} />
     </>
   );

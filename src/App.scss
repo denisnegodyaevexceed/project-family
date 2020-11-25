@@ -11,7 +11,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+  }
 
 .contnet{
   width: 100%;
@@ -27,18 +27,6 @@
   z-index: 10;
   
   
-
-  // &::after{
-  //     // content: '|';
-  //     color: white;
-  //     animation-name: spin;
-  //     animation-duration: 1000ms;
-  //     animation-iteration-count: infinite;
-  //     animation-timing-function: linear; 
-  //     position: absolute;
-  //     top: 50%;
-  //     left:50%;
-  // }
 }
 
 @keyframes spin {
