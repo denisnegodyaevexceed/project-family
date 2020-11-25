@@ -93,6 +93,9 @@ const BasicTable = () => {
 
   return (
     <>
+    <Typography  variant="h6" id="tableTitle" component="div">
+              Список членов семьи
+            </Typography>
       <TableContainer component={Paper} className='family-table'>
         <Table aria-label="simple table">
           <TableHead>
