@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   const history = useHistory()
   const dispatch = useDispatch();
   const setSignIn = useSelector(state => state.SignInReducer);
+  let userData = useSelector(state => state.SignInReducer);
   
   const classes = useStyles();
   const Exit = ()=>{
@@ -42,13 +43,19 @@ const useStyles = makeStyles((theme) => ({
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Button to="/" 
-          component={Link} 
-          color="inherit">На главную</Button>
-          {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Свои траты</Button> : null }
-            <Typography   
-            variant="h6" 
-            className={classes.title}>
+
+          <Button to="/" component={Link} color="inherit">На главную</Button>
+          {userData.userInfo.budget ?
+            <>
+              {setSignIn.isAuth ? <Button to="/self" component={Link} color="inherit">Свои траты</Button> : null }
+              {setSignIn.isAuth ? <Button to="/family" component={Link} color="inherit">Семья</Button> : null }
+            </>
+          :
+            null
+          }
+
+            <Typography   variant="h6" className={classes.title}>
+
               Семейный бюджет
             </Typography>
             {!setSignIn.isAuth ?

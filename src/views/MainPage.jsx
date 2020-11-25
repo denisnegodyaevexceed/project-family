@@ -3,26 +3,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import Table from '../components/Table/Table'
 import SimpleModal from "../components/Modal/Modal";
 import { Button } from "@material-ui/core"
+import { Typography } from '@material-ui/core';
 
 import allSpendingActions from "../actions/spendingActions"
-import { Filter } from "@material-ui/icons";
-import { set } from "date-fns/esm";
 
 const MainPage = ({isSelf = false}) => {
     const [isOpen, setIsOpen] = useState(false);
+
     const dispatch = useDispatch();
-    const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, getTableList, deleteSpending } = allSpendingActions;
+    const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, clearSpendingForm, getTableList, deleteSpending } = allSpendingActions;
     let listData = useSelector(state => state.spendingReducer.tableList);
     let userData = useSelector(state => state.SignInReducer);
-    listData?.map((item, i) => {listData[i].price = +item.price})
-    if(isSelf){listData = listData?.filter(item => item.fullName == userData.userInfo.fullName);}
+    listData?.map((item, i) => listData[i].price = +item.price)
+    if(isSelf){listData = listData?.filter(item => item.fullName === userData.userInfo.fullName);}
 
     useEffect(() => {
-        const headers = {
+        const headers = {   
             headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
         };
         dispatch(getTableList(userData.userInfo._id, headers));
-    }, [dispatch]);
+    }, [dispatch, getTableList, userData.userInfo._id]);
 
     const editSpendingSetState = (id, date, name, value) => {
         date = new Date(date).toString()
@@ -40,8 +40,8 @@ const MainPage = ({isSelf = false}) => {
     }
 
     const handleClosePopup = () => {
-        setIsOpen(false);   
-        dispatch(allSpendingActions.clearSpendingForm());
+        setIsOpen(false);
+        dispatch(clearSpendingForm());
     };
 
     const handleOpenPopup = () => {
@@ -49,8 +49,15 @@ const MainPage = ({isSelf = false}) => {
     };
 
     return (
-        <>
-            <Table isSelf={isSelf} deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
+        <>  
+            {userData.userInfo.budget ?
+                <Table isSelf={isSelf} deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
+                :
+                <>
+                    <Typography variant='h5'>Что бы создать бюджет - добавьте первую трату</Typography>
+                    <Typography variant='h5'>Или попросите добавить вас в семью</Typography>
+                </>
+            }
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
             <SimpleModal open={isOpen} closePopUp={handleClosePopup} />
         </>

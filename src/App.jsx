@@ -11,6 +11,7 @@ import SignIn from './components/Auth/SignIn';
 import PageError from './components/page404/Page404';
 import ForgotPassword from './components/forgotPassword/forgotPassword'
 import ResetPassword from './components/forgotPassword/resetPassword'
+import Family from './components/Family/Family'
 import allActions from "./actions/signInAction"
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -62,6 +63,7 @@ function App() {
             <Route path="/forgot-password" component={ForgotPassword}/>
             <Route path="/reset-password" component={ResetPassword}/>
             <Route path="/join" component={SignUpPage}/>
+            <Route path="/family" component={Family}/>
             <Route  component={PageError} />
           </Switch>
         </div>

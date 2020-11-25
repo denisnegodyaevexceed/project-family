@@ -1,5 +1,5 @@
 import actions from '../constants/actionsType'
-import { getFamilySpending, delSpendings, putEditSpending, postAddSpending } from '../api/spendingService'
+import { getFamilySpending, delSpendings, putEditSpending, postAddSpending, postInviteUser } from '../api/spendingService'
 
 
 export const getTableList = (i, headers) => {
@@ -57,10 +57,13 @@ export const editSpending = (budgetId, id, value, date, name, callback, headers)
     return dispatch => {
         dispatch(editSpendingStarted());
         putEditSpending(budgetId, id, value, date, name, headers).then(res => {
-            setTimeout(() => {
-                dispatch(editSpendingSuccess(res.data.waste));
-                callback()
-            },1)
+                console.log('first edit test',res);
+                dispatch(setUserBudgetId(res.data._id));
+                res.data.waste ? 
+                    dispatch(editSpendingSuccess(res.data.waste))
+                    :
+                    dispatch(editSpendingSuccess([]))
+                callback();
         }).catch(err => {
             dispatch(editSpendingFailure(err.message));
             alert(`ошибка сервера ${err.message}`);
@@ -84,7 +87,8 @@ export const addSpending = (id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(addSpendingStarted());
         postAddSpending(id, value, date, name, headers).then(res => {
-            console.log('first add test',res)
+            console.log('first add test',res);
+            dispatch(setUserBudgetId(res.data._id));
             res.data.waste ? 
                 dispatch(addSpendingSuccess(res.data.waste))
                 :
@@ -108,6 +112,11 @@ const addSpendingFailure = (err) => ({
     payload: err,
 })
 
+
+export const setUserBudgetId = data => ({
+    type: actions.SET_USER_BUDGET_ID,
+    payload: data,
+})
 
 export const setDateSpending = (date) => ({
     type: actions.SET_DATE_SPENDING,
@@ -139,6 +148,28 @@ export const clearSpendingForm = () => ({
 })
 
 
+export const inviteUserAction = (email, budgetId, headers) => {
+    return dispatch => {
+        dispatch(inviteUserActionStarted());
+        postInviteUser(email, budgetId, headers).then(res => {
+            dispatch(inviteUserActionSuccess(res));
+        }).catch(err => {
+            dispatch(inviteUserActionFailure(err.message));
+        });
+    }
+}
+const inviteUserActionStarted = () => ({
+    type: actions.POST_INVITE_STARTED,
+})
+const inviteUserActionSuccess = () => ({
+    type: actions.POST_INVITE_SUCCESS,
+})
+const inviteUserActionFailure  = (err) => ({
+    type: actions.POST_INVITE_FAILURE,
+    payload: err
+})
+
+
 export default {
     setDateSpending,
     setNameSpending,
@@ -150,4 +181,6 @@ export default {
     getTableList,
     editSpending,
     addSpending,
+    setUserBudgetId,
+    inviteUserAction,
 }

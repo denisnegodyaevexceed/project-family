@@ -8,7 +8,10 @@ const initialState = {
     loadingTable:false,
     tableList:[],
     loadingModal: false,
-    errorModal: false
+    errorModal: false,
+    inviteLoading: false,
+    inviteError: false,
+    inviteSuccess: false,
 }
 
 export default function spendingReducer(state = initialState, actions){
@@ -135,6 +138,28 @@ export default function spendingReducer(state = initialState, actions){
                 ...state,
                 errorModal: actions.payload,
                 loadingModal: false,
+            }
+
+        case 'POST_INVITE_STARTED' :
+            return{
+                ...state,
+                inviteError: false,
+                inviteLoading: true,
+                inviteSuccess: false,
+            }
+
+        case 'POST_INVITE_SUCCESS' :
+            return{
+                ...state,
+                inviteLoading: false,
+                inviteSuccess: true,
+            }
+
+        case 'POST_INVITE_FAILURE' :
+                return{
+                ...state,
+                inviteError: actions.payload,
+                inviteLoading: false,
             }
 
         default:

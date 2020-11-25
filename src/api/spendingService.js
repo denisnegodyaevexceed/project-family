@@ -46,8 +46,17 @@ export async function postAddSpending(userId, price, date, nameWaste, headers){
     }
 }
 
+// TODO
+export async function postInviteUser(email, budgetId, headers){
+    return await API.post(`https://backend-family-budget.herokuapp.com`,{
+        email,
+        budgetId,
+    }, headers);
+}
+
 export default{
     getFamilySpending,
     delSpendings,
     putEditSpending,
+    postInviteUser,
 }
