@@ -9,7 +9,11 @@ export let API = axios.create({
 API.interceptors.response.use(
     response => response,
     error => {
-        if(error?.response?.data?.message === 'Token expired!' || error?.response?.data?.message === 'Invalid token!' || error?.response?.data?.message === 'Token not provided!'){
+        if( 
+            error?.response?.data?.message === 'Token expired!' || 
+            error?.response?.data?.message === 'Invalid token!' || 
+            error?.response?.data?.message === 'Token not provided!'
+        ){
             alert('истекло время сессии')
             localStorage.clear();
             document.location.reload();
@@ -17,4 +21,4 @@ API.interceptors.response.use(
         return Promise.reject(error);
 });
 
-export default API
+export default API  
