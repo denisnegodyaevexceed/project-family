@@ -32,7 +32,8 @@ export const postSignUp = ({ email, password, fullName , budgetId}, e) => {
                 const { data: user } = await axios.post('https://backend-family-budget.herokuapp.com/auth/signup', {
                     email,
                     password,
-                    fullName
+                    fullName,
+                    budgetId
                 })
                 dispatch({
                     type: actions.POST_SIGNUP_SUCCESS,

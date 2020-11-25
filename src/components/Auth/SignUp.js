@@ -27,7 +27,7 @@ export default function SignUp() {
 
   const budgetId = window.location.search.split('=')[1]
 
-  console.log(budgetId)
+  
 
 
   if (isAuth) return <Redirect to="/" />;
