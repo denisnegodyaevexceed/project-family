@@ -5,10 +5,6 @@ import SignInReducer from './signInReducer'
 import forgotPasswordReducer from './forgotPasswordReducers'
 import resetPasswordReducer from './resetPasswordsReducers'
 
-
-console.log('bbbbbb', forgotPasswordReducer)
-
-
 export default combineReducers({
     SignInReducer,
     spendingReducer,

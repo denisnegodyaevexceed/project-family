@@ -16,7 +16,6 @@ export const getTableList = (i, headers) => {
                 : 
                 dispatch(getTablePageSuccess([]));
         }).catch(err => {
-            alert(`ошибка сервера ${err.message}`);
             dispatch(getTablePageFailure(err))
         });
     }
@@ -41,7 +40,6 @@ export const deleteSpending = (id, arrDel, headers) => {
             dispatch(deleteSpendingSuccess(res.data.waste));
         }).catch(err => {
             dispatch(deleteSpendingFailure(err.message));
-            alert(`ошибка сервера ${err.message}`);
         });
     }
 }
@@ -70,7 +68,6 @@ export const editSpending = (budgetId, id, value, date, name, callback, headers)
                 callback();
         }).catch(err => {
             dispatch(editSpendingFailure(err.message));
-            alert(`ошибка сервера ${err.message}`);
         });
     }
 }
@@ -99,7 +96,6 @@ export const addSpending = (id, value, date, name, callback, headers) => {
             callback()
         }).catch(err => {
             dispatch(addSpendingFailure(err.message));
-            alert(`ошибка сервера ${err.message}`);
         });
     }
 }
@@ -155,11 +151,14 @@ export const inviteUserAction = (email, budgetId, headers) => {
     return dispatch => {
         dispatch(inviteUserActionStarted());
         postInviteUser(email, budgetId, headers).then(res => {
+            console.log('inv-suc',res)
             dispatch(inviteUserActionSuccess(res));
         }).catch(err => {
-            console.log('inv-err', err)
-            dispatch(inviteUserActionFailure(err.message));
-            // alert(`ошибка сервера ${err.message}`);  
+            if(err.response){
+                dispatch(inviteUserActionFailure(err?.response?.data?.message || err));
+            } else {
+                dispatch(inviteUserActionFailure('server err'));  
+            }
         });
     }
 }

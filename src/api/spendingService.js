@@ -1,4 +1,4 @@
-import API from "./API";
+import {API} from "./API";
 
 export async function getFamilySpending(userId, headers){
     return await API.get(`https://backend-family-budget.herokuapp.com/user/show-user?userId=${userId}`, headers);
