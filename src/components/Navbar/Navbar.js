@@ -46,13 +46,19 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           {setSignIn.isAuth ? (
+            
           <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
+        
         <React.Fragment>
+          <div className='mobil'>
           <Button variant="contained" color="primary" {...bindTrigger(popupState)}>
             Меню
           </Button>
+          </div>
+          
           <Menu {...bindMenu(popupState)}>
+          <div className="flex">
           <Button to="/" component={Link} color="inherit">
             Расход семьи
           </Button>
@@ -62,16 +68,25 @@ const Navbar = () => {
           <Button to="/family" component={Link} color="inherit">
             Моя Семья
           </Button>
+          </div>
           </Menu>
+         
+          
         </React.Fragment>
+        
       )}
     </PopupState>
+    
           ):(null)
         }
-          {/* <Button to="/" component={Link} color="inherit">
+        <div className='full'>
+          <Button to="/" component={Link} color="inherit">
             Расход семьи
           </Button>
-          {userData.userInfo.budget ? (
+          <Button to="/select" component={Link} color="inherit">
+            ВЫбор
+          </Button>
+          
             <>
               {setSignIn.isAuth ? (
                 <Button to="/self" component={Link} color="inherit">
@@ -82,9 +97,11 @@ const Navbar = () => {
                 <Button to="/family" component={Link} color="inherit">
                   Моя Семья
                 </Button>
+                
               ) : null}
             </>
-          ) : null} */}
+            </div>
+          
           <div className='app-tittle'>
           <Typography variant="h6" className={classes.title}>
             Семейный бюджет

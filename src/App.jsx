@@ -11,6 +11,7 @@ import PageError from './components/page404/Page404';
 import ForgotPassword from './components/forgotPassword/forgotPassword'
 import ResetPassword from './components/forgotPassword/resetPassword'
 import Family from './components/Family/Family'
+import Select from './components/Select/Select'
 import Navbar from './components/Navbar/Navbar';
 import allActions from "./actions/signInAction"
 import './App.scss';
@@ -62,6 +63,7 @@ function App() {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/join" component={SignUpPage} />
+            <Route path="/select" component={Select} />
             <Route path="/family" component={setUser.isAuth ? Family : SignInPage} />
             <Route component={PageError} />
           </Switch>

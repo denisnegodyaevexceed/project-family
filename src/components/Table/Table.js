@@ -170,7 +170,7 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
             {numSelected} Выбрано
           </Typography>
         ) : (
-            <Typography className='table-tittle' variant="h6" id="tableTitle" component="div">
+            <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
               {isSelf ? 'Мои расходы' : 'Расход семьи'}
               
             </Typography>
@@ -208,9 +208,10 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
         <div className='search'>
         {!isSelf && <TextField 
         className="search-input"
-          id="outlined-basic"
+        id="outlined-size-small"
+        size="small"
           variant="outlined"
-          label="Найти (имя)"
+          label="Имя"
           type="text" 
           onChange={(e) => setSearch(e.target.value)} />}
           </div>
