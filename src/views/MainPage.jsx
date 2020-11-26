@@ -4,6 +4,7 @@ import { Typography, Button } from '@material-ui/core';
 import Table from '../components/Table/Table'
 import SimpleModal from "../components/Modal/Modal";
 
+
 import allSpendingActions from "../actions/spendingActions"
 
 const MainPage = ({ isSelf = false }) => {
@@ -54,6 +55,8 @@ const MainPage = ({ isSelf = false }) => {
                 <>
                     <Typography variant='h5'>Что бы создать бюджет - добавьте первую трату</Typography>
                     <Typography variant='h5'>Или попросите добавить вас в семью</Typography>
+                    
+                    
                 </>
             }
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
