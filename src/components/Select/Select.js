@@ -1,12 +1,14 @@
-import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import React, {useEffect} from 'react';
+import {  useTheme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from "@material-ui/core/Button";
 import FormControl from '@material-ui/core/FormControl';
+import { useDispatch, useSelector } from 'react-redux';
 
+import allFamilySelectActions from '../../actions/familySelectActions';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,18 +21,7 @@ const MenuProps = {
   },
 };
 
-const names = [
- " Oliver Hansen",
-    `Van Henry`,
-  `April Tucker`,
-  `Ralph Hubbard`,
-  `Omar Alexander`,
-  `Carlos Abbott`,
-  `Miriam Wagner`,
-`Bradley Wilkerson`,
-  `Virginia Andrews`,
-  `Kelly Snyder`,
-];
+
 
 function getStyles(name, personName, theme) {
   return {
@@ -42,9 +33,20 @@ function getStyles(name, personName, theme) {
 }
 
 export default function MultipleSelect() {
+
+  const dispatch = useDispatch();
+
+  const getNames = useSelector((state) => state.familySelectReducer)
+  
+  const {data} = getNames
+
+  
+  console.log(getNames, 'get get')
   
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+
+
 
   const handleChange = (event) => {
     setPersonName(event.target.value);
@@ -55,6 +57,10 @@ const addName = (e) =>{
     console.log(personName)
 }
  
+useEffect(()=>{
+  dispatch(allFamilySelectActions.getFamilyNames())
+},[dispatch])
+
 
   return (
     <div>
@@ -69,13 +75,13 @@ const addName = (e) =>{
           input={<Input  />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-              {name}
+          {data.map((item, index) => (
+            <MenuItem key={index} value={item.familyName} style={getStyles(item.familyName, personName, theme)}>
+              {item.familyName}
             </MenuItem>
           ))}
         </Select>
-        <Button type="submit" variant="contained"  onClick={(e) => addName(e)}>
+        <Button type="submit" variant="contained"  onClick={(e)=>{addName(e)}}>
           Присоедениться
       </Button>
       </FormControl>
