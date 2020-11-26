@@ -14,7 +14,7 @@ const getTableList = (i, headers) => {
         dispatch(getTablePageStarted());
         getFamilySpending(i, headers).then(res => {
             res.data.budget ?
-                dispatch(getTablePageSuccess(res.data.budget.waste))
+                dispatch(getTablePageSuccess(res.data.budget))
                 :
                 dispatch(getTablePageSuccess([]));
         }).catch(err => {

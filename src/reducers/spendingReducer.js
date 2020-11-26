@@ -8,6 +8,7 @@ const initialState = {
     errorTable: false,
     loadingTable: false,
     tableList: [],
+    familyName:'',
     loadingModal: false,
     errorModal: false,
     inviteLoading: false,
@@ -16,12 +17,14 @@ const initialState = {
 }
 
 export default function spendingReducer(state = initialState, actions) {
+
     switch (actions.type) {
         case 'GET_TABLE_LIST_SUCCESS':
             return {
                 ...state,
                 loadingTable: false,
-                tableList: actions.payload,
+                tableList: actions.payload.waste,
+                familyName: actions.payload.familyName
             }
 
         case 'GET_TABLE_LIST_STARTED':

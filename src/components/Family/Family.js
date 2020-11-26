@@ -42,7 +42,7 @@ const BasicTable = () => {
 
   useEffect(() => {
     let copyData
-    copyData = listData.reduce((acc, curr) => {
+    copyData = listData?.reduce((acc, curr) => {
       if (acc.find(element => element.fullName === curr.fullName) === undefined) {
         acc.push(curr)
       } else {
@@ -112,7 +112,7 @@ const BasicTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row, index) => (
+            {data?.map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   {row.fullName}

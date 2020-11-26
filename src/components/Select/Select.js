@@ -75,7 +75,7 @@ const addName = (e) =>{
             </MenuItem>
           ))}
         </Select>
-        <Button type="submit" variant="contained" >
+        <Button type="submit" variant="contained"  onClick={(e) => addName(e)} >
           Присоедениться
       </Button>
       </FormControl>

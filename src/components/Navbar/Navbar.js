@@ -31,6 +31,7 @@ const Navbar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
+  const familyValid = useSelector((state)=> state.spendingReducer);
 
   const classes = useStyles();
   const Exit = () => {
@@ -65,6 +66,7 @@ const Navbar = () => {
           <Button to="/self" component={Link} color="inherit">
             Мои траты
           </Button>
+          
           <Button to="/family" component={Link} color="inherit">
             Моя Семья
           </Button>
@@ -83,10 +85,7 @@ const Navbar = () => {
           <Button to="/" component={Link} color="inherit">
             Расход семьи
           </Button>
-          <Button to="/select" component={Link} color="inherit">
-            ВЫбор
-          </Button>
-          
+        
             <>
               {setSignIn.isAuth ? (
                 <Button to="/self" component={Link} color="inherit">
@@ -94,6 +93,7 @@ const Navbar = () => {
                 </Button>
               ) : null}
               {setSignIn.isAuth ? (
+
                 <Button to="/family" component={Link} color="inherit">
                   Моя Семья
                 </Button>

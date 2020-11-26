@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SignInPage from './views/SignInPage';
@@ -11,7 +11,6 @@ import PageError from './components/page404/Page404';
 import ForgotPassword from './components/forgotPassword/forgotPassword'
 import ResetPassword from './components/forgotPassword/resetPassword'
 import Family from './components/Family/Family'
-import Select from './components/Select/Select'
 import Navbar from './components/Navbar/Navbar';
 import allActions from "./actions/signInAction"
 import './App.scss';
@@ -19,6 +18,8 @@ import './App.scss';
 function App() {
   const dispatch = useDispatch();
   const setUser = useSelector(state => state.SignInReducer);
+  const familyValid = useSelector((state)=> state.spendingReducer);
+
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       let token = localStorage.getItem('accessToken');
@@ -63,8 +64,10 @@ function App() {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/join" component={SignUpPage} />
-            <Route path="/select" component={Select} />
+            {familyValid.familyName == undefined ? <Redirect to="/"/>
+            :
             <Route path="/family" component={setUser.isAuth ? Family : SignInPage} />
+            }
             <Route component={PageError} />
           </Switch>
         </div>

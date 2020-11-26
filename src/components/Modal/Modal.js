@@ -24,7 +24,6 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
   const { setDateSpending, setNameSpending, setValueSpending, editSpending, addSpending, setFamilyNameSpending } = allSpendingActions;
   const userData = useSelector(state => state.SignInReducer);
 
-  console.log(familyName)
   const sendData = (e) => {
     e.preventDefault();
     const headers = {
