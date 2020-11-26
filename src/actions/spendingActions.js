@@ -13,9 +13,9 @@ const getTableList = (i, headers) => {
     return dispatch => {
         dispatch(getTablePageStarted());
         getFamilySpending(i, headers).then(res => {
-            res.data.budget ? 
+            res.data.budget ?
                 dispatch(getTablePageSuccess(res.data.budget.waste))
-                : 
+                :
                 dispatch(getTablePageSuccess([]));
         }).catch(err => {
             dispatch(getTablePageFailure(err))
@@ -62,12 +62,12 @@ const editSpending = (budgetId, id, value, date, name, callback, headers) => {
     return dispatch => {
         dispatch(editSpendingStarted());
         putEditSpending(budgetId, id, value, date, name, headers).then(res => {
-                dispatch(setUserBudgetId(res.data._id));
-                res.data.waste ? 
-                    dispatch(editSpendingSuccess(res.data.waste))
-                    :
-                    dispatch(editSpendingSuccess([]))
-                callback();
+            dispatch(setUserBudgetId(res.data._id));
+            res.data.waste ?
+                dispatch(editSpendingSuccess(res.data.waste))
+                :
+                dispatch(editSpendingSuccess([]))
+            callback();
         }).catch(err => {
             dispatch(editSpendingFailure(err.message));
         });
@@ -86,12 +86,12 @@ const editSpendingFailure = (err) => ({
 })
 
 
-const addSpending = (id, value, date, name, callback, headers) => {
+const addSpending = (id, value, date, name, callback, headers, familyName) => {
     return dispatch => {
         dispatch(addSpendingStarted());
-        postAddSpending(id, value, date, name, headers).then(res => {
+        postAddSpending(id, value, date, name, headers, familyName).then(res => {
             dispatch(setUserBudgetId(res.data._id));
-            res.data.waste ? 
+            res.data.waste ?
                 dispatch(addSpendingSuccess(res.data.waste))
                 :
                 dispatch(addSpendingSuccess([]))
@@ -129,6 +129,11 @@ const setNameSpending = (name) => ({
     payload: name
 })
 
+const setFamilyNameSpending = (familyName) => ({
+    type: actions.SET_FAMILYNAME_SPENDING,
+    payload: familyName
+})
+
 const setValueSpending = (value) => ({
     type: actions.SET_VALUE_SPENDING,
     payload: value
@@ -153,13 +158,13 @@ const inviteUserAction = (email, budgetId, headers) => {
     return dispatch => {
         dispatch(inviteUserActionStarted());
         postInviteUser(email, budgetId, headers).then(res => {
-            
+
             dispatch(inviteUserActionSuccess(res));
         }).catch(err => {
-            if(err.response){
+            if (err.response) {
                 dispatch(inviteUserActionFailure(err?.response?.data?.message || err));
             } else {
-                dispatch(inviteUserActionFailure('server err'));  
+                dispatch(inviteUserActionFailure('server err'));
             }
         });
     }
@@ -170,7 +175,7 @@ const inviteUserActionStarted = () => ({
 const inviteUserActionSuccess = () => ({
     type: actions.POST_INVITE_SUCCESS,
 })
-const inviteUserActionFailure  = (err) => ({
+const inviteUserActionFailure = (err) => ({
     type: actions.POST_INVITE_FAILURE,
     payload: err
 })
@@ -192,7 +197,8 @@ const allSpendingActions = {
     addSpending,
     setUserBudgetId,
     inviteUserAction,
-    clearInviteFormAction
+    clearInviteFormAction,
+    setFamilyNameSpending
 }
 
 export default allSpendingActions

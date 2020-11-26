@@ -19,11 +19,12 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
   const [hasError, setHasError] = useState(false);
 
   const modalData = useSelector(state => state.spendingReducer);
-  const { isEdit, date, name, value, id, loadingModal } = modalData
+  const { isEdit, date, name, value, id, loadingModal, familyName, errorModal } = modalData
   const dispatch = useDispatch();
-  const { setDateSpending, setNameSpending, setValueSpending, editSpending, addSpending } = allSpendingActions;
+  const { setDateSpending, setNameSpending, setValueSpending, editSpending, addSpending, setFamilyNameSpending } = allSpendingActions;
   const userData = useSelector(state => state.SignInReducer);
 
+  console.log(familyName)
   const sendData = (e) => {
     e.preventDefault();
     const headers = {
@@ -31,7 +32,7 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
     };
     if (name === '' || value === '') { setHasError(true); return null }
     if (!isEdit) {
-      dispatch(addSpending(userData.userInfo._id, value, date, name, closePopUp, headers));
+      dispatch(addSpending(userData.userInfo._id, value, date, name, closePopUp, headers, familyName));
     } else {
       dispatch(editSpending(userData.userInfo.budget, id, value, date, name, closePopUp, headers));
     }
@@ -70,21 +71,31 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
               />
             </MuiPickersUtilsProvider >
             <TextField
+              required
               disabled={loadingModal}
               label="Наименование траты"
               value={name}
               onChange={event => dispatch(setNameSpending(event.target.value))}
             />
             <TextField
+              required
               disabled={loadingModal}
               type='number'
               label="Трата (.руб)"
               value={value}
               onChange={event => dispatch(setValueSpending(event.target.value))}
             />
+            {!userData.userInfo.budget && <TextField
+              disabled={loadingModal}
+              type='text'
+              label="Название семьи"
+              value={familyName}
+              required
+              onChange={event => dispatch(setFamilyNameSpending(event.target.value))}
+            />}
             <Button disabled={loadingModal} type="submit" variant="contained">{!isEdit ? 'Добавить' : 'Редактировать'}</Button>
           </form>
-          { hasError && <MuiAlert elevation={6} variant="filled" severity="error">Заполните все поля!</MuiAlert>}
+          { errorModal && <MuiAlert elevation={6} variant="filled" severity="error">Простите, но такая семья уже существует, придумайте другое название.</MuiAlert>}
         </>
       }
     </div>
