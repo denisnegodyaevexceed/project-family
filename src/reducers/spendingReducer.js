@@ -2,6 +2,7 @@ const initialState = {
     date: new Date(),
     name: '',
     value: '',
+    familyName: '',
     isEdit: false,
     id: '',
     errorTable: false,
@@ -49,6 +50,11 @@ export default function spendingReducer(state = initialState, actions) {
                 name: actions.payload,
 
             }
+        case 'SET_FAMILYNAME_SPENDING':
+            return {
+                ...state,
+                familyName: actions.payload,
+            }
         case 'SET_VALUE_SPENDING':
             return {
                 ...state,
@@ -75,6 +81,8 @@ export default function spendingReducer(state = initialState, actions) {
                 value: '',
                 isEdit: false,
                 id: '',
+                familyName: '',
+                errorModal: false
             }
 
         case 'POST_NEW_SPENDING_STARTED':
@@ -162,8 +170,8 @@ export default function spendingReducer(state = initialState, actions) {
                 inviteLoading: false,
             }
 
-        case 'CLEAR_INVITE_FORM' :
-                return{
+        case 'CLEAR_INVITE_FORM':
+            return {
                 ...state,
                 inviteLoading: false,
                 inviteError: false,
