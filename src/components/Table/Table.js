@@ -20,6 +20,7 @@ import {
   Checkbox,
   IconButton,
   Tooltip,
+  TextField,
 } from "@material-ui/core";
 
 import tableFunctionality from './functionality'
@@ -171,7 +172,9 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
         ) : (
             <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
               {isSelf ? 'Мои расходы' : 'Расход семьи'}
+              
             </Typography>
+            
           )}
 
         {numSelected > 0 ? (
@@ -202,7 +205,15 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
     <div className={classes.root}>
       {loadingTable && <div className="loader-table"></div>}
       <Paper className={classes.paper}>
-        <input type="text" onChange={(e) => setSearch(e.target.value)} />
+        <div className='search'>
+        <TextField 
+        className="search-input"
+          id="outlined-basic"
+          variant="outlined"
+          label="Найти (имя)"
+          type="text" 
+          onChange={(e) => setSearch(e.target.value)} />
+          </div>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -283,7 +294,7 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
         <div className='sum-table'>Сумма: {dataSpending && dataSpending.length && dataSpending.map(item => item.price).reduce((prev, next) => prev + next)} ₽</div>
-
+        
       </Paper>
     </div>
   );
