@@ -31,7 +31,7 @@ const Navbar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
-  const familyValid = useSelector((state)=> state.spendingReducer);
+  
 
   const classes = useStyles();
   const Exit = () => {

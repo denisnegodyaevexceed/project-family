@@ -64,7 +64,7 @@ function App() {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/join" component={SignUpPage} />
-            {familyValid.familyName == undefined ? <Redirect to="/"/>
+            {familyValid.familyName === undefined ? <Redirect to="/"/>
             :
             <Route path="/family" component={setUser.isAuth ? Family : SignInPage} />
             }

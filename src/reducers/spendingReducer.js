@@ -8,7 +8,6 @@ const initialState = {
     errorTable: false,
     loadingTable: false,
     tableList: [],
-    familyName:'',
     loadingModal: false,
     errorModal: false,
     inviteLoading: false,

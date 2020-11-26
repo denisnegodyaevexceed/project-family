@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -16,7 +16,7 @@ const {useStyles} = allUseStyles
 
 export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
   const classes = useStyles();
-  const [hasError, setHasError] = useState(false);
+  
 
   const modalData = useSelector(state => state.spendingReducer);
   const { isEdit, date, name, value, id, loadingModal, familyName, errorModal } = modalData
@@ -29,13 +29,13 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
     const headers = {
       headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
     };
-    if (name === '' || value === '') { setHasError(true); return null }
+    if (name === '' || value === '') {  return null }
     if (!isEdit) {
       dispatch(addSpending(userData.userInfo._id, value, date, name, closePopUp, headers, familyName));
     } else {
       dispatch(editSpending(userData.userInfo.budget, id, value, date, name, closePopUp, headers));
     }
-    setHasError(false);
+    ;
   }
 
   const handleDateChange = (date) => {
@@ -46,7 +46,7 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
     <div className={classes.paper}>
       <button
         className='close-button'
-        onClick={() => {closePopUp(); setHasError(false)}}
+        onClick={() => {closePopUp()}}
       >✖</button>
       {forInvite ||
         <>
@@ -105,7 +105,7 @@ export const SimpleModal = ({ open, closePopUp, forInvite = false }) => {
       className={classes.modal}
       open={open}
       closeAfterTransition
-      onClose={() => { closePopUp(); setHasError(false) }}
+      onClose={() => { closePopUp();  }}
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       BackdropComponent={Backdrop}
