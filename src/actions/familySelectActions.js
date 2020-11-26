@@ -10,8 +10,9 @@ const getFamilyNames =() => {
             })
             const getNames = async () => {
                 
-                const response = await axios('https://backend-family-budget.herokuapp.com/budget/all-familys').then((res) =>{
+                await axios('https://backend-family-budget.herokuapp.com/budget/all-familys').then((res) =>{
                         const {data} = res;
+                        
                         console.log(data, 'dada')
                         dispatch({
                             type: actions.GET_FAMILYNAMES_SUCCESS,
@@ -24,7 +25,7 @@ const getFamilyNames =() => {
                             
                         })
                       });;
-                    
+                 
             }
             getNames()
             

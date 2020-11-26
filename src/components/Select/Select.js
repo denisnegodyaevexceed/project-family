@@ -44,17 +44,18 @@ export default function MultipleSelect() {
   console.log(getNames, 'get get')
   
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState('');
 
 
 
   const handleChange = (event) => {
     setPersonName(event.target.value);
    
+   
   };
 const addName = (e) =>{
     e.preventDefault();
-    console.log(personName)
+    console.log(personName, 'pearsonName')
 }
  
 useEffect(()=>{
@@ -76,6 +77,7 @@ useEffect(()=>{
           MenuProps={MenuProps}
         >
           {data.map((item, index) => (
+            
             <MenuItem key={index} value={item.familyName} style={getStyles(item.familyName, personName, theme)}>
               {item.familyName}
             </MenuItem>
