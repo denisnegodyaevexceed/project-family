@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Typography, Button } from '@material-ui/core';
 import Table from '../components/Table/Table'
 import SimpleModal from "../components/Modal/Modal";
-
-
 import allSpendingActions from "../actions/spendingActions"
 import MultipleSelect from "../components/Select/Select";
 
