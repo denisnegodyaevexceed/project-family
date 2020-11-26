@@ -5,6 +5,7 @@ import Table from '../components/Table/Table'
 import SimpleModal from "../components/Modal/Modal";
 
 import allSpendingActions from "../actions/spendingActions"
+import MultipleSelect from "../components/Select/Select";
 
 const MainPage = ({ isSelf = false }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +55,7 @@ const MainPage = ({ isSelf = false }) => {
                 <>
                     <Typography variant='h5'>Что бы создать бюджет - добавьте первую трату</Typography>
                     <Typography variant='h5'>Или попросите добавить вас в семью</Typography>
+                    <MultipleSelect/>
                 </>
             }
             <Button variant="contained" type="button" onClick={handleOpenPopup}>Добавить трату</Button>
