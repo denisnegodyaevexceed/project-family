@@ -22,3 +22,21 @@
     width: auto;
     text-align: right;
 }
+
+.auth-buttons{
+    position: absolute;
+    right: 20px;
+    top: 20%;
+}
+.app-tittle{
+    margin-left: 20px
+}
+
+
+// @media all and (max-width: 700px)
+
+@media all and (max-width: 500px){
+    .app-tittle{
+        display: none
+    }
+}

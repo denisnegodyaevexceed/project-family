@@ -50,3 +50,27 @@
     left: 5%;
     top: 0;
 }
+
+.table-tittle{
+    font-size: 30px;
+    position: absolute;
+    right: 5%;
+    z-index:2;
+}
+
+@media all and (max-width: 510px){
+    .search{
+        max-width: 150px;
+    }
+    .sum-table{
+        top: -10px;
+        font-size: 14px;
+        left: 15px;
+        left: 3%
+    }
+    .table-tittle{
+        font-size: 5px;
+        right: 3%;
+        }
+  
+}

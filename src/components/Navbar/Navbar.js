@@ -85,11 +85,12 @@ const Navbar = () => {
               ) : null}
             </>
           ) : null} */}
-
+          <div className='app-tittle'>
           <Typography variant="h6" className={classes.title}>
             Семейный бюджет
           </Typography>
-          {!setSignIn.isAuth ? (
+          </div>
+          <div className='auth-buttons'>{!setSignIn.isAuth ? (
             <>
               <Button to="/signin" className='auth-nav' component={Link} color="inherit">
                 Авторизация
@@ -112,6 +113,8 @@ const Navbar = () => {
               </Button>
             </>
           )}
+          </div>
+          
         </Toolbar>
       </AppBar>
     </div>
