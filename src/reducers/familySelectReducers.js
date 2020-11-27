@@ -1,7 +1,9 @@
 const initialState = {
     error: false,
     data: [],
-    isFetching: false
+    isFetching: false,
+    isSend: false,
+    selectFamily: ''
 }
 
 const familySelectReducer = (state = initialState, actions) => {
@@ -18,6 +20,25 @@ const familySelectReducer = (state = initialState, actions) => {
                 data: actions.payload
             }
         case 'GET_FAMILYNAMES_ERROR':
+            return{
+                ...state,
+                isFetching: false,
+                error: true
+            }
+        case 'POST_FAMILYID_REQUEST':
+            return{
+                ...state,
+                isFetching: true,
+                error: false
+            }
+        case 'POST_FAMILYID_SUCCESS':
+            return{
+                ...state,
+                isFetching: false,
+                isSend: true,
+                selectFamily: actions.payload
+            }
+        case 'POST_FAMILYID_ERROR':
             return{
                 ...state,
                 isFetching: false,

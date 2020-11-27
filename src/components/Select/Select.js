@@ -7,6 +7,10 @@ import Select from '@material-ui/core/Select';
 import Button from "@material-ui/core/Button";
 import FormControl from '@material-ui/core/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import MuiAlert from '@material-ui/lab/Alert';
+
+
 
 import allFamilySelectActions from '../../actions/familySelectActions';
 
@@ -21,8 +25,6 @@ const MenuProps = {
   },
 };
 
-
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -32,30 +34,39 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect() {
 
+
+
+export default function MultipleSelect() {
+  
   const dispatch = useDispatch();
 
   const getNames = useSelector((state) => state.familySelectReducer)
+  const setSignIn = useSelector((state) => state.SignInReducer);
+  const { userInfo } = setSignIn;
   
-  const {data} = getNames
+  const {data, isSend, isFetching, selectFamily, error} = getNames
 
-  
+  console.log(userInfo, 'userInfo')
   console.log(getNames, 'get get')
+  // console.log(userInfo.request[0].budgetId, 'fqlbiybr')
   
   const theme = useTheme();
   const [personName, setPersonName] = React.useState('');
 
-
-
+  const currentFamily = () => selectFamily || userInfo.request[0].familyName
+  
+  console.log(data, 'data')
   const handleChange = (event) => {
     setPersonName(event.target.value);
-   
-   
-  };
+   };
 const addName = (e) =>{
-    e.preventDefault();
-    console.log(personName, 'pearsonName')
+    
+    const budgetId = data.filter((i)=>i.familyName===personName)[0]._id
+    const userId = userInfo._id
+    
+    dispatch(allFamilySelectActions.postFamilyId({budgetId, userId}, e, personName))
+    
 }
  
 useEffect(()=>{
@@ -64,9 +75,12 @@ useEffect(()=>{
 
 
   return (
+    
     <div>
+      {isFetching && <div className='loading'><CircularProgress className='loader' /></div>}
+      {(isSend||userInfo.request[0]?.familyName) && <div className='sendTittle'><h3>Вы отправили запрос в семью {currentFamily()}, ожидайте подтверждения.</h3> <h3>В случае отправки запроса в другую семью или создания своего бюджета, предыдущий запрос будете отменен.</h3></div>}
       <FormControl className="form">
-        <InputLabel  >Выбор семьи</InputLabel>
+  <InputLabel  >Выбор семьи</InputLabel>
         <Select
         className="select"
           
@@ -87,7 +101,9 @@ useEffect(()=>{
           Присоедениться
       </Button>
       </FormControl>
-      
+      {error && <MuiAlert elevation={6}
+            variant="filled"
+            severity="error">Вы уже отправили запрос в эту семью.</MuiAlert>}
     </div>
   );
 }

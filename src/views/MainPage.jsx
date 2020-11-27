@@ -7,6 +7,8 @@ import allSpendingActions from "../actions/spendingActions"
 import MultipleSelect from "../components/Select/Select";
 
 const MainPage = ({ isSelf = false }) => {
+    const getNames = useSelector((state) => state.familySelectReducer)
+    const {isSend} = getNames
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
     const { setIsEditSpending, setIdSpending, setDateSpending, setNameSpending, setValueSpending, clearSpendingForm, getTableList, deleteSpending } = allSpendingActions;
@@ -52,8 +54,9 @@ const MainPage = ({ isSelf = false }) => {
                 <Table isSelf={isSelf} deleteSpendings={deleteSpendings} editSpendingSetState={editSpendingSetState} dataSpending={listData} />
                 :
                 <>
-                    <Typography variant='h5'>Что бы создать бюджет - добавьте первую трату</Typography>
+                    {!isSend&& <div><Typography variant='h5'>Что бы создать бюджет - добавьте первую трату</Typography>
                     <Typography variant='h5'>Или попросите добавить вас в семью</Typography>
+                    </div>}
                     <MultipleSelect/>
                 </>
             }
