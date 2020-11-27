@@ -24,13 +24,9 @@ const getFamilyNames =() => {
                             
                         })
                       });;
-                 
-            }
+                }
             getNames()
-            
         }
-    
-    
 }
 
 const postFamilyId = ({budgetId, userId}, e, selectFamily) =>{

@@ -74,7 +74,7 @@ useEffect(()=>{
     
     <div>
       {isFetching && <div className='loading'><CircularProgress className='loader' /></div>}
-      {(isSend||userInfo.request[0]?.familyName) && <div className='sendTittle'><h3>Вы отправили запрос в семью {currentFamily()}, ожидайте подтверждения.</h3> <h3>В случае отправки запроса в другую семью или создания своего бюджета, предыдущий запрос будете отменен.</h3></div>}
+      {(isSend||userInfo.request[0]?.familyName) && <div className='sendTittle'><h3>Вы отправили запрос в семью {currentFamily()}, ожидайте подтверждения.</h3> <h3>В случае отправки запроса в другую семью или создания своего бюджета, предыдущий запрос будет отменен.</h3></div>}
       <FormControl className="form">
   <InputLabel  >Выбор семьи</InputLabel>
         <Select
@@ -96,10 +96,11 @@ useEffect(()=>{
         <Button type="submit" variant="contained"  onClick={(e)=>{addName(e)}}>
           Присоедениться
       </Button>
-      </FormControl>
       {error && <MuiAlert elevation={6}
             variant="filled"
             severity="error">Вы уже отправили запрос в эту семью.</MuiAlert>}
+      </FormControl>
+      
     </div>
   );
 }
