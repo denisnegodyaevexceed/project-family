@@ -17,7 +17,7 @@ const initialState = {
 }
 
 export default function spendingReducer(state = initialState, actions) {
-  console.log(actions.payload)
+  
     switch (actions.type) {
         case 'GET_TABLE_LIST_SUCCESS':
             return {

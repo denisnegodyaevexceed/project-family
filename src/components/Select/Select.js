@@ -47,16 +47,12 @@ export default function MultipleSelect() {
   
   const {data, isSend, isFetching, selectFamily, error} = getNames
 
-  console.log(userInfo, 'userInfo')
-  console.log(getNames, 'get get')
-  // console.log(userInfo.request[0].budgetId, 'fqlbiybr')
   
   const theme = useTheme();
   const [personName, setPersonName] = React.useState('');
 
   const currentFamily = () => selectFamily || userInfo.request[0].familyName
   
-  console.log(data, 'data')
   const handleChange = (event) => {
     setPersonName(event.target.value);
    };

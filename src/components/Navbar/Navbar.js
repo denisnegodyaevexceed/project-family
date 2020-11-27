@@ -12,7 +12,6 @@ import allSignInActions from "../../actions/signInAction";
 import Menu from "@material-ui/core/Menu";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import Badge from "@material-ui/core/Badge";
-import IconButton from "@material-ui/core/IconButton";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import "./Navbar.scss";
@@ -34,7 +33,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
   let userData = useSelector(state => state.spendingReducer);
-console.log(userData.familyName);
+
  
 
   const classes = useStyles();
