@@ -14,14 +14,13 @@ import Family from './components/Family/Family'
 import Navbar from './components/Navbar/Navbar';
 import allActions from "./actions/signInAction"
 import './App.scss';
-import { Notifications } from './components/Notifications/Notifications';
+import  Notifications  from './components/Notifications/Notifications';
 
 function App() {
   const dispatch = useDispatch();
   const setUser = useSelector(state => state.SignInReducer);
   const familyValid = useSelector((state)=> state.spendingReducer);
   const setSignIn = useSelector((state) => state.SignInReducer);
-
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       let token = localStorage.getItem('accessToken');

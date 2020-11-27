@@ -4,10 +4,10 @@ import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 import allNotificationsActions from "../../actions/notificationsActions";
 
-export const Notifications = () => {
+ const Notifications = () => {
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
-  console.log(14, setSignIn);
+
   if (setSignIn.request.length === 0) {
     return <div>У вас нет уведомлений</div>;
   } else {
@@ -60,3 +60,4 @@ export const Notifications = () => {
     );
   }
 };
+export default Notifications
