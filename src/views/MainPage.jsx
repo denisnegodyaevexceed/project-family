@@ -20,6 +20,8 @@ const MainPage = ({ isSelf = false }) => {
             headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
         };
         dispatch(getTableList(userData.userInfo._id, headers));
+        
+
     }, [dispatch, getTableList, userData.userInfo._id]);
 
     const editSpendingSetState = (id, date, name, value) => {

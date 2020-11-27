@@ -14,11 +14,13 @@ import Family from './components/Family/Family'
 import Navbar from './components/Navbar/Navbar';
 import allActions from "./actions/signInAction"
 import './App.scss';
+import { Notifications } from './components/Notifications/Notifications';
 
 function App() {
   const dispatch = useDispatch();
   const setUser = useSelector(state => state.SignInReducer);
   const familyValid = useSelector((state)=> state.spendingReducer);
+  const setSignIn = useSelector((state) => state.SignInReducer);
 
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
@@ -64,6 +66,8 @@ function App() {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/join" component={SignUpPage} />
+            {setSignIn.admin ? (<Route path="/notifications" component={Notifications} />):(<Redirect to="/"/>)}
+            
             {familyValid.familyName === undefined ? <Redirect to="/"/>
             :
             <Route path="/family" component={setUser.isAuth ? Family : SignInPage} />

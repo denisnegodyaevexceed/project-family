@@ -1,3 +1,4 @@
+
 const initialState = {
     date: new Date(),
     name: '',
@@ -16,14 +17,15 @@ const initialState = {
 }
 
 export default function spendingReducer(state = initialState, actions) {
-
+  console.log(actions.payload)
     switch (actions.type) {
         case 'GET_TABLE_LIST_SUCCESS':
             return {
                 ...state,
                 loadingTable: false,
                 tableList: actions.payload.waste,
-                familyName: actions.payload.familyName
+                familyName: actions.payload.familyName,
+                request:actions.payload.user
             }
 
         case 'GET_TABLE_LIST_STARTED':
