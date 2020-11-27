@@ -7,7 +7,7 @@ import allSpendingActions from "../../actions/spendingActions";
 
 
 
-export const Notifications = () => {
+ const Notifications = () => {
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
   
@@ -70,3 +70,4 @@ export const Notifications = () => {
     );
   }
 };
+export default Notifications

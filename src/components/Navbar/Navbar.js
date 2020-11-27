@@ -42,6 +42,7 @@ const Navbar = () => {
     dispatch(allSignInActions.logoutUser());
     history.go(0);
   };
+  
 
   return (
     <div className={classes.root}>
@@ -100,9 +101,12 @@ const Navbar = () => {
 
           <div className="app-tittle">
             <Typography variant="h6" className={classes.title}>
-              Семейный бюджет:
-              {userData.familyName === undefined?(null):(<span> {userData.familyName} </span>)}
-
+              Семейный бюджет
+              {!userData.familyName ? 
+                ''
+               : 
+                <span> {`: ${userData.familyName}`} </span>
+            }
             </Typography>
           </div>
           <div className="auth-buttons">
@@ -128,17 +132,23 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <span>Привет, {setSignIn.userInfo.fullName}  </span>
-                
-                {setSignIn.admin ? (<Button aria-label="cart"  to="/notifications"  component={Link}>
-                  <Badge
-                    badgeContent={setSignIn.request.length}
-                    color="secondary"
+                <span>Привет, {setSignIn.userInfo.fullName} </span>
+
+                {setSignIn.admin ? (
+                  <Button
+                    aria-label="cart"
+                    to="/notifications"
+                    component={Link}
                   >
-                    <NotificationsIcon className="not" />
-                  </Badge>
-                </Button>):(null)}
-                
+                    <Badge
+                      badgeContent={setSignIn.request.length}
+                      color="secondary"
+                    >
+                      <NotificationsIcon className="not" />
+                    </Badge>
+                  </Button>
+                ) : null}
+
                 <Button to="/" component={Link} color="inherit" onClick={Exit}>
                   Выход
                 </Button>
