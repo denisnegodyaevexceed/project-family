@@ -5,6 +5,8 @@ import SignInReducer from './signInReducer'
 import forgotPasswordReducer from './forgotPasswordReducers'
 import resetPasswordReducer from './resetPasswordsReducers'
 import familySelectReducer from './familySelectReducers'
+import notificationsReducer from './notificationsReducer'
+
 
 
 
@@ -16,5 +18,6 @@ export default combineReducers({
     signUpReducer,
     forgotPasswordReducer,
     resetPasswordReducer,
-    familySelectReducer
+    familySelectReducer,
+    notificationsReducer
 })

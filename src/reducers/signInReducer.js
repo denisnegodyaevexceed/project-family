@@ -90,7 +90,11 @@ export default function SignInReducer(state = initialState, actions) {
         password: "",
         error: false,
       };
-
+    case 'POST_NOTIFICATIONS_SUCCESS':
+      return {
+        ...state,
+        request: actions.payload.request
+      }
     default:
       return state;
   }
