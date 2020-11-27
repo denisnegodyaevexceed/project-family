@@ -34,7 +34,7 @@ const Navbar = () => {
   const setSignIn = useSelector((state) => state.SignInReducer);
   let userData = useSelector(state => state.spendingReducer);
 
- 
+  
 
   const classes = useStyles();
   const Exit = () => {

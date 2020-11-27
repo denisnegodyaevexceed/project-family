@@ -18,7 +18,7 @@ export default function SignIn() {
     dispatch(allSignInActions.signInUser(email, password));
   };
 
-  console.log(userInfo, 'userInfo')
+  
 
   if (isAuth) return <Redirect to="/" />;
   return (

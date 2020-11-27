@@ -1,13 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 import allNotificationsActions from "../../actions/notificationsActions";
+import allSpendingActions from "../../actions/spendingActions";
+
+
 
 export const Notifications = () => {
   const dispatch = useDispatch();
   const setSignIn = useSelector((state) => state.SignInReducer);
-  console.log(14, setSignIn);
+  
+  useEffect(()=>{
+    const headers = {
+      headers: { Authorization: `Bearer ${localStorage.getItem('refreshToken')}` },
+  };
+  dispatch(allSpendingActions.getTableList(setSignIn.userInfo._id, headers));
+  },[dispatch,setSignIn.userInfo._id])
+  
+  
   if (setSignIn.request.length === 0) {
     return <div>У вас нет уведомлений</div>;
   } else {
@@ -19,7 +30,6 @@ export const Notifications = () => {
         <div className="form">
           {setSignIn.request.map((item, index) => (
             <div key={index}>
-              {console.log(567, item)}
               <div className="user_not">
                 <div className="item_user">Пользователь, {item.fullName}</div>
                 <Button

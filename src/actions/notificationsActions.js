@@ -18,7 +18,7 @@ const postNotificationsConnect = ( budgetId, userId, isJoin ,adminId, e) => {
             adminId,
           }
         );
-        console.log("user=======================>", user)
+        
         dispatch({
           type: actions.POST_NOTIFICATIONS_SUCCESS,
           payload: user

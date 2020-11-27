@@ -93,7 +93,7 @@ useEffect(()=>{
             </MenuItem>
           ))}
         </Select>
-        <Button type="submit" variant="contained"  onClick={(e)=>{addName(e)}}>
+        <Button type="submit" variant="contained" disabled={!personName}  onClick={(e)=>{addName(e)}}>
           Присоедениться
       </Button>
       {error && <MuiAlert elevation={6}
