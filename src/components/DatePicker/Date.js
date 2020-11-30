@@ -13,7 +13,7 @@ export const MaterialUIPickers = ({ onChange, value }) => {
       <KeyboardDatePicker
         disableToolbar
         variant="inline"
-        format="MM/dd/yyyy"
+        format={toRFC2822String()}
         margin="normal"
         id="date-picker-inline"
         label="Дата"

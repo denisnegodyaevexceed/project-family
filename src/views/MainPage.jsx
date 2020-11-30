@@ -5,7 +5,7 @@ import Table from '../components/Table/Table'
 import SimpleModal from "../components/Modal/Modal";
 import allSpendingActions from "../actions/spendingActions"
 import MultipleSelect from "../components/Select/Select";
-
+import moment from 'moment'
 const MainPage = ({ isSelf = false }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const MainPage = ({ isSelf = false }) => {
     }, [dispatch, getTableList, userData.userInfo._id]);
 
     const editSpendingSetState = (id, date, name, value) => {
-        date = new Date(date).toString()
+        date = moment(new Date(date).toISOString());
         handleOpenPopup();
         dispatch(setIsEditSpending(true));
         dispatch(setIdSpending(id));

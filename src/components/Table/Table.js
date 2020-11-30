@@ -294,7 +294,7 @@ export const EnhancedTable = ({ editSpendingSetState, dataSpending, deleteSpendi
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-        <div className='sum-table'>Сумма: {dataSpending && dataSpending.length && dataSpending.map(item => item.price).reduce((prev, next) => prev + next)} ₽</div>
+        <div className='sum-table'>Сумма: {data && data.length && data.map(item => item.price).reduce((prev, next) => prev + next)} ₽</div>
         
       </Paper>
     </div>
