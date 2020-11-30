@@ -88,6 +88,14 @@
         left: 5.5%;
     }
     
+    .full{
+        
+        display: none; 
+    }
+    .mobil{
+        display: block; 
+        flex-direction: column;;
+    }
 }
 @media all and (max-width: 579px){
     .search{
@@ -100,14 +108,7 @@
 
 @media all and (max-width: 510px){
     
-    .full{
-        
-        display: none; 
-    }
-    .mobil{
-        display: block; 
-        flex-direction: column;;
-    }
+    
     
     .search{
         max-width:60px;
@@ -134,6 +135,11 @@
         left: 10.5%;
     }
     
+}
+@media all and (max-width: 370px){
+    .helloUser{
+        display: none;
+    }
 }
 @media all and (max-width: 320px){
     .search{

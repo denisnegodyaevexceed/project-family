@@ -132,7 +132,7 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <span>Привет, {setSignIn.userInfo.fullName} </span>
+                <span className='helloUser'>Привет, {setSignIn.userInfo.fullName} </span>
 
                 {setSignIn.admin ? (
                   <Button
